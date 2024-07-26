@@ -1,0 +1,30 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-center">Profile</h1>
+<hr>
+
+<form action="{% url 'profile' %}" method="POST">
+    {% csrf_token %}
+    <label>Name</label><br>
+    <p>{{data.first_name}}</p>
+    <label>Address</label><br>
+    <p>{{data.Address}}</p>
+    <label>Phone Number</label><br>
+    <p>{{data.Phonenumber}}</p>
+    <label>User Name</label><br>
+    <p>{{data.username}}</p>
+    <label>Email</label><br>
+    <p>{{data.email}}</p>  
+    <label>Age</label><br>
+    <p>{{data.Age}}</p>   
+    <label>DOB</label><br>
+    <p>{{data.DOB}}</p>   
+</form>
+
+{% endblock %}

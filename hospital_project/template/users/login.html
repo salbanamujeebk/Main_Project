@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>    
+    <div class="container-fluid">
+        <div class="row d-flex align-items-center ">
+            <div class="col-sm-6">
+                <form action="{% url 'Login' %}" method="POST">
+                    {% csrf_token %}
+                    <h4 class="head">Login</h4>
+                    <input type="text" placeholder="username" name="username"><br>
+                    <input type="password" placeholder="password" name="password"><br>
+                    <button type="login"><a href="">Login</a></button>
+                    <p>Dont have an account?<a href="{% url 'registration' %}">Register</a></p> 
+                </form>
+            </div>
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

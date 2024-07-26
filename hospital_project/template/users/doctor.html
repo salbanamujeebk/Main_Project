@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+{%load static}
+{% block title %}
+doctors
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-center">Doctors</h1>
+<hr>
+<div class="container">
+
+    {% for d in doctors %}
+
+        {{d.name}}<br>
+        {{d.speciality}}<br>
+        {{d.department}}<br>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

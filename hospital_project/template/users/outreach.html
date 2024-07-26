@@ -1,0 +1,15 @@
+ {% extends 'users/base.html' %}
+
+{% block title %}
+Social Outreach
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-center">SOCIAL OUTREACH</h1>
+<hr>
+<h4><a href="{% url 'kidney_care' %}" style="text-decoration: none;">KIDNEY CARE</h4></a>
+<h4><a href="{% url 'paliative' %}" style="text-decoration: none;">PAIN AND PALIATIVE</a></h4>
+<h4><a href="{% url 'emergency' %}" style="text-decoration: none;">EMERGENCY HEALTH AND CRITICAL CARE</h4></a>
+<h4><a href="{% url 'orphan_care' %}" style="text-decoration: none;">ORPHAN CARE</h4></a>
+{% endblock %}

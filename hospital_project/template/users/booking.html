@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+booking
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-center">Make an Appoinment</h1>
+<hr>
+
+<div class="container w-50">
+    <form action="{% url 'booking' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
+
+

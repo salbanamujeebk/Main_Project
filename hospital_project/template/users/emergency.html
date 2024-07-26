@@ -1,0 +1,29 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+Emergency
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-center">EMERGENCY HEALTH AND CRITICAL CARE</h1>
+<hr><br>
+
+<div class="mx-auto w-50 text-center text-black p-5 my-3 ">
+    <p>Emergency critical care is an intensive care unit, where patient needs immediate attention and needed in case of life
+    threatening accident and traumatic condition.</p>
+</div>
+
+{% for d in emergency %}
+<div class="mx-auto w-50 text-center text-black p-3 my-3 ">
+    <h2>{{d.p_heading}}</h2>
+    <p>{{d.p_description}}</p>
+</div>
+
+
+
+{% endfor %}
+
+<p class="text-center fs-3 text-danger">9632145870</p>
+
+{% endblock %}

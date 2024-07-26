@@ -1,0 +1,57 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+Paliative
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-center">PAIN AND PALIATIVE CARE</h1>
+<hr>
+
+<div class="mx-auto w-50 text-center text-black p-5 my-3 ">
+    <p>
+    With a dash of humanity and compassion, IQRAA Pain & Palliative Care is here to provide the bedridden, cancer and HIV patients, and other severely ill people some relief and life. Through comprehensive diagnostic, physical, and psychological therapy, IQRAA Pain and palliative care guarantee the patients’ and their families’ overall well-being. We also also offers home-based assistance for patients in need. 
+    By offering free medication and other assistance through appropriate community involvement, IQRAA aids patients in becoming healthy
+    </p>
+</div>
+<h5 class="text-center"><a href="{% url 'donations' %}" style="text-decoration: none;">DONATE</h5></a>
+
+<h4>How to Get Palliative Care?</h4>
+The first step is to talk to your own doctor. Most of the time, you have to ask your doctor for a palliative care referral to get palliative care services.
+Whether you are in the hospital or at home, a palliative care team can help you. Following are some tips to help you talk to your doctor:
+<ul>
+    <li>Tell your doctor you are thinking about palliative care, and ask where palliative care is available in your area.</li>
+    <li>Ask your doctor to explain your illness and any past, current and future treatments and procedures.</li>
+    <li>Explain to your doctor exactly what quality of life means to you. This list may include: being able to spend time with loved ones; relief from any pain and other symptoms; having the ability to make your own decisions for care and where you want to be treated (home vs. in the hospital).</li>
+    <li>Be sure your doctor is aware of any personal, religious or cultural beliefs, values or practices that are important to consider in your care and treatment decisions.</li>
+    <li>Tell your doctor which treatments you may or may not want.</li>
+    <li>Mention that you would like time to discuss future planning for your care. You should do this even if you’re well or it’s early in your illness.</li>
+    <li>If you have completed a living will or health care proxy, be sure to tell your doctor and provide him or her with a copy.</li>
+    <li>Finally, at any point in your illness if you are experiencing symptoms and stress, ask your doctor for the palliative care referral!</li>
+</ul>
+
+<h3> Help the 12,000,000 people who need palliative care, get palliative care.<br><br></h3>
+
+<div class="card" style="width: 18rem;float: left;">
+    <img src="{% static 'images\wheelchair01.jpeg' %}" class="card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title">Wheel Chairs</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+       <p class="text-danger">7024153698</p>
+    </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+    <img src="{% static 'images\ambulance.jpeg' %}" class="card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title">Wheel Chairs</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+       <p class="text-danger">7024003698</p>
+    </div>
+</div>
+
+{% endblock %}

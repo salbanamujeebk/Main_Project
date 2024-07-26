@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+Orphan Care
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-center">ORPHAN CARE</h1>
+<hr>
+
+<div class="mx-auto w-50 text-center text-black p-5 my-3 ">
+    <p>Free health tratement and procedures for JDT orphans. one of the oldest scheme of care matrix</p>
+</div>
+
+{% for d in orphan_care %}
+<div class="mx-auto w-50 text-center text-black p-3 my-3 ">
+    <h2>{{d.heading}}</h2>
+    <p>{{d.description}}</p>
+</div>
+{% endfor %}
+
+{% endblock %}

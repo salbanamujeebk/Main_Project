@@ -1,0 +1,33 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+Edit profile
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Edit Profile</h1>
+<hr>
+
+
+<form action="{% url 'editprofile' %}" method="POST">
+    {% csrf_token %}
+    <h3>Edit Profile</h3>
+    <label for="name">Name</label><br>
+    <input type="text" placeholder="Name" name="Name" value="{{data.first_name}}"><br>
+    <label for="address">Address</label><br>
+    <input type="text" placeholder="Address" name="Address" value="{{data.Address}}"><br>
+    <label for="phone">Phone Number</label><br>
+    <input type="number" placeholder="Phone Number" name="Phone" value="{{data.Phonenumber}}"><br>
+    <label for="user name">user name</label><br>
+    <input type="text" placeholder="User Name" name="Username" value="{{data.username}}"><br>
+    <label for ="email">Email</label><br>
+    <input type="email" placeholder="Email" name="Email" value="{{data.email}}"><br>
+    <label for="age">Age</label><br>
+    <input type="number" placeholder="Age" name="Age" value="{{data.Age}}"><br>
+    <label for="DOB">DOB</label><br>
+    <input type="date" placeholder="Date of Birth" name="DOB" value="{{data.DOB}}"><br>
+    <button type="submit">Update</button>
+</form>
+
+
+{% endblock %}
