@@ -46,7 +46,7 @@ urlpatterns = [
 
 
 # DOCTOR
-
+    path('registration_doctor',views.registration_doctor,name='registration_doctor'),
     path('doctor_home',views.doctor_home,name='doctor_home'),
     path('appoinments',views.appoinments,name='appoinments'),
     path('my_patients',views.my_patients,name='my_patients'),

@@ -13,3 +13,5 @@ class BookingForm(forms.ModelForm):
         widgets = {
             'booking_date':DateInput()
         }
+
+

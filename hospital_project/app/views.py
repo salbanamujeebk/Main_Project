@@ -7,6 +7,10 @@ from .forms import BookingForm
 
 # Create your views here.
 
+
+# USER
+
+
 def index(request):
     return render(request,'users/index.html')
 
@@ -68,11 +72,6 @@ def registration(request):
     
 
 
-
-
-
-
-
 def Login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -87,7 +86,7 @@ def Login(request):
                 if user.usertype == "user": 
                     return redirect(home)  # Redirect to home view
                 elif user.usertype == "doctor":
-                    return redirect('doctors')  # Redirect to doctor's home view
+                    return redirect(doctor_home)  # Redirect to doctor's home view
                 elif user.usertype == "admin":
                     return redirect('/admin/')
                 else:
@@ -99,9 +98,6 @@ def Login(request):
             return render(request, 'users/login.html', context)
     else:
         return render(request, 'users/login.html')
-
-
-
 
 
 
@@ -130,7 +126,8 @@ def editprofile(request):
 
 
 def home(request):
-    return render(request,'users/home.html')
+    dept= Departments.objects.all()  
+    return render(request,'users/home.html',{'department':dept})
 
 def outreach(request):
     return render(request,'users/outreach.html')
@@ -224,7 +221,7 @@ def contact(request):
 
 
 
-def registration(request):
+def registration_doctor(request):
     if request.method == 'POST':
         name = request.POST['name']
         Username = request.POST['username']

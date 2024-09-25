@@ -35,6 +35,21 @@
 
 <h4 class="text-center "><a href="{% url 'outreach' %}" style="text-decoration: none;">SOCIAL OUTREACH</h4></a>
 <h4 class="text-center"><a href="{% url 'health_insurance' %}" style="text-decoration: none;">HEALTH INSURANCE</h4></a>
-<h4 class="text-center"><a href="{% url 'health_checkup' %}" style="text-decoration: none;">HEALTH CHECKUP</h4></a>
+<h4 class="text-center"><a href="{% url 'health_checkup' %}" style="text-decoration: none;">HEALTH CHECKUP</h4></a><br>
+
+
+<h1 class="text-center">OUR DEPARTMENTS</h1><br>
+<!-- <h4><a href="{% url 'departments' %}">Our Departmnets</h4></a> -->
+
+
+{% for d in department %}
+<div class="card mb-3 mx-auto w-50" style="width: 18rem; float: left;">
+  <div class="card-body">
+    <h4>
+      <a href="{{ d.dep_link }}">{{ d.dep_name }}</a>
+    </h4>
+  </div>
+</div>
+{% endfor %}
 
 {% endblock %}
