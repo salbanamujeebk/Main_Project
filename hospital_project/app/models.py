@@ -23,6 +23,7 @@ class Departments(models.Model):
 
 
 class Doctors(models.Model):
+    doc = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     name=models.CharField(max_length=100)
     speciality=models.CharField(max_length=100)
     department=models.ForeignKey(Departments, on_delete=models.CASCADE)

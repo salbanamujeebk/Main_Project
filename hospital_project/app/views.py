@@ -34,6 +34,7 @@ def registration(request):
         if CustomUser.objects.filter(email=Email).exists():
             return render(request, 'users/registration.html', {'error': 'email already exists'})
         Password = request.POST['password']
+        print("pass : ",Password)
         data = CustomUser.objects.create_user(first_name=name, username=Username, Age=age,DOB=dob,Address=Address,email=Email,password=Password,usertype="user")
         data.save()
         return redirect(Login)
@@ -84,9 +85,9 @@ def Login(request):
                 return redirect('/admin/')  
             else:
                 if user.usertype == "user": 
-                    return redirect(home)  # Redirect to home view
+                    return redirect(home)  
                 elif user.usertype == "doctor":
-                    return redirect(doctor_home)  # Redirect to doctor's home view
+                    return redirect(doctor_home)  
                 elif user.usertype == "admin":
                     return redirect('/admin/')
                 else:
@@ -227,17 +228,17 @@ def registration_doctor(request):
         Username = request.POST['username']
         if CustomUser.objects.filter(username=Username).exists():
             return render(request, 'doctors/doctor_reg.html', {'error': 'username already exists'})
-        # age = request.POST['age']
-        # Phonenumber = request.POST['phone']
-        # if CustomUser.objects.filter(Phonenumber=Phonenumber).exists():
-        #     return render(request, 'registration.html', {'error': 'Phonenumber already exists'})
-        # dob = request.POST['dob']
-        # Address = request.POST['address']
+        age = request.POST['age']
+        Phonenumber = request.POST['phone']
+        if CustomUser.objects.filter(Phonenumber=Phonenumber).exists():
+            return render(request, 'doctors/doctor_reg.html', {'error': 'Phonenumber already exists'})
+        dob = request.POST['dob']
+        Address = request.POST['address']
         Email = request.POST['email']
         if CustomUser.objects.filter(email=Email).exists():
             return render(request, 'doctors/doctor_reg.html', {'error': 'email already exists'})
         Password = request.POST['password']
-        data = CustomUser.objects.create_user(first_name=name, username=Username,email=Email,password=Password,usertype="doctor")
+        data = CustomUser.objects.create_user(first_name=name, username=Username, Age=age,DOB=dob,Address=Address,email=Email,password=Password,usertype="doctor")
         data.save()
         return redirect(Login)
     else:
