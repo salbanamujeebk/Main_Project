@@ -226,20 +226,29 @@ def registration_doctor(request):
     if request.method == 'POST':
         name = request.POST['name']
         Username = request.POST['username']
-        if CustomUser.objects.filter(username=Username).exists():
+        if CustomUser.objects.filter(username=Username,usertype="doctor").exists():
             return render(request, 'doctors/doctor_reg.html', {'error': 'username already exists'})
         age = request.POST['age']
         Phonenumber = request.POST['phone']
-        if CustomUser.objects.filter(Phonenumber=Phonenumber).exists():
+        if CustomUser.objects.filter(Phonenumber=Phonenumber,usertype="doctor",).exists():
             return render(request, 'doctors/doctor_reg.html', {'error': 'Phonenumber already exists'})
         dob = request.POST['dob']
         Address = request.POST['address']
         Email = request.POST['email']
-        if CustomUser.objects.filter(email=Email).exists():
+        if CustomUser.objects.filter(email=Email,usertype="doctor").exists():
             return render(request, 'doctors/doctor_reg.html', {'error': 'email already exists'})
         Password = request.POST['password']
-        data = CustomUser.objects.create_user(first_name=name, username=Username, Age=age,DOB=dob,Address=Address,email=Email,password=Password,usertype="doctor")
+        speciality=request.POST['speciality']
+        department=request.POST['department']
+        image=request.FILES['Image']
+        data = CustomUser.objects.create_user(username=Username, Age=age,DOB=dob,Address=Address,email=Email,password=Password,usertype="doctor")
         data.save()
+        try:
+            data1 = Doctors.objects.create(doc=data,name=name,speciality=speciality,department=department,image=image)
+            data1.save()
+        except Exception as e:
+            print(e)
+            
         return redirect(Login)
     else:
         # return HttpResponse("success")

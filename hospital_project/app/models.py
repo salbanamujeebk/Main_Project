@@ -26,8 +26,11 @@ class Doctors(models.Model):
     doc = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     name=models.CharField(max_length=100)
     speciality=models.CharField(max_length=100)
-    department=models.ForeignKey(Departments, on_delete=models.CASCADE)
+    department=models.CharField(max_length=100)
     image=models.FileField()
+
+    def __str__(self):
+         return self.name
 
 
 class Booking(models.Model):

@@ -6,7 +6,7 @@
     <title>Registration</title>
 </head>
 <body>
-    <form method="POST" action="{% url 'registration_doctor' %}">
+    <form method="POST" action="{% url 'registration_doctor' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="name" placeholder="Name"><br>
         <input type="text" name="address" placeholder="Address"><br>
@@ -16,6 +16,9 @@
         <input type="email" name="email" placeholder="Email"><br>
         <input type="number" name="age" placeholder="Age"><br>
         <input type="date" name="dob" placeholder="Date of Birth"><br>
+        <input type="text" name="speciality" placeholder="Speciality"><br>
+        <input type="text" name="department" placeholder="Department"><br>
+        <input type="file" name="Image" >
         <button type="submit">Register</button>
         <p>Already have an account?<a href="">Login</a></p>
     </form>
