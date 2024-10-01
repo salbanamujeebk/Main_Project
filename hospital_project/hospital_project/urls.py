@@ -40,15 +40,18 @@ urlpatterns = [
     path('editprofile',views.editprofile,name='editprofile'),
     path('about',views.about,name='about'),
     path('booking',views.booking,name='booking'),
-    path('doctors',views.doctors,name='doctors'),
-    path('departments',views.departments,name='departments'),
+    # path('departments',views.departments,name='departments'),
     path('contact',views.contact,name='contact'),
+    path('departments/<int:department_id>/doctors/', views.department_doctors, name='department_doctors'),
+    path('departments/', views.departments, name='departments'),
+    path('doctors/', views.doctors, name='doctors'),
 
 
 # DOCTOR
     path('registration_doctor',views.registration_doctor,name='registration_doctor'),
     path('doctor_home',views.doctor_home,name='doctor_home'),
-    path('appoinments',views.appoinments,name='appoinments'),
+    # path('appoinments',views.appoinments,name='appoinments'),
+    path('doctor/<int:doctor_id>/appointments/', views.appointments, name='doctor_appointments'),
     path('my_patients',views.my_patients,name='my_patients'),
     path('patient_history',views.patient_history,name='patient_history'),
 

@@ -1,4 +1,4 @@
-{% extends 'users/base.html' %}
+ {% extends 'users/base.html' %}
 
 {% block title %}
 
@@ -6,28 +6,24 @@
 
 
 {% block content %}
-{% load static %}
+{% load static %} 
 
 
 
 <style>
   
 </style>
-<!-- <h1 class="text-center">home page</h1>
-<hr> -->
 <h1 class="text-center">WE ASSURE QUALITY CARE</h1>
 <hr>
 <div id="carouselExample" class="carousel slide">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="hospital_project\static\image4.png" class="d-block w-100" alt="...">
+        <img src="hospital_project\static\image4.png" class="d-block w-100" alt="">
       </div>
       <div class="carousel-item">
-        <img src="hospital_project\static\iamge5.png" class="d-block w-100" alt="...">
+        <img src="hospital_project\static\iamge5.png" class="d-block w-100" alt="">
       </div>
-      <!-- <div class="carousel-item">
-        <img src="" class="d-block w-100" alt="...">
-      </div> -->
+      
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -41,49 +37,42 @@
 <div>
   <div class="card-group">
     <div class="card">
-      <img src="{% static 'images/iamge6.png'%}" class="card-img-top" alt="...">
+      <img src="{% static 'images\iamge6.png'%}" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title"><a href="{% url 'outreach' %}" style="text-decoration: none;">SOCIAL OUTREACH</h5></a>
-        <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
+      
       </div>
     </div>
     <div class="card">
-      <img src="{% static 'images/iamge7.png'%}" class="card-img-top" alt="...">
+      <img src="{% static 'images\iamge7.png'%}" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title"><a href="{% url 'health_insurance' %}" style="text-decoration: none;">HEALTH INSURANCE</h5></a>
-        <!-- <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
+      
       </div>
     </div>
     <div class="card">
-      <img src="{% static 'images/iamge9.png'%}" class="card-img-top" alt="...">
+      <img src="{% static 'images\iamge9.png'%}" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title"><a href="{% url 'health_checkup' %}" style="text-decoration: none;">HEALTH CHECKUP</h5></a>
-        <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
       </div>
     </div>
   </div>
 </div>
-<!-- <h4 class="text-center "><a href="{% url 'outreach' %}" style="text-decoration: none;">SOCIAL OUTREACH</h4></a> -->
-<!-- <h4 class="text-center"><a href="{% url 'health_insurance' %}" style="text-decoration: none;">HEALTH INSURANCE</h4></a>
-<h4 class="text-center"><a href="{% url 'health_checkup' %}" style="text-decoration: none;">HEALTH CHECKUP</h4></a><br> -->
 
 
 <h1 class="text-center">OUR DEPARTMENTS</h1><br>
-<!-- <h4><a href="{% url 'departments' %}">Our Departmnets</h4></a> -->
+
 
 
 {% for d in department %}
-<div class="card mb-3 mx-auto w-50" style="width: 18rem; float: left;">
+<div class="card mb-3 mx-auto w-30" style="width: 18rem; float: left;">
   <div class="card-body">
     <h4>
-      <a href="{{ d.dep_link }}">{{ d.dep_name }}</a>
+      <a href="{% url 'department_doctors' department_id=d.id %}">{{ d.dep_name }}</a>
     </h4>
   </div>
 </div>
-
 {% endfor %}
 
 {% endblock %}
+

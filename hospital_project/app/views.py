@@ -206,10 +206,21 @@ def doctors(request):
 
 
 
-def departments(request):
-    dept= Departments.objects.all()  
-    return render(request,'users/department.html',{'department':dept})
+# def departments(request):
+#     dept= Departments.objects.all()  
+#     return render(request,'users/department.html',{'department':dept})
 
+def departments(request):
+    dept = Departments.objects.all()
+    return render(request, 'users/department.html', {'department': dept})
+
+
+
+
+def department_doctors(request, department_id):
+    department = Departments.objects.get(id=department_id)
+    doctors = Doctors.objects.filter(department=department)
+    return render(request, 'users/doctor.html', {'doctors': doctors, 'department': department})
 
 
 
@@ -260,8 +271,20 @@ def doctor_home(request):
 
 
 
-def appoinments(request):
-    return render(request,'doctors/appoinments.html')
+
+
+
+# def appoinments(request):
+#     return render(request,'doctors/appoinments.html')
+
+
+
+def appointments(request, doctor_id):
+    doctor = Doctors.objects.get(id=doctor_id)  
+    bookings = bookings.objects.filter(name=doctor)  
+    
+    return render(request, 'doctors/appointments.html', {'doctor': doctor, 'bookings': bookings})
+
 
 
 def my_patients(request):

@@ -33,6 +33,11 @@ class Doctors(models.Model):
          return self.name
 
 
+
+
+
+
+
 class Booking(models.Model):
     p_name=models.CharField(max_length=200)
     p_phone=models.CharField(max_length=10)
