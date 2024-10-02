@@ -89,7 +89,8 @@ def Login(request):
                 elif user.usertype == "doctor":
                     return redirect(doctor_home)  
                 elif user.usertype == "admin":
-                    return redirect('/admin/')
+                    # return redirect('/admin/')
+                    return redirect(admin_home)
                 else:
                     return HttpResponse("error")
         else:
@@ -217,10 +218,10 @@ def departments(request):
 
 
 
-def department_doctors(request, department_id):
-    department = Departments.objects.get(id=department_id)
-    doctors = Doctors.objects.filter(department=department)
-    return render(request, 'users/doctor.html', {'doctors': doctors, 'department': department})
+# def department_doctors(request, department_id):
+#     department = Departments.objects.get(id=department_id)
+#     doctors = Doctors.objects.filter(department=department)
+#     return render(request, 'users/doctor.html', {'doctors': doctors, 'department': department})
 
 
 
@@ -293,3 +294,8 @@ def my_patients(request):
 
 def patient_history(request):
     return render(request,'doctors/patient_history.html')
+
+
+
+def admin_home(request):
+    return render(request,'admin/admin_home.html')

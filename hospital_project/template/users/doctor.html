@@ -24,24 +24,3 @@ doctors
 
 
 
-<!-- 
-
-{% extends 'users/base.html' %}
-{% load static %}
-
-{% block title %}
-Doctors in {{ department.dep_name }}
-{% endblock %}
-
-{% block content %}
-<h1 class="text-center">Doctors in {{ department.dep_name }}</h1>
-<hr>
-<div class="container">
-    {% for d in doctors %}
-        <p><strong>{{ d.name }}</strong></p>
-        <p>Speciality: {{ d.speciality }}</p>
-        <p>Department: {{ d.department.dep_name }}</p>
-        <hr>
-    {% endfor %}
-</div>
-{% endblock %}  -->
