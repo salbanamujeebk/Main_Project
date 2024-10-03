@@ -1,30 +1,61 @@
 {% extends 'users/base.html' %}
 
 {% block title %}
-Profile
+    Profile
 {% endblock %}
 
-
 {% block content %}
-<h1 class="text-center">Profile</h1>
-<hr>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h2>User Profile</h2>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{% url 'profile' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Name</strong></label>
+                            <p class="form-control">{{ data.first_name }}</p>
+                        </div>
 
-<form action="{% url 'profile' %}" method="POST">
-    {% csrf_token %}
-    <label>Name</label><br>
-    <p>{{data.first_name}}</p>
-    <label>Address</label><br>
-    <p>{{data.Address}}</p>
-    <label>Phone Number</label><br>
-    <p>{{data.Phonenumber}}</p>
-    <label>User Name</label><br>
-    <p>{{data.username}}</p>
-    <label>Email</label><br>
-    <p>{{data.email}}</p>  
-    <label>Age</label><br>
-    <p>{{data.Age}}</p>   
-    <label>DOB</label><br>
-    <p>{{data.DOB}}</p>   
-</form>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Address</strong></label>
+                            <p class="form-control">{{ data.Address }}</p>
+                        </div>
 
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Phone Number</strong></label>
+                            <p class="form-control">{{ data.Phonenumber }}</p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Username</strong></label>
+                            <p class="form-control">{{ data.username }}</p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Email</strong></label>
+                            <p class="form-control">{{ data.email }}</p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Age</strong></label>
+                            <p class="form-control">{{ data.Age }}</p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Date of Birth</strong></label>
+                            <p class="form-control">{{ data.DOB }}</p>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'editprofile' %}" class="btn btn-dark">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
