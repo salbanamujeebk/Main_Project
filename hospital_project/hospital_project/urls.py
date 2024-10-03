@@ -42,9 +42,10 @@ urlpatterns = [
     path('booking',views.booking,name='booking'),
     # path('departments',views.departments,name='departments'),
     path('contact',views.contact,name='contact'),
-    # path('departments/<int:department_id>/doctors/', views.department_doctors, name='department_doctors'),
+    path('department_doctors/<int:department_id>', views.department_doctors, name='department_doctors'),
     path('departments/', views.departments, name='departments'),
     path('doctors/', views.doctors, name='doctors'),
+    
 
 
 # DOCTOR
@@ -54,6 +55,7 @@ urlpatterns = [
     # path('doctor/<int:doctor_id>/appointments/', views.appointments, name='doctor_appointments'),
     path('my_patients',views.my_patients,name='my_patients'),
     path('patient_history',views.patient_history,name='patient_history'),
+    path('doctor_profile',views.doctor_profile,name='doctor_profile'),
 
 
 

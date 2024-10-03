@@ -1,21 +1,31 @@
 {% extends 'users/base.html' %}
 
 {% block title %}
-booking
+Booking
 {% endblock %}
-
 
 {% block content %}
-<h1 class="text-center">Make an Appoinment</h1>
+
+
+<style>
+    
+    
+</style>
+
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<h1 class="text-center mt-5">Make an Appointment</h1>
 <hr>
 
-<div class="container w-50">
-    <form action="{% url 'booking' %}" method="post">
+<div class="container w-50 mt-4">
+    <form action="{% url 'booking' %}" method="post" class="border p-4 shadow-sm rounded">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-dark btn-block">Submit</button>
     </form>
 </div>
+
 {% endblock %}
-
-

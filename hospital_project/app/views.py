@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import CustomUser
 from django.contrib.auth import authenticate, login 
-from .models import Departments, Doctors, Emergency, Orpahan_care
+from .models import Departments, Doctors, Emergency, Orpahan_care,Booking
 from .forms import BookingForm
 
 # Create your views here.
@@ -218,10 +218,10 @@ def departments(request):
 
 
 
-# def department_doctors(request, department_id):
-#     department = Departments.objects.get(id=department_id)
-#     doctors = Doctors.objects.filter(department=department)
-#     return render(request, 'users/doctor.html', {'doctors': doctors, 'department': department})
+def department_doctors(request, department_id):
+    department1 = Departments.objects.get(id=department_id)
+    doctors = Doctors.objects.filter(department=department1.dep_name)
+    return render(request, 'users/department_doctors.html', {'doctors': doctors, 'department': department1})
 
 
 
@@ -280,11 +280,12 @@ def doctor_home(request):
 
 
 
-def appointments(request, doctor_id):
-    doctor = Doctors.objects.get(id=doctor_id)  
-    bookings = bookings.objects.filter(name=doctor)  
+def appointments(request):
+    doctor = CustomUser.objects.get(id=request.user.id)
+    doctor_id = Doctors.objects.get(doc=doctor)  
+    bookings = Booking.objects.filter(name=doctor_id)  
     
-    return render(request, 'doctors/appointments.html', {'doctor': doctor, 'bookings': bookings})
+    return render(request,'doctors/appoinments.html',{'doctor': doctor_id, 'bookings': bookings})
 
 
 
@@ -296,6 +297,12 @@ def patient_history(request):
     return render(request,'doctors/patient_history.html')
 
 
+def doctor_profile(request):
+    proff=Doctors.objects.get(id=request.user.id)
+    return render(request,'doctors/doctor_profile.html',{'data':proff})
+
+
+# ADMIN
 
 def admin_home(request):
     return render(request,'admin/admin_home.html')

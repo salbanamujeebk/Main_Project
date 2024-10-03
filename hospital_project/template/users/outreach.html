@@ -1,15 +1,92 @@
- {% extends 'users/base.html' %}
+{% extends 'users/base.html' %}
 
 {% block title %}
 Social Outreach
 {% endblock %}
 
-
 {% block content %}
-<h1 class="text-center">SOCIAL OUTREACH</h1>
-<hr>
-<h4><a href="{% url 'kidney_care' %}" style="text-decoration: none;">KIDNEY CARE</h4></a>
-<h4><a href="{% url 'paliative' %}" style="text-decoration: none;">PAIN AND PALIATIVE</a></h4>
-<h4><a href="{% url 'emergency' %}" style="text-decoration: none;">EMERGENCY HEALTH AND CRITICAL CARE</h4></a>
-<h4><a href="{% url 'orphan_care' %}" style="text-decoration: none;">ORPHAN CARE</h4></a>
+{% load static %}
+
+<style>
+  .card {
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+  }
+
+  .card-text {
+      font-size: 1rem;
+      margin-bottom: 20px;
+  }
+
+  .btn-primary {
+      background-color: gray;
+      border-color: gray;
+      transition: background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+      background-color: #494749;
+  }
+</style>
+
+
+
+
+<div class="container mt-5">
+    <h1 class="text-center">SOCIAL OUTREACH</h1>
+    <hr>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Kidney Care</h5>
+                    <p class="card-text">Comprehensive care for patients with kidney-related conditions.</p>
+                    <a href="{% url 'kidney_care' %}" class="btn btn-primary ">Learn More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Pain and Palliative</h5>
+                    <p class="card-text">Supportive care for those suffering from chronic pain.</p>
+                    <a href="{% url 'paliative' %}" class="btn btn-primary ">Learn More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Emergency and Critical Care</h5>
+                    <p class="card-text">Urgent care for critical conditions and emergencies.</p>
+                    <a href="{% url 'emergency' %}" class="btn btn-primary ">Learn More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Orphan Care</h5>
+                    <p class="card-text">Caring for orphans with specialized health services.</p>
+                    <a href="{% url 'orphan_care' %}" class="btn btn-primary ">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+Doctor View
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+    <h4 class="text-center mb-4">Doctors</h4>
+    <hr>
+    <div class="row">
+        {% for doctor in doctors %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Dr. {{ doctor.name }}</h5>
+                    <p class="card-text">{{ doctor.department }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p>No doctors available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

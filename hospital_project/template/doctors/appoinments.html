@@ -1,14 +1,55 @@
 {% extends 'doctors/doctor_home.html' %}
 
-{% block title %}
-Appoinments
-{% endblock %}
-
-
-{% block content %}
 {% load static %}
 
-<h1>Appointments for Dr. {{ doctor.name }}</h1>
+{% block title %}
+Appointments
+{% endblock %}
+
+{% block content %}
+
+<!-- <h1>Appointments for Dr. {{ doctor.name }}</h1> -->
+
+<h3>My Appoinments</h3>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 1.1em;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: black; 
+        color: white; 
+        text-transform: uppercase; 
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; 
+    }
+
+    tr:hover {
+        background-color: #ddd; 
+    }
+
+    .no-appointments {
+        text-align: center;
+        padding: 20px;
+        font-size: 1.2em;
+        color: #888; 
+    }
+</style>
 
 <table>
     <thead>
@@ -31,15 +72,10 @@ Appoinments
         </tr>
         {% empty %}
         <tr>
-            <td colspan="5">No appointments available.</td>
+            <td colspan="5" class="no-appointments">No appointments available.</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
-
 {% endblock %}
-
-
-<!-- <a href="{% url 'doctor_appointments' doctor.id %}">View Appointments</a> -->
-<!--  -->

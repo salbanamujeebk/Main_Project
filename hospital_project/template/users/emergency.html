@@ -1,29 +1,30 @@
 {% extends 'users/base.html' %}
 
 {% block title %}
-Emergency
+Emergency Health & Critical Care
 {% endblock %}
 
-
 {% block content %}
-<h1 class="text-center">EMERGENCY HEALTH AND CRITICAL CARE</h1>
-<hr><br>
+<div class="container my-5">
+    <h1 class="text-center text-uppercase fw-bold text-dark">Emergency Health & Critical Care</h1>
+    <hr class="w-25 mx-auto border border-dark"><br>
 
-<div class="mx-auto w-50 text-center text-black p-5 my-3 ">
-    <p>Emergency critical care is an intensive care unit, where patient needs immediate attention and needed in case of life
-    threatening accident and traumatic condition.</p>
+    <div class="mx-auto w-75 text-center text-secondary p-4 my-4 bg-light rounded shadow">
+        <p class="lead">
+            Emergency critical care is an intensive care unit where patients need immediate attention, often in life-threatening situations such as accidents and trauma.
+        </p>
+    </div>
+
+    {% for d in emergency %}
+    <div class="mx-auto w-75 text-center p-4 my-4 bg-white rounded shadow-sm border border-secondary">
+        <h2 class="text-success">{{ d.p_heading }}</h2>
+        <p class="text-muted">{{ d.p_description }}</p>
+    </div>
+    {% endfor %}
+
+    <div class="text-center mt-5">
+        <p class="display-6 text-danger fw-bold">Emergency Contact: 9632145870</p>
+        <button class="btn btn-danger btn-lg rounded-pill">Call Now</button>
+    </div>
 </div>
-
-{% for d in emergency %}
-<div class="mx-auto w-50 text-center text-black p-3 my-3 ">
-    <h2>{{d.p_heading}}</h2>
-    <p>{{d.p_description}}</p>
-</div>
-
-
-
-{% endfor %}
-
-<p class="text-center fs-3 text-danger">9632145870</p>
-
 {% endblock %}

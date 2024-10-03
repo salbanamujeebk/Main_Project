@@ -4,81 +4,94 @@
 Health Checkup
 {% endblock %}
 
-
 {% block content %}
-<h1 class="text-center">HEALTH CHECKUP</h1>
-<hr>
-<h2>HEALTH CHECK PACKAGES</h2>
-<p>CAREMATRIX Hospital presents a range of health check packages. 
-These preventive health check packages are custom designed for different age groups & disease profiles.</p>
 
-
-<h4>WHEN YOU ARE COMING FOR HEALTH CHECKUP</h4>
-<ol>
-    <li> On appearing for a test, be in fasting for 10 hours. You can drink water</li>
-    <li> Please register at the counter between 6.30 am to 8.00 am</li>
-    <li> Please keep your routine medicines and insulin with you and take them after
-    giving blood sample</li>
-    <li>Please do not increase or decrease the intake of your breakfast. Have it as
-    normal as you do</li>
-    <li> Eye examination, dental examination and gynecology consultation will be
-    between 10.30 am and 12 pm.  Please report at the station concerned on time.</li>
-    <li> Test results can be collected only by evening. You should come prepared to
-    stay back in the hospital till the results are delivered</li>
-</ol>
-
-<h4>ECONOMY DIABETES CHECK UP</h4>
-<ol>
-    <li>Complete blood tests</li>
-    <li>Urinary routine examination</li>
-    <li>Kidney screening</li>
-    <li>Cholesterol tests</li>
-    <li>TSH</li>
-    <li>HbA1c (Diabetic confirmatory test)</li>
-    <li>Vascular Doppler study (AB Index)</li>
-    <li>Biothesiometry (Podiatric tests)</li>
-    <li>ECG (Electrocardiogram)</li>
-    <li>Diabetes education</li>
-    <li>Dietician consultation</li>   
-</ol>
-<h5>Doctor’s Consultation</h5>
-Diabetes Examination<br>
-Eye Examination<br>
-Dental Examination<br><br>
-
-<p class="fs-4">Package Price: Rs 1900</p>
-
-
-<h4>CARDIOLOGY HEALTH CHECKUP</h4>
-<h5>Booking is mandatory</h5>
-<ol>
-    <li>Complete Blood Tests</li>
-    <li>Urine Routine Analysis</li>
-    <li>Renal Profile Tests</li>
-    <li>Cholesterol Related Testvs
-    <li>Liver Tests</li>
-    <li>Uric Acid, Sodiuvm, Potassium</li>
-    <li>Cancer Screening</li>
-    <li>PSA for Men</li>
-    <li>PAP smear for Women</li>
-    <li>Chest X-Ray</li>
-    <li>TSH</li>
-    <li>Ultrasonography (Scanning)</li>
-    <li>ECG, ECHO, TMT</li>
-</ol>
-<h5>Doctor’s Consultation</h5>
-
-Consultation of Cardiologist<br>
-Consultation of Gynaecologist<br>
-Dental Examination<br><br>
-
-<p class="fs-4">Package Price: Rs 4500</p>
+<style>
+    .card-header{
+        background-color: black;
+        color: white;
+    }
+</style>
 
 
 
+<div class="container my-5">
+    <h1 class="text-center display-4">Health Checkup</h1>
+    <hr class="my-4">
+    <div class="my-5">
+        <h2 class="text-dark">Health Check Packages</h2>
+        <p>CAREMATRIX Hospital presents a range of health check packages. These preventive health check packages are custom designed for different age groups & disease profiles.</p>
+    </div>
 
+    <div class="mb-5">
+        <h4 class="text-secondary">When You Are Coming for Health Checkup</h4>
+        <ol class="list-group list-group-numbered">
+            <li class="list-group-item">Be in fasting for 10 hours before your test. You can drink water.</li>
+            <li class="list-group-item">Please register at the counter between 6:30 am and 8:00 am.</li>
+            <li class="list-group-item">Bring your routine medicines and insulin, and take them after giving the blood sample.</li>
+            <li class="list-group-item">Do not change your breakfast routine; have it as usual after the tests.</li>
+            <li class="list-group-item">Eye, dental, and gynecology consultations are between 10:30 am and 12:00 pm. Please be punctual.</li>
+            <li class="list-group-item">Test results will be available by evening. Please plan to stay until then.</li>
+        </ol>
+    </div>
 
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header ">
+            <h4 class="mb-0 text-white">Economy Diabetes Checkup</h4>
+        </div>
+        <div class="card-body">
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Complete blood tests</li>
+                <li class="list-group-item">Urinary routine examination</li>
+                <li class="list-group-item">Kidney screening</li>
+                <li class="list-group-item">Cholesterol tests</li>
+                <li class="list-group-item">TSH</li>
+                <li class="list-group-item">HbA1c (Diabetic confirmatory test)</li>
+                <li class="list-group-item">Vascular Doppler study (AB Index)</li>
+                <li class="list-group-item">Biothesiometry (Podiatric tests)</li>
+                <li class="list-group-item">ECG (Electrocardiogram)</li>
+                <li class="list-group-item">Diabetes education</li>
+                <li class="list-group-item">Dietician consultation</li>
+            </ol>
+            <h5 class="mt-4">Doctor’s Consultation</h5>
+            <p>
+                Diabetes Examination<br>
+                Eye Examination<br>
+                Dental Examination<br>
+            </p>
+            <p class="fs-4 font-weight-bold text-success">Package Price: Rs 1900</p>
+        </div>
+    </div>
 
-
-
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header bg-dark ">
+            <h4 class="mb-0 text-white">Cardiology Health Checkup</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="text-danger">Booking is mandatory</h5>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Complete Blood Tests</li>
+                <li class="list-group-item">Urine Routine Analysis</li>
+                <li class="list-group-item">Renal Profile Tests</li>
+                <li class="list-group-item">Cholesterol Related Tests</li>
+                <li class="list-group-item">Liver Tests</li>
+                <li class="list-group-item">Uric Acid, Sodium, Potassium</li>
+                <li class="list-group-item">Cancer Screening</li>
+                <li class="list-group-item">PSA for Men</li>
+                <li class="list-group-item">PAP Smear for Women</li>
+                <li class="list-group-item">Chest X-Ray</li>
+                <li class="list-group-item">TSH</li>
+                <li class="list-group-item">Ultrasonography (Scanning)</li>
+                <li class="list-group-item">ECG, ECHO, TMT</li>
+            </ol>
+            <h5 class="mt-4">Doctor’s Consultation</h5>
+            <p>
+                Consultation of Cardiologist<br>
+                Consultation of Gynaecologist<br>
+                Dental Examination<br>
+            </p>
+            <p class="fs-4 font-weight-bold text-danger">Package Price: Rs 4500</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
