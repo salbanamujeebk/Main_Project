@@ -60,7 +60,12 @@ urlpatterns = [
 
 
 #ADMIN
-    path('admin_home',views.admin_home,name='admin_home')
+    path('admin_home',views.admin_home,name='admin_home'),
+    path('doctors_list',views.doctors_list,name='doctors_list'),
+    path('patients_list',views.patients_list,name='patients_list'),
+    path('total_appoinments',views.total_appoinments,name='total_appoinments'),
+    path('approve_app',views.approve_app,name='approve_app'),
+    path('reject_app',views.reject_app,name='reject_app'),
 
 
 

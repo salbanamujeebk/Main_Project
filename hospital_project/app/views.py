@@ -288,6 +288,13 @@ def appointments(request):
     return render(request,'doctors/appoinments.html',{'doctor': doctor_id, 'bookings': bookings})
 
 
+def approve_app(request):
+    return HttpResponse("done")
+
+
+def reject_app(request):
+    return HttpResponse('done')
+
 
 def my_patients(request):
     return render(request,'doctors/my_patients.html')
@@ -302,7 +309,21 @@ def doctor_profile(request):
     return render(request,'doctors/doctor_profile.html',{'data':proff})
 
 
+
+
 # ADMIN
+
+
+
 
 def admin_home(request):
     return render(request,'admin/admin_home.html')
+
+def doctors_list(request):  
+    return render(request,'admin/doctors_list.html')
+
+def patients_list(request):
+    return render(request,'admin/patients_list.html')
+
+def total_appoinments(request):
+    return render(request,'admin/total_appoinments.html')
