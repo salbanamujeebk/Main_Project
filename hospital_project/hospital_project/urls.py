@@ -49,7 +49,7 @@ urlpatterns = [
 
 
 # DOCTOR
-    path('registration_doctor',views.registration_doctor,name='registration_doctor'),
+    
     path('doctor_home',views.doctor_home,name='doctor_home'),
     path('appoinments',views.appointments,name='appoinments'),
     # path('doctor/<int:doctor_id>/appointments/', views.appointments, name='doctor_appointments'),
@@ -60,12 +60,18 @@ urlpatterns = [
 
 
 #ADMIN
+    path('registration_doctor',views.registration_doctor,name='registration_doctor'),
     path('admin_home',views.admin_home,name='admin_home'),
     path('doctors_list',views.doctors_list,name='doctors_list'),
     path('patients_list',views.patients_list,name='patients_list'),
     path('total_appoinments',views.total_appoinments,name='total_appoinments'),
     path('approve_app',views.approve_app,name='approve_app'),
     path('reject_app',views.reject_app,name='reject_app'),
+    path('doctor_details',views.doctor_details,name='doctor_details'),
+    path('departments_list',views.departments_list,name='departments_list'),
+    path('doctor_view',views.doctor_view,name='doctor_view'),
+    path('add_departments',views.add_departments,name='add_departments'),
+
 
 
 

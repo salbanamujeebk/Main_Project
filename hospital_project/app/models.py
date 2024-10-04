@@ -27,12 +27,11 @@ class Doctors(models.Model):
     name=models.CharField(max_length=100)
     speciality=models.CharField(max_length=100)
     department=models.CharField(max_length=100)
+    # department = models.ForeignKey(Departments, on_delete=models.CASCADE)
     image=models.FileField()
 
     def __str__(self):
          return self.name
-
-
 
 
 

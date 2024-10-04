@@ -1,0 +1,24 @@
+{% extends 'admin/base_admin.html' %}
+
+{% load static %}
+
+{% block title %}
+Departments List
+{% endblock %}
+
+{% block content %}
+<h1>Departments</h1>
+
+<ul>
+    {% for dept in department %}
+            <h2>{{ dept.dep_name }}</h2>
+            <p>{{ dept.dep_description }}</p>
+    {% empty %}
+        <li>No departments found.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+
+

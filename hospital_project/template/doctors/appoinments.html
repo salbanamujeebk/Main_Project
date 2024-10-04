@@ -58,6 +58,7 @@ Appointments
             <th>Email</th>
             <th>Booking Date</th>
             <th>Booked On</th>
+            <th></th>
         </tr>
     <tbody>
         {% for booking in bookings %}
@@ -67,6 +68,8 @@ Appointments
             <td>{{ booking.p_email }}</td>
             <td>{{ booking.booking_date }}</td>
             <td>{{ booking.booked_on }}</td>
+            <td><button type="submit" class="btn btn-success">Approve</button>&nbsp;&nbsp;<button type="submit" class="btn btn-danger">reject</button></td>
+            
         </tr>
         {% empty %}
         <tr>

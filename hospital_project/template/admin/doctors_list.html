@@ -7,6 +7,16 @@ Doctors List
 {% endblock %}
 
 {% block content %}
+
+<style>
+   a {
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    color: gray;
+}
+</style>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Doctors</h1>
     <hr>
@@ -15,23 +25,22 @@ Doctors List
         <table class="table table-bordered table-hover table-striped">
             <thead class="table-dark text-center">
                 <tr>
-                    <th scope="col">Sl. No</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Department</th>
+                    <th>Sl. No</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Department</th>
                 </tr>
+                {% for doctor in doctors %}
+                <tr>
+                    <td>{{ forloop.counter }}</td> 
+                    <td><a href="{% url 'doctor_details' %}">Dr.{{ doctor.name }}</a></td> 
+                    <td>{{ doctor.doc.Address }}</td> 
+                    <td>{{ doctor.doc.Phonenumber }}</td> 
+                    <td>{{ doctor.department }}</td>
+                </tr>
+                {% endfor %}
             </thead>
-            <tbody class="text-center">
-                
-                <tr>
-                    
-                </tr>
-                <tr>
-                    
-                </tr>
-                
-            </tbody>
         </table>
     </div>
 </div>

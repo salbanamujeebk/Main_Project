@@ -48,28 +48,38 @@ Admin Home
 
 
 
-<div class="container content-section">
+<div class="container content-section" style="height: 100vh;">
   <div class="row g-4">
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-3 col-md-6">
       <div class="card card-custom bg-danger text-white">
         <h3>Doctors</h3>
         <p>Manage doctor profiles and schedules</p>
-        <a href="{% url 'doctors_list'%}" class="btn btn-light">Go to Doctors</a>
-        <!-- <a href="{% url 'doctors_list'%}" class="btn btn-secondary">Register Now</a> -->
+        <a href="{% url 'doctors_list'%}" class="btn btn-light">View</a><br>
+        <a href="{% url 'registration_doctor' %}" class="btn btn-light">Register</a>
       </div>
     </div>
-    <div class="col-lg-4 col-md-6">
-      <div class="card card-custom bg-success text-white">
+    <div class="col-lg-3 col-md-6">
+      <div class="card card-custom bg-warning text-white">
         <h3>Patients</h3>
-        <p>View and manage patient records</p>
-        <a href="{% url 'patients_list' %}" class="btn btn-light">Go to Patients</a>
+        <p>View and manage patient records</p><br>
+        <a href="{% url 'patients_list' %}" class="btn btn-light">View</a>
+        <!-- <a href="{% url 'patients_list' %}" class="btn btn-light">history</a> -->
       </div>
     </div>
-    <div class="col-lg-4 col-md-12">
-      <div class="card card-custom bg-primary text-white">
+    <div class="col-lg-3 col-md-12">
+      <div class="card card-custom bg-info text-white">
         <h3>Appointments</h3>
-        <p>Check and schedule appointments</p>
-        <a href="{% url 'total_appoinments' %}" class="btn btn-light">Go to Appointments</a>
+        <p>Check and schedule appointments</p><br>
+        <a href="{% url 'total_appoinments' %}" class="btn btn-light">View</a>
+        <!-- <a href="{% url 'patients_list' %}" class="btn btn-light">History</a> -->
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-12">
+      <div class="card card-custom bg-success text-white">
+        <h3>Departments</h3>
+        <p>Check and update departments</p>
+        <a href="{% url 'departments' %}" class="btn btn-light">View</a><br>
+        <a href="{% url 'add_departments' %}" class="btn btn-light">Add</a>
       </div>
     </div>
   </div>

@@ -82,15 +82,12 @@ def Login(request):
         if user is not None:
             login(request, user)
             if user.is_staff:
-                return redirect('/admin/')  
+                return redirect(admin_home)  
             else:
                 if user.usertype == "user": 
                     return redirect(home)  
                 elif user.usertype == "doctor":
                     return redirect(doctor_home)  
-                elif user.usertype == "admin":
-                    # return redirect('/admin/')
-                    return redirect(admin_home)
                 else:
                     return HttpResponse("error")
         else:
@@ -224,6 +221,19 @@ def department_doctors(request, department_id):
     return render(request, 'users/department_doctors.html', {'doctors': doctors, 'department': department1})
 
 
+def doctor_view(request):
+    doctors = Doctors.objects.select_related('department').all()
+    department = Departments.objects.get(dep_name=doctors.department) 
+    
+    context = {
+        'doctors': doctors,
+        'department': department,
+        
+    }
+    return render(request, 'users/doctor_view.html',context)
+
+
+
 
 def contact(request):
     return render(request,'users/contact.html')
@@ -320,10 +330,31 @@ def admin_home(request):
     return render(request,'admin/admin_home.html')
 
 def doctors_list(request):  
-    return render(request,'admin/doctors_list.html')
+    doctors = Doctors.objects.all()
+    return render(request,'admin/doctors_list.html',{'doctors':doctors})
+
+
+
+
+# def doctors_list(request):
+#     doctors = Doctors.objects.all()
+#     return render(request, 'doctors/doctors_list.html', {'doctors': doctors})
+
 
 def patients_list(request):
     return render(request,'admin/patients_list.html')
 
 def total_appoinments(request):
     return render(request,'admin/total_appoinments.html')
+
+
+def doctor_details(request):
+    return render(request,'admin/doctor_details.html')
+
+
+def departments_list(request):
+    return render(request,'admin/departments_list.html')
+
+
+def add_departments(request):
+    return render(request,'admin/add_departments.html')
