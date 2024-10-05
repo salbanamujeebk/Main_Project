@@ -43,7 +43,6 @@ urlpatterns = [
     # path('departments',views.departments,name='departments'),
     path('contact',views.contact,name='contact'),
     path('department_doctors/<int:department_id>', views.department_doctors, name='department_doctors'),
-    path('departments/', views.departments, name='departments'),
     path('doctors/', views.doctors, name='doctors'),
     
 
@@ -68,9 +67,12 @@ urlpatterns = [
     path('approve_app',views.approve_app,name='approve_app'),
     path('reject_app',views.reject_app,name='reject_app'),
     path('doctor_details',views.doctor_details,name='doctor_details'),
-    path('departments_list',views.departments_list,name='departments_list'),
+    # path('departments_list',views.departments_list,name='departments_list'),
     path('doctor_view',views.doctor_view,name='doctor_view'),
+    path('doctor/details/<int:doctor_id>/', views.doctor_details, name='doctor_details'),
     path('add_departments',views.add_departments,name='add_departments'),
+    path('departments/', views.departments, name='departments'),
+    path('update_department/<int:id>',views.update_department,name='update_department'),
 
 
 

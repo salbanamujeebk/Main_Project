@@ -4,6 +4,8 @@ from .models import CustomUser
 from django.contrib.auth import authenticate, login 
 from .models import Departments, Doctors, Emergency, Orpahan_care,Booking
 from .forms import BookingForm
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -124,6 +126,7 @@ def editprofile(request):
         return render(request,'users/editprofile.html',{'data':edit_prof})
 
 
+@login_required
 def home(request):
     dept= Departments.objects.all()  
     return render(request,'users/home.html',{'department':dept})
@@ -208,13 +211,6 @@ def doctors(request):
 #     dept= Departments.objects.all()  
 #     return render(request,'users/department.html',{'department':dept})
 
-def departments(request):
-    dept = Departments.objects.all()
-    return render(request, 'users/department.html', {'department': dept})
-
-
-
-
 def department_doctors(request, department_id):
     department1 = Departments.objects.get(id=department_id)
     doctors = Doctors.objects.filter(department=department1.dep_name)
@@ -233,8 +229,6 @@ def doctor_view(request):
     return render(request, 'users/doctor_view.html',context)
 
 
-
-
 def contact(request):
     return render(request,'users/contact.html')
 
@@ -244,37 +238,37 @@ def contact(request):
 
 
 
-def registration_doctor(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        Username = request.POST['username']
-        if CustomUser.objects.filter(username=Username,usertype="doctor").exists():
-            return render(request, 'doctors/doctor_reg.html', {'error': 'username already exists'})
-        age = request.POST['age']
-        Phonenumber = request.POST['phone']
-        if CustomUser.objects.filter(Phonenumber=Phonenumber,usertype="doctor",).exists():
-            return render(request, 'doctors/doctor_reg.html', {'error': 'Phonenumber already exists'})
-        dob = request.POST['dob']
-        Address = request.POST['address']
-        Email = request.POST['email']
-        if CustomUser.objects.filter(email=Email,usertype="doctor").exists():
-            return render(request, 'doctors/doctor_reg.html', {'error': 'email already exists'})
-        Password = request.POST['password']
-        speciality=request.POST['speciality']
-        department=request.POST['department']
-        image=request.FILES['Image']
-        data = CustomUser.objects.create_user(username=Username, Age=age,DOB=dob,Address=Address,email=Email,password=Password,usertype="doctor")
-        data.save()
-        try:
-            data1 = Doctors.objects.create(doc=data,name=name,speciality=speciality,department=department,image=image)
-            data1.save()
-        except Exception as e:
-            print(e)
+# def registration_doctor(request):
+#     if request.method == 'POST':
+#         name = request.POST['name']
+#         Username = request.POST['username']
+#         if CustomUser.objects.filter(username=Username,usertype="doctor").exists():
+#             return render(request, 'doctors/doctor_reg.html', {'error': 'username already exists'})
+#         age = request.POST['age']
+#         Phonenumber = request.POST['phone']
+#         if CustomUser.objects.filter(Phonenumber=Phonenumber,usertype="doctor",).exists():
+#             return render(request, 'doctors/doctor_reg.html', {'error': 'Phonenumber already exists'})
+#         dob = request.POST['dob']
+#         Address = request.POST['address']
+#         Email = request.POST['email']
+#         if CustomUser.objects.filter(email=Email,usertype="doctor").exists():
+#             return render(request, 'doctors/doctor_reg.html', {'error': 'email already exists'})
+#         Password = request.POST['password']
+#         speciality=request.POST['speciality']
+#         department=request.POST['department']
+#         image=request.FILES['Image']
+#         data = CustomUser.objects.create_user(username=Username, Age=age,DOB=dob,Address=Address,email=Email,password=Password,usertype="doctor")
+#         data.save()
+#         try:
+#             data1 = Doctors.objects.create(doc=data,name=name,speciality=speciality,department=department,image=image)
+#             data1.save()
+#         except Exception as e:
+#             print(e)
             
-        return redirect(Login)
-    else:
-        # return HttpResponse("success")
-        return render(request,'doctors/doctor_reg.html')
+#         return redirect(Login)
+#     else:
+#         # return HttpResponse("success")
+#         return render(request,'doctors/doctor_reg.html')
 
 
 def doctor_home(request):
@@ -282,6 +276,42 @@ def doctor_home(request):
 
 
 
+
+def registration_doctor(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        Username = request.POST['username']
+        if CustomUser.objects.filter(username=Username, usertype="doctor").exists():
+            return render(request, 'doctors/doctor_reg.html', {'error': 'Username already exists'})
+        
+        age = request.POST['age']
+        Phonenumber = request.POST['phone']
+        if CustomUser.objects.filter(Phonenumber=Phonenumber, usertype="doctor").exists():
+            return render(request, 'doctors/doctor_reg.html', {'error': 'Phonenumber already exists'})
+        
+        dob = request.POST['dob']
+        Address = request.POST['address']
+        Email = request.POST['email']
+        if CustomUser.objects.filter(email=Email, usertype="doctor").exists():
+            return render(request, 'doctors/doctor_reg.html', {'error': 'Email already exists'})
+        
+        Password = request.POST['password']
+        speciality = request.POST['speciality']
+        department = request.POST['department']
+        image = request.FILES['Image']
+    
+        data = CustomUser.objects.create_user(username=Username, Age=age, DOB=dob, Address=Address, email=Email, password=Password, usertype="doctor", Phonenumber=Phonenumber)
+        data.save()
+        try:
+            data1 = Doctors.objects.create(doc=data, name=name, speciality=speciality, department=department, image=image)
+            data1.save()
+        except Exception as e:
+            print(e)
+        
+        return redirect(Login)
+    
+    else:
+        return render(request, 'doctors/doctor_reg.html')
 
 
 
@@ -333,9 +363,6 @@ def doctors_list(request):
     doctors = Doctors.objects.all()
     return render(request,'admin/doctors_list.html',{'doctors':doctors})
 
-
-
-
 # def doctors_list(request):
 #     doctors = Doctors.objects.all()
 #     return render(request, 'doctors/doctors_list.html', {'doctors': doctors})
@@ -352,9 +379,53 @@ def doctor_details(request):
     return render(request,'admin/doctor_details.html')
 
 
-def departments_list(request):
-    return render(request,'admin/departments_list.html')
+# def doctor_details(request, doctor_id):
+#     doctor = get_object_or_404(Doctors, id=doctor_id) 
+#     return render(request, 'doctors/doctor_details.html', {'doctor': doctor})
+
+
+
+# def departments_list(request):
+#     return render(request,'admin/departments_list.html')
+
+def departments(request):
+    dept = Departments.objects.all()
+    return render(request, 'admin/department.html', {'department': dept})
+
 
 
 def add_departments(request):
-    return render(request,'admin/add_departments.html')
+    if request.method == 'POST':
+        dep_name = request.POST['dep_name']
+        dep_description = request.POST['dep_description']
+        department = Departments(dep_name=dep_name, dep_description=dep_description)
+        department.save()
+        return redirect('departments')  
+    
+    return render(request, 'admin/add_departments.html')
+    
+
+def update_department(request,id):
+    data=Departments.objects.get(id=id)
+    print("data ====   ",data)
+    if request.method == 'POST':
+        name = request.POST.get('dep_name')
+        description = request.POST.get('dep_description')
+
+        data.dep_name = name
+        data.dep_description = description
+        data.save()
+
+        print("name --   ",data.dep_name)
+        return redirect(departments) 
+    else:
+        return render(request, 'admin/update_department.html',{'data':data})
+
+
+    # return render(request,'admin/update_department.html')
+
+
+
+
+
+

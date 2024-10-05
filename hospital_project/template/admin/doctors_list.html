@@ -34,10 +34,11 @@ a:hover{
                 {% for doctor in doctors %}
                 <tr>
                     <td>{{ forloop.counter }}</td> 
-                    <td><a href="{% url 'doctor_details' %}">Dr.{{ doctor.name }}</a></td> 
+                    <td><a href="{% url 'doctor_details' doctor.id %}">Dr.{{ doctor.name }}</a></td> 
                     <td>{{ doctor.doc.Address }}</td> 
                     <td>{{ doctor.doc.Phonenumber }}</td> 
                     <td>{{ doctor.department }}</td>
+                    
                 </tr>
                 {% endfor %}
             </thead>

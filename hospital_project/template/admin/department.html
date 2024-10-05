@@ -6,6 +6,14 @@ department
 
 
 {% block content %}
+
+<style>
+    a {
+     text-decoration: none;
+     color: white;
+    }
+ </style>
+
 <h1  class="text-center">Our Departments</h1>
 <hr>
 
@@ -13,6 +21,14 @@ department
 <div class="mx-auto w-50 bg-secondary text-center text-white p-3 my-3 ">
     <h2>{{d.dep_name}}</h2>
     <p>{{d.dep_description}}</p>
+    <button type="submit" class="btn btn-dark"><a href="{% url 'update_department' id=d.id %}">Update</a></button>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-dark">Delete</button>
 </div>
+
 {% endfor %}
-{% endblock %}                                            
+{% endblock %}          
+
+
+
+
+
