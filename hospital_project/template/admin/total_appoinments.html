@@ -1,14 +1,43 @@
 {% extends 'admin/base_admin.html' %}
 
-{% load static %}
-
 {% block title %}
-Appoinments List
+Appointments List
 {% endblock %}
 
 {% block content %}
 
+<h2 class="text-center mt-5">Appointments List</h2>
+<hr>
 
-
+<div class="container mt-4">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Doctor</th>
+                <th>Booking Date</th>
+                <th>Booked On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.p_name }}</td>
+                    <td>{{ booking.p_phone }}</td>
+                    <td>{{ booking.p_email }}</td>
+                    <td>{{ booking.name.name }}</td>
+                    <td>{{ booking.booking_date }}</td>
+                    <td>{{ booking.booked_on }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No appointments found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}

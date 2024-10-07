@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password, is_password_usable
+from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 
@@ -34,9 +35,6 @@ class Doctors(models.Model):
          return self.name
 
 
-
-
-
 class Booking(models.Model):
     p_name=models.CharField(max_length=200)
     p_phone=models.CharField(max_length=10)
@@ -45,7 +43,10 @@ class Booking(models.Model):
     booking_date=models.DateField()
     booked_on=models.DateField(auto_now=True)
 
+    def __str__(self):
+        return self.name
 
+    
 class Emergency(models.Model):
      p_heading=models.CharField(max_length=200)
      p_description=models.TextField()
@@ -61,8 +62,9 @@ class PatientConsultation(models.Model):
     doctor = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     dob = models.DateField()
-    age = models.IntegerField()
-    phone = models.CharField(max_length=15)
+    age = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(120)])
+    height = models.IntegerField(null=True, validators=[MinValueValidator(0)]) 
+    weight = models.IntegerField(validators=[MinValueValidator(0)]) 
     state = models.CharField(max_length=100)
     condition = models.TextField()
     medicine = models.TextField()

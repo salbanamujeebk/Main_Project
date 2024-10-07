@@ -280,18 +280,21 @@ def consultation(request):
         name = request.POST.get('name')
         dob = request.POST.get('dob')
         age = request.POST.get('age')
-        phone = request.POST.get('phone')
+        height = request.POST.get('height')
+        weight = request.POST.get('weight')
         state = request.POST.get('state')
         condition = request.POST.get('condition')
         medicine = request.POST.get('medicine')
         doctor = request.user
 
-        consultation = PatientConsultation(name=name,dob=dob,age=age,phone=phone,state=state,condition=condition,medicine=medicine,doctor=doctor)
-        consultation.save()
-        messages.success(request, "Consultation details submitted successfully!")
-        return redirect('consultation')
+        consultation1 = PatientConsultation.objects.create(name=name,dob=dob,age=age,height=height,weight=weight,state=state,condition=condition,medicine=medicine,doctor=doctor)
+        consultation1.save()
+        # messages.success(request, "Consultation details submitted successfully!")
+        # return redirect('consultation')
+        # return redirect(patients_list)
+        return HttpResponse( "Consultation details submitted successfully!")
     else:
-        return render(request, 'doctors/consultation.html')
+        return render(request, 'admin/patients_list.html')
 
 
 def approve_app(request):
@@ -316,9 +319,7 @@ def doctor_profile(request):
 
 
 
-
 # ADMIN
-
 
 
 
@@ -330,10 +331,35 @@ def doctors_list(request):
     return render(request,'admin/doctors_list.html',{'doctors':doctors})
 
 def patients_list(request):
-    return render(request,'admin/patients_list.html')
+    consultation1 = PatientConsultation.objects.all()
+    print(consultation1)
+    return render(request, 'admin/patients_list.html', {'consultation': consultation1})
+
+
+
+
+# def patients_list(request):
+#     try:
+#         consultations = PatientConsultation.objects.all()
+#     except Exception as e:
+#         messages.error(request, f"An error occurred: {str(e)}")
+#         consultations = [] 
+
+#     return render(request, 'admin/patients_list.html', {'consultations': consultations})
+
+
+
 
 def total_appoinments(request):
     return render(request,'admin/total_appoinments.html')
+
+
+
+def total_appoinments(request):
+    bookings = Booking.objects.all()
+    return render(request, 'admin/total_appoinments.html', {'bookings': bookings})
+
+
 
 
 def doctor_details(request):
