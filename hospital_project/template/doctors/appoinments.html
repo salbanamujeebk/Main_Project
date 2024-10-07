@@ -49,27 +49,33 @@ Appointments
         font-size: 1.2em;
         color: #888; 
     }
+    a{
+        text-decoration: none;
+        color: black;
+    }
 </style>
 
 <table>
-        <tr>
-            <th>Patient Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Booking Date</th>
-            <th>Booked On</th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>Patient Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Booking Date</th>
+        <th>Booked On</th>
+        <th></th>
+    </tr>
     <tbody>
         {% for booking in bookings %}
-        <tr>
-            <td>{{ booking.p_name }}</td>
+        <tr {% if booking.booking_date == today %} style="font-weight: bold;" {% endif %}>
+            <td><a href="{% url 'consultation' %}">{{ booking.p_name }}</a></td>
             <td>{{ booking.p_phone }}</td>
             <td>{{ booking.p_email }}</td>
             <td>{{ booking.booking_date }}</td>
             <td>{{ booking.booked_on }}</td>
-            <td><button type="submit" class="btn btn-success">Approve</button>&nbsp;&nbsp;<button type="submit" class="btn btn-danger">reject</button></td>
-            
+            <td>
+                <button type="submit" class="btn btn-success">Approve</button>
+                <button type="submit" class="btn btn-danger">Reject</button>
+            </td>
         </tr>
         {% empty %}
         <tr>
@@ -78,5 +84,6 @@ Appointments
         {% endfor %}
     </tbody>
 </table>
+
 
 {% endblock %}

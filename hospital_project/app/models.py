@@ -55,3 +55,18 @@ class Orpahan_care(models.Model):
      heading=models.CharField(max_length=200)
      description=models.TextField()
      
+
+
+class PatientConsultation(models.Model):
+    doctor = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    dob = models.DateField()
+    age = models.IntegerField()
+    phone = models.CharField(max_length=15)
+    state = models.CharField(max_length=100)
+    condition = models.TextField()
+    medicine = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

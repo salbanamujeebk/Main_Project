@@ -2,12 +2,13 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import CustomUser
 from django.contrib.auth import authenticate, login 
-from .models import Departments, Doctors, Emergency, Orpahan_care,Booking
+from .models import Departments, Doctors, Emergency, Orpahan_care,Booking, PatientConsultation
 from .forms import BookingForm
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from datetime import date
 
-
-# Create your views here.
 
 
 # USER
@@ -15,9 +16,6 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request,'users/index.html')
-
-# def Login(request):
-#      return render(request,'login.html')
 
 
 def registration(request):
@@ -43,36 +41,6 @@ def registration(request):
     else:
         # return HttpResponse("success")
         return render(request,'users/registration.html')
-
-
-# def Login(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-        
-#         if user is not None:
-#             login(request, user)
-#             if user.is_staff:
-#                 return redirect('/admin/')  
-#             else:
-#                 if user.usertype == "user": 
-#                     return HttpResponse('success')
-#                     # return render(request,'home.html')  
-#                 elif user.usertype == "doctor":
-#                     return HttpResponse('success')  
-#                 elif user.usertype == "admin":
-#                     return redirect('/admin/')
-#                 else:
-#                     return HttpResponse("error")
-#         else:
-#             context = {
-#                 'message': "Invalid credentials"
-#             }
-#             return render(request, 'login.html', context)
-#     else:
-#         return render(request, 'login.html')
-    
 
 
 def Login(request):
@@ -162,22 +130,6 @@ def about(request):
     return render(request,'users/about.html')
 
 
-
-
-
-
-# def booking(request):
-#     if request.method=="POST":
-#         form=BookingForm(request.POST)
-#         if form.os_valid():form.save()
-#     form = BookingForm()
-#     frm = {
-#         'form': form
-#     }
-#     return render(request,'booking.html',frm)
-
-
-
 def booking(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
@@ -186,18 +138,8 @@ def booking(request):
             return HttpResponse('success')
     else:
         form = BookingForm()
-    
+    messages.success(request, "Consultation details submitted successfully!")
     return render(request, 'users/booking.html', {'form': form})
-
-
-
-# def doctors(request):
-#     doct={
-#         'doctors': Doctors.objects.all()
-#     }
-#     print(doct)
-#     return render(request,'doctor.html',doct)
-
 
 
 def doctors(request):
@@ -323,9 +265,33 @@ def registration_doctor(request):
 def appointments(request):
     doctor = CustomUser.objects.get(id=request.user.id)
     doctor_id = Doctors.objects.get(doc=doctor)  
-    bookings = Booking.objects.filter(name=doctor_id)  
+    today = date.today()
+    bookings = Booking.objects.filter(name=doctor_id). order_by('booking_date')
     
-    return render(request,'doctors/appoinments.html',{'doctor': doctor_id, 'bookings': bookings})
+    return render(request,'doctors/appoinments.html',{'doctor': doctor_id, 'bookings': bookings, 'today':today})
+
+
+# def consultation(request):
+#     return render(request,'doctors/consultation.html')
+
+
+def consultation(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        dob = request.POST.get('dob')
+        age = request.POST.get('age')
+        phone = request.POST.get('phone')
+        state = request.POST.get('state')
+        condition = request.POST.get('condition')
+        medicine = request.POST.get('medicine')
+        doctor = request.user
+
+        consultation = PatientConsultation(name=name,dob=dob,age=age,phone=phone,state=state,condition=condition,medicine=medicine,doctor=doctor)
+        consultation.save()
+        messages.success(request, "Consultation details submitted successfully!")
+        return redirect('consultation')
+    else:
+        return render(request, 'doctors/consultation.html')
 
 
 def approve_app(request):
@@ -363,11 +329,6 @@ def doctors_list(request):
     doctors = Doctors.objects.all()
     return render(request,'admin/doctors_list.html',{'doctors':doctors})
 
-# def doctors_list(request):
-#     doctors = Doctors.objects.all()
-#     return render(request, 'doctors/doctors_list.html', {'doctors': doctors})
-
-
 def patients_list(request):
     return render(request,'admin/patients_list.html')
 
@@ -383,17 +344,11 @@ def doctor_details(request):
 #     doctor = get_object_or_404(Doctors, id=doctor_id) 
 #     return render(request, 'doctors/doctor_details.html', {'doctor': doctor})
 
-
-
-# def departments_list(request):
-#     return render(request,'admin/departments_list.html')
-
 def departments(request):
     dept = Departments.objects.all()
     return render(request, 'admin/department.html', {'department': dept})
 
-
-
+#
 def add_departments(request):
     if request.method == 'POST':
         dep_name = request.POST['dep_name']

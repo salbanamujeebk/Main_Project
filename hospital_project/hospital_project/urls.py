@@ -51,6 +51,7 @@ urlpatterns = [
     
     path('doctor_home',views.doctor_home,name='doctor_home'),
     path('appoinments',views.appointments,name='appoinments'),
+    path('consultation',views.consultation,name='consultation'),
     # path('doctor/<int:doctor_id>/appointments/', views.appointments, name='doctor_appointments'),
     path('my_patients',views.my_patients,name='my_patients'),
     path('patient_history',views.patient_history,name='patient_history'),
