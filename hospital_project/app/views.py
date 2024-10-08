@@ -252,6 +252,7 @@ def registration_doctor(request):
         
         return redirect(Login)
     
+    
     else:
         return render(request, 'doctors/doctor_reg.html')
 
@@ -330,6 +331,15 @@ def doctors_list(request):
     doctors = Doctors.objects.all()
     return render(request,'admin/doctors_list.html',{'doctors':doctors})
 
+
+
+
+def delete_doctor(request,id):
+    data=Doctors.objects.get(id=id)
+    data.delete()
+    return redirect(doctors_list)
+
+
 def patients_list(request):
     consultation1 = PatientConsultation.objects.all()
     print(consultation1)
@@ -406,7 +416,9 @@ def update_department(request,id):
     # return render(request,'admin/update_department.html')
 
 
-
-
+def delete_department(request,id):
+    data=Departments.objects.get(id=id)
+    data.delete()
+    return redirect(departments)
 
 

@@ -30,6 +30,7 @@ a:hover{
                     <th>Address</th>
                     <th>Phone</th>
                     <th>Department</th>
+                    <th>Action</th>
                 </tr>
                 {% for doctor in doctors %}
                 <tr>
@@ -38,6 +39,9 @@ a:hover{
                     <td>{{ doctor.doc.Address }}</td> 
                     <td>{{ doctor.doc.Phonenumber }}</td> 
                     <td>{{ doctor.department }}</td>
+                    <td>
+                        <button type="submit" class="btn btn-dark"><a href="{% url 'delete_doctor' doctor.id %}">Delete</a></button>
+                    </td>
                     
                 </tr>
                 {% endfor %}

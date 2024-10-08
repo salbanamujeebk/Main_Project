@@ -22,7 +22,7 @@ department
     <h2>{{d.dep_name}}</h2>
     <p>{{d.dep_description}}</p>
     <button type="submit" class="btn btn-dark"><a href="{% url 'update_department' id=d.id %}">Update</a></button>&nbsp;&nbsp;
-    <button type="submit" class="btn btn-dark">Delete</button>
+    <button type="submit" class="btn btn-dark"><a href="{% url 'delete_department' id=d.id %}">Delete</a></button>
 </div>
 
 {% endfor %}

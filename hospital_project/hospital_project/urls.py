@@ -75,6 +75,8 @@ urlpatterns = [
     path('add_departments',views.add_departments,name='add_departments'),
     path('departments/', views.departments, name='departments'),
     path('update_department/<int:id>',views.update_department,name='update_department'),
+    path('delete_department/<int:id>',views.delete_department,name='delete_department'),
+    path('delete_doctor/<int:id>',views.delete_doctor,name='delete_doctor'),
 
 
 
