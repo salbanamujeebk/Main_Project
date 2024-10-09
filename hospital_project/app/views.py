@@ -238,7 +238,8 @@ def appointments(request):
 #     return render(request,'doctors/consultation.html')
 
 
-def consultation(request):
+def consultation(request, id):
+    patient = get_object_or_404(PatientConsultation, id=id) 
     if request.method == "POST":
         name = request.POST.get('name')
         dob = request.POST.get('dob')
@@ -257,7 +258,7 @@ def consultation(request):
         # return redirect(patients_list)
         return HttpResponse( "Consultation details submitted successfully!")
     else:
-        return render(request, 'admin/patients_list.html')
+        return render(request, 'doctors/consultation.html',{'patient':patient})
 
 
 def approve_app(request):
