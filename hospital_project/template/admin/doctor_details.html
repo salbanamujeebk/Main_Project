@@ -1,12 +1,96 @@
 {% extends 'admin/base_admin.html' %}
 
-{% load static %}
-
 {% block title %}
-Doctor details
+Doctor Details
 {% endblock %}
 
 {% block content %}
+
+
+<style>
+  
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    th {
+        background-color: #f8f9fa; 
+        font-weight: bold;
+    }
+    
+    td {
+        vertical-align: middle; 
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #e9ecef; 
+    }
+
+    .table-bordered {
+        border: 1px solid #dee2e6; 
+    }
+
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #dee2e6; 
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; 
+        border: none; 
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+</style>
+
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Dr. {{ doctor.name }}</h1>
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Address</th>
+                <td>{{ doctor.doc.Address }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Phone Number</th>
+                <td>{{ doctor.doc.Phonenumber }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td>{{ doctor.doc.Email }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Age</th>
+                <td>{{ doctor.doc.Age }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Date of Birth</th>
+                <td>{{ doctor.doc.DOB }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Department</th>
+                <td>{{ doctor.Department }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Specialty</th>
+                <td>{{ doctor.Speciality }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'doctors_list' %}" class="btn btn-dark">Back to Doctors list</a>
+    </div>
+</div>
 
 
 {% endblock %}

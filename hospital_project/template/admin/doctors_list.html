@@ -7,15 +7,15 @@ Doctors List
 {% endblock %}
 
 {% block content %}
-
 <style>
    a {
     text-decoration: none;
-    color: white;
-}
-a:hover{
-    color: gray;
-}
+    color: black;
+    }
+    a:hover{
+        color: gray;
+    }
+
 </style>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Doctors</h1>
@@ -32,21 +32,31 @@ a:hover{
                     <th>Department</th>
                     <th>Action</th>
                 </tr>
+            </thead>
+            <tbody>
                 {% for doctor in doctors %}
                 <tr>
                     <td>{{ forloop.counter }}</td> 
-                    <td><a href="{% url 'doctor_details' doctor.id %}">Dr.{{ doctor.name }}</a></td> 
+                    <td><a href="{% url 'doctor_details' doctor.id %}">Dr. {{ doctor.name }}</a></td> 
                     <td>{{ doctor.doc.Address }}</td> 
                     <td>{{ doctor.doc.Phonenumber }}</td> 
                     <td>{{ doctor.department }}</td>
                     <td>
-                        <button type="submit" class="btn btn-dark"><a href="{% url 'delete_doctor' doctor.id %}">Delete</a></button>
+                        <button class="btn btn-secondary">
+                            <a href="{% url 'delete_doctor' doctor.id %}">Delete</a>
+                        </button>
                     </td>
-                    
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No doctors found</td>
                 </tr>
                 {% endfor %}
-            </thead>
+            </tbody>
         </table>
+    </div>
+    <div class="text-center mt-5">
+        <a href="{% url 'admin_home' %}" class="btn btn-dark">Back to Home</a>
     </div>
 </div>
 {% endblock %}

@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import date
+from django.shortcuts import get_object_or_404
 
 
 
@@ -219,45 +220,6 @@ def doctor_home(request):
 
 
 
-def registration_doctor(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        Username = request.POST['username']
-        if CustomUser.objects.filter(username=Username, usertype="doctor").exists():
-            return render(request, 'doctors/doctor_reg.html', {'error': 'Username already exists'})
-        
-        age = request.POST['age']
-        Phonenumber = request.POST['phone']
-        if CustomUser.objects.filter(Phonenumber=Phonenumber, usertype="doctor").exists():
-            return render(request, 'doctors/doctor_reg.html', {'error': 'Phonenumber already exists'})
-        
-        dob = request.POST['dob']
-        Address = request.POST['address']
-        Email = request.POST['email']
-        if CustomUser.objects.filter(email=Email, usertype="doctor").exists():
-            return render(request, 'doctors/doctor_reg.html', {'error': 'Email already exists'})
-        
-        Password = request.POST['password']
-        speciality = request.POST['speciality']
-        department = request.POST['department']
-        image = request.FILES['Image']
-    
-        data = CustomUser.objects.create_user(username=Username, Age=age, DOB=dob, Address=Address, email=Email, password=Password, usertype="doctor", Phonenumber=Phonenumber)
-        data.save()
-        try:
-            data1 = Doctors.objects.create(doc=data, name=name, speciality=speciality, department=department, image=image)
-            data1.save()
-        except Exception as e:
-            print(e)
-        
-        return redirect(Login)
-    
-    
-    else:
-        return render(request, 'doctors/doctor_reg.html')
-
-
-
 # def appoinments(request):
 #     return render(request,'doctors/appoinments.html')
 
@@ -327,11 +289,62 @@ def doctor_profile(request):
 def admin_home(request):
     return render(request,'admin/admin_home.html')
 
+
+
+def registration_doctor(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        Username = request.POST['username']
+        if CustomUser.objects.filter(username=Username, usertype="doctor").exists():
+            return render(request, 'admin/doctor_reg.html', {'error': 'Username already exists'})
+        
+        age = request.POST['age']
+        Phonenumber = request.POST['phone']
+        if CustomUser.objects.filter(Phonenumber=Phonenumber, usertype="doctor").exists():
+            return render(request, 'admin/doctor_reg.html', {'error': 'Phonenumber already exists'})
+        
+        dob = request.POST['dob']
+        Address = request.POST['address']
+        Email = request.POST['email']
+        if CustomUser.objects.filter(email=Email, usertype="doctor").exists():
+            return render(request, 'admin/doctor_reg.html', {'error': 'Email already exists'})
+        
+        Password = request.POST['password']
+        speciality = request.POST['speciality']
+        department = request.POST['department']
+        image = request.FILES['Image']
+    
+        data = CustomUser.objects.create_user(username=Username, Age=age, DOB=dob, Address=Address, email=Email, password=Password, usertype="doctor", Phonenumber=Phonenumber)
+        data.save()
+        try:
+            data1 = Doctors.objects.create(doc=data, name=name, speciality=speciality, department=department, image=image)
+            data1.save()
+        except Exception as e:
+            print(e)
+        
+        return redirect('doctors_list')
+        # return HttpResponse("success")
+    
+    
+    else:
+        return render(request, 'admin/doctor_reg.html')
+
+
+
+
+
 def doctors_list(request):  
     doctors = Doctors.objects.all()
     return render(request,'admin/doctors_list.html',{'doctors':doctors})
 
 
+# def doctor_details(request,id):
+#     doctors = Doctors.objects.all(id=id)
+#     return render(request,'admin/doctor_details.html',{'doctors':doctors})
+
+def doctor_details(request, id):
+    doctor = get_object_or_404(Doctors, id=id)
+    return render(request, 'admin/doctor_details.html', {'doctor': doctor})
 
 
 def delete_doctor(request,id):
@@ -368,12 +381,6 @@ def total_appoinments(request):
 def total_appoinments(request):
     bookings = Booking.objects.all()
     return render(request, 'admin/total_appoinments.html', {'bookings': bookings})
-
-
-
-
-def doctor_details(request):
-    return render(request,'admin/doctor_details.html')
 
 
 # def doctor_details(request, doctor_id):
