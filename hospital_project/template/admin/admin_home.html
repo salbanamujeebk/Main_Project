@@ -16,7 +16,6 @@ Admin Home
   }
 
   body {
-    background-image: url("{% static 'images/image12.png' %}");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -43,6 +42,9 @@ Admin Home
   .footer-custom a {
     color: white;
     margin-right: 15px;
+  }
+  #box{
+    background-color: rgb(136, 181, 166);
   }
 </style>
 
@@ -80,6 +82,20 @@ Admin Home
         <p>Check and update departments</p>
         <a href="{% url 'departments' %}" class="btn btn-light">View</a><br>
         <a href="{% url 'add_departments' %}" class="btn btn-light">Add</a>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <div class="card card-custom text-white" id="box">
+        <h3>Records</h3>
+        <p>asdfghjkl wertyu asdfgh</p><br>
+        <a href="{% url 'user_feedback' %}" class="btn btn-light">View</a>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <div class="card card-custom bg-danger-subtle text-white">
+        <h3>Users</h3>
+        <p>View and manage user feedbacks</p><br>
+        <a href="{% url 'user_feedback' %}" class="btn btn-light">View</a>
       </div>
     </div>
   </div>

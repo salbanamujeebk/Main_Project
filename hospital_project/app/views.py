@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from .models import CustomUser
 from django.contrib.auth import authenticate, login 
 from .models import Departments, Doctors, Emergency, Orpahan_care,Booking, PatientConsultation
-from .forms import BookingForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -131,16 +130,46 @@ def about(request):
     return render(request,'users/about.html')
 
 
+
+
+# def booking(request):
+#     if request.method == "POST":
+#         form = BookingForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponse('success')
+#     else:
+#         form = BookingForm()
+#     messages.success(request, "Consultation details submitted successfully!")
+#     return render(request, 'users/booking.html', {'form': form})
+
+
 def booking(request):
+    data = CustomUser.objects.get(id=request.user.id)
+    doctors_name  = Doctors.objects.all()
     if request.method == "POST":
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponse('success')
+        patient_name= request.POST.get('name')
+        phone=request.POST.get('phone')
+        email=request.POST.get('email')
+        booking_date=request.POST.get('bookingdate')
+        dname = request.POST.get('dname')
+        dname1 = Doctors.objects.get(id=dname)
+        
+        data1 = Booking.objects.create(user=data,p_name=patient_name,p_phone=phone,p_email=email,booking_date=booking_date,name=dname1)
+        data1.save()
+        return HttpResponse('success')
     else:
-        form = BookingForm()
-    messages.success(request, "Consultation details submitted successfully!")
-    return render(request, 'users/booking.html', {'form': form})
+        context = {
+            "data":data,
+            "doctors":doctors_name
+        }
+        return render(request, 'users/booking.html',context)
+
+        
+
+
+
+
 
 
 def doctors(request):
@@ -239,7 +268,9 @@ def appointments(request):
 
 
 def consultation(request, id):
-    patient = get_object_or_404(PatientConsultation, id=id) 
+    print(id)
+    patient = Booking.objects.get(id = id)
+
     if request.method == "POST":
         name = request.POST.get('name')
         dob = request.POST.get('dob')
@@ -428,5 +459,11 @@ def delete_department(request,id):
     data=Departments.objects.get(id=id)
     data.delete()
     return redirect(departments)
+
+
+
+def user_feedback(request):
+    return render(request,'admin/user_feedback.html')
+
 
 

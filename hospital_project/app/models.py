@@ -36,7 +36,8 @@ class Doctors(models.Model):
 
 
 class Booking(models.Model):
-    p_name=models.CharField(max_length=200)
+    user=models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    p_name = models.CharField(max_length=200)
     p_phone=models.CharField(max_length=10)
     p_email=models.EmailField()
     name=models.ForeignKey(Doctors, on_delete=models.CASCADE)
@@ -59,7 +60,8 @@ class Orpahan_care(models.Model):
 
 
 class PatientConsultation(models.Model):
-    doctor = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='consultations_as_doctor')
+    user_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE, related_name='consultations_as_patient')
     name = models.CharField(max_length=100)
     dob = models.DateField()
     age = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(120)])
