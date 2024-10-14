@@ -8,44 +8,53 @@ About
 {% block content %}
 {% load static %}
 <style>
-    .about {
-        width: 100%;
-        height: 800px;
-        background-image: url("{% static 'images/image16.png' %}");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 
-    .about h1 {
-        color: white;
-        font-size: 3rem;
-    }
+     .title{
+        padding-top: 50px;
+     }
+     p{
+        font-size: 20px;
+     }
+     .list{
+        font-size: 20px; 
+     }
 </style>
-
-<div class="about">
-    <!-- <h1 class="text-center">Welcome to Our Hospital</h1> -->
-</div>
-<br><br>
-
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
             <div class="content-section">
                 <h1 class="title">About CareMatrix</h1><hr>
                 <p>The vision ‘affordable, accessible and quality healthcare for all’, a dream of visionary, Dr. K G Alexander was made a reality in 1987 with the commencement of Baby Memorial Hospital (BMH). The novel initiative then marked a revolution in the healthcare segment in Kerala, thus symbolizing an answer for the growing healthcare demands of the state. A tribute to late K C Varghese (known as ‘Baby’), father of Dr. K G Alexander,
-                     the Chairman and Managing Director, the hospital has set a benchmark in offering unprecedented care.</p>
+                the Chairman and Managing Director, the hospital has set a benchmark in offering unprecedented care.</p>
+                <p>With only 52 beds when started, the hospital now boasts world‐class amenities, which includes:</p>
+                <ul class="list">
+                <li>500 beds.</li>
+                <li>Over 40 Medical and Surgical departments.</li>
+                <li>Exceptional paramedical support system.</li>
+                <li>16 world-class operation theatres.</li>
+                <li>11 fully equipped ultramodern ICUs.</li>
+                <li>24-hours accident and trauma care unit</li>
+                </ul>
             </div>
-
         </div>
     </div>
+</div>
 
+<div>
+    <h4>Vission & Mission</h4>
+    <p><b>Vision :</b> Affordable, Accessible and Quality Services to All.</p>
+    <p><b>Mission :</b> “BMH shall provide quality healthcare in a safe and patient centred environment by highly skilled professionals using current
+     best medical practices and advanced technology. We offer patients outstanding value in an environment friendly atmosphere”.</p>
+</div>
+<div>
+    <h4>CAREMATRIX - More than care</h4>
+    <p>Being committed to care for three decades has meant a lot to us. It helped us to understand better on how to give you more than care, through deeper understanding of your needs. We have thus, combined the best of healthcare,
+    commitment and personal attention to give you a unique healing experience.</p> 
 </div>
 
 
 {% endblock %}
+
+
+
+

@@ -271,9 +271,9 @@ def consultation(request, id):
     print(id)
     patient = Booking.objects.get(id = id)
 
-    if request.method == "POST":
+    if request.method == "POST": 
+        print('post')  
         name = request.POST.get('name')
-        dob = request.POST.get('dob')
         age = request.POST.get('age')
         height = request.POST.get('height')
         weight = request.POST.get('weight')
@@ -281,13 +281,14 @@ def consultation(request, id):
         condition = request.POST.get('condition')
         medicine = request.POST.get('medicine')
         doctor = request.user
-
-        consultation1 = PatientConsultation.objects.create(name=name,dob=dob,age=age,height=height,weight=weight,state=state,condition=condition,medicine=medicine,doctor=doctor)
+      
+        consultation1 = PatientConsultation.objects.create(user_id=patient.user,name=name,age=age,height=height,weight=weight,state=state,condition=condition,medicine=medicine,doctor=doctor)
         consultation1.save()
+        # print("hghghg")
         # messages.success(request, "Consultation details submitted successfully!")
         # return redirect('consultation')
-        # return redirect(patients_list)
-        return HttpResponse( "Consultation details submitted successfully!")
+        return redirect(appointments)
+        
     else:
         return render(request, 'doctors/consultation.html',{'patient':patient})
 
@@ -390,6 +391,10 @@ def patients_list(request):
     print(consultation1)
     return render(request, 'admin/patients_list.html', {'consultation': consultation1})
 
+
+def patient_details(request):
+    details = PatientConsultation.objects.all()
+    return render(request,'admin/patient_details.html',{'details': details})
 
 
 

@@ -5,8 +5,18 @@ Patients List
 {% endblock %}
 
 {% block content %}
+
+<style>
+    a{
+        color: white;
+        text-decoration: none;
+    }
+</style>
+
+
+
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Patients Consultation List</h2>
+    <h2 class="text-center mb-4">Patients List</h2>
     
     <table class="table table-bordered table-hover">
         <thead class="thead-dark">
@@ -14,6 +24,7 @@ Patients List
                 <th>Patient Name</th>
                 <th>Phone Number</th>
                 <th>Doctor</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +33,9 @@ Patients List
                 <td>{{ i.name }}</td>
                 <td>{{ i.phone }}</td>
                 <td>{{ i.doctor.username }}</td>
+                <td>
+                    <button type="submit" class="btn btn-dark"><a href="{% url 'patient_details' %}">View</a></button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

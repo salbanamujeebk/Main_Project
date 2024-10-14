@@ -63,7 +63,6 @@ class PatientConsultation(models.Model):
     doctor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='consultations_as_doctor')
     user_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE, related_name='consultations_as_patient')
     name = models.CharField(max_length=100)
-    dob = models.DateField()
     age = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(120)])
     height = models.IntegerField(null=True, validators=[MinValueValidator(0)]) 
     weight = models.IntegerField(validators=[MinValueValidator(0)]) 
