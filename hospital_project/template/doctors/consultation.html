@@ -95,12 +95,12 @@ Consultation
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="age" class="form-label">Age</label>
-                        <input type="number" class="form-control" id="age" name="age" placeholder="Enter age" required>
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" value="{{ patient.p_phone }}"  required pattern="[0-9]{10}">
                     </div>
                     <div class="col-md-4">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number" required pattern="[0-9]{10}">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" placeholder="Enter age" required>
                     </div>
                     <div class="col-md-4">
                         <label for="state" class="form-label">State</label>

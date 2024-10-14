@@ -8,19 +8,44 @@ About
 {% block content %}
 {% load static %}
 <style>
-    .about{
+    .about {
         width: 100%;
-        height: 800px; 
-        background-image: url("{% static 'images/image14.png' %}");
+        height: 800px;
+        background-image: url("{% static 'images/image16.png' %}");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .about h1 {
+        color: white;
+        font-size: 3rem;
     }
 </style>
 
 <div class="about">
-    <h1 class="text-center "></h1>
-  </div>
-  
+    <!-- <h1 class="text-center">Welcome to Our Hospital</h1> -->
+</div>
+<br><br>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="content-section">
+                <h1 class="title">About CareMatrix</h1><hr>
+                <p>The vision ‘affordable, accessible and quality healthcare for all’, a dream of visionary, Dr. K G Alexander was made a reality in 1987 with the commencement of Baby Memorial Hospital (BMH). The novel initiative then marked a revolution in the healthcare segment in Kerala, thus symbolizing an answer for the growing healthcare demands of the state. A tribute to late K C Varghese (known as ‘Baby’), father of Dr. K G Alexander,
+                     the Chairman and Managing Director, the hospital has set a benchmark in offering unprecedented care.</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
 {% endblock %}
