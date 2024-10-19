@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import CustomUser
-from django.contrib.auth import authenticate, login 
+from django.contrib.auth.models import auth
+from django.contrib.auth import authenticate, login , logout
 from .models import Departments, Doctors, Emergency, Orpahan_care,Booking, PatientConsultation
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -67,6 +68,13 @@ def Login(request):
             return render(request, 'users/login.html', context)
     else:
         return render(request, 'users/login.html')
+
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect(Login)
+
 
 
 

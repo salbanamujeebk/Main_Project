@@ -36,6 +36,7 @@ urlpatterns = [
     path('health_checkup',views.health_checkup,name='health_checkup'),
     path('registration',views.registration,name='registration'),
     path('Login',views.Login,name='Login'),
+    path('logout',views.logout,name='logout'),
     path('profile',views.profile,name='profile'),
     path('editprofile',views.editprofile,name='editprofile'),
     path('about',views.about,name='about'),

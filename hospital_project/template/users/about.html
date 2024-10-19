@@ -4,57 +4,145 @@
 About
 {% endblock %}
 
-
 {% block content %}
 {% load static %}
 <style>
 
-     .title{
+    .title {
         padding-top: 50px;
-     }
-     p{
-        font-size: 20px;
-     }
-     .list{
-        font-size: 20px; 
-     }
+        font-weight: bold;
+        font-size: 3rem;
+        color: var(--primary-color);
+        text-align: center;
+    }
+
+    
+    .content-section p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        color: var(--light-text-color);
+        margin-top: 15px;
+        text-align: justify;
+    }
+
+    .content-section ul {
+        margin-top: 20px;
+        padding-left: 20px;
+    }
+
+    .content-section li {
+        font-size: 1.1rem;
+        color: black;
+        margin-bottom: 10px;
+    }
+
+    .content-section hr {
+        border: 2px solid var(--accent-color);
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    
+    .card {
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: var(--bg-color);
+        border-left: 5px solid var(--primary-color);
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(145deg, #fff, #e0e0e0);
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h4 {
+        font-size: 1.7rem;
+        color: navy;
+        margin-bottom: 15px;
+    }
+
+    .card p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        color: var(--text-color);
+    }
+
+    .container {
+        margin-bottom: 50px;
+    }
+
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+
+
+
 </style>
-<div class="container">
+
+<div class="container fade-in">
     <div class="row">
         <div class="col-lg-12">
             <div class="content-section">
-                <h1 class="title">About CareMatrix</h1><hr>
-                <p>The vision ‘affordable, accessible and quality healthcare for all’, a dream of visionary, Dr. K G Alexander was made a reality in 1987 with the commencement of Baby Memorial Hospital (BMH). The novel initiative then marked a revolution in the healthcare segment in Kerala, thus symbolizing an answer for the growing healthcare demands of the state. A tribute to late K C Varghese (known as ‘Baby’), father of Dr. K G Alexander,
-                the Chairman and Managing Director, the hospital has set a benchmark in offering unprecedented care.</p>
-                <p>With only 52 beds when started, the hospital now boasts world‐class amenities, which includes:</p>
-                <ul class="list">
-                <li>500 beds.</li>
-                <li>Over 40 Medical and Surgical departments.</li>
-                <li>Exceptional paramedical support system.</li>
-                <li>16 world-class operation theatres.</li>
-                <li>11 fully equipped ultramodern ICUs.</li>
-                <li>24-hours accident and trauma care unit</li>
-                </ul>
+                <h1 class="title" >ABOUT SMK</h1>
+                <hr>
+                <p>The vision of ‘affordable, accessible, and quality healthcare for all’, a dream of Dr. K G Alexander, became a reality in 1987 with the commencement of Baby Memorial Hospital (BMH). The initiative sparked a revolution in the healthcare segment in Kerala, marking a new era of healthcare excellence.
+                A tribute to late K C Varghese (known as ‘Baby’), father of Dr. K G Alexander, the hospital has set new benchmarks for care.
+                Effective hospital advertising goes beyond simply promoting services; it aims to create a positive perception of the hospital brand and foster trust among potential patients.
+                Targeted hospital advertising helps you to reach your desired audience and inspire them to choose you for their healthcare needs.
+                Other marketing strategies that hospitals can use include: digital advertising, social media, content marketing, community outreach, and public relations.
+                Other marketing strategies that hospitals can use include: digital advertising, social media, content marketing, community outreach, and public relations.The vision of ‘affordable, accessible, and quality healthcare for all’, a dream of Dr. K G Alexander, became a reality in 1987 with the commencement of Baby Memorial Hospital (BMH). The initiative sparked a revolution in the healthcare segment in Kerala, marking a new era of healthcare excellence.
+                A tribute to late K C Varghese (known as ‘Baby’), father of Dr. K G Alexander, the hospital has set new benchmarks for care.
+                Effective hospital advertising goes beyond simply promoting services; it aims to create a positive perception of the hospital brand and foster trust among potential patients.
+                Targeted hospital advertising helps you to reach your desired audience and inspire them to choose you for their healthcare needs.
+                Other marketing strategies that hospitals can use include: digital advertising, social media, content marketing, community outreach, and public relations.
+                Other marketing strategies that hospitals can use include: digital advertising, social media, content marketing, community outreach, and public relations.
+                </p>
+                <p>The vision of ‘affordable, accessible, and quality healthcare for all’, a dream of Dr. K G Alexander, became a reality in 1987 with the commencement of Baby Memorial Hospital (BMH). The initiative sparked a revolution in the healthcare segment in Kerala, marking a new era of healthcare excellence.
+                    A tribute to late K C Varghese (known as ‘Baby’), father of Dr. K G Alexander, the hospital has set new benchmarks for care.
+                    Effective hospital advertising goes beyond simply promoting services; it aims to create a positive perception of the hospital brand and foster trust among potential patients.
+                    Targeted hospital advertising helps you to reach your desired audience and inspire them to choose you for their healthcare needs.
+                    Other marketing strategies that hospitals can use include: digital advertising, social media, content marketing, community outreach, and public relations.
+                    Other marketing strategies that hospitals can use include: digital advertising, social media, content marketing, community outreach, and public relations.
+                    The vision of ‘affordable, accessible, and quality healthcare for all’, a dream of Dr. K G Alexander, became a reality in 1987 with the commencement of Baby Memorial Hospital (BMH). The initiative sparked a revolution in the healthcare segment in Kerala, marking a new era of healthcare excellence.
+                    A tribute to late K C Varghese (known as ‘Baby’), father of Dr. K G Alexander, the hospital has set new benchmarks for care.
+                    Effective hospital advertising goes beyond simply promoting services; it aims to create a positive perception of the hospital brand and foster trust among potential patients.
+                    Targeted hospital advertising helps you to reach your desired audience and inspire them to choose you for their healthcare needs.</p>
+                
             </div>
         </div>
     </div>
 </div>
 
-<div>
-    <h4>Vission & Mission</h4>
-    <p><b>Vision :</b> Affordable, Accessible and Quality Services to All.</p>
-    <p><b>Mission :</b> “BMH shall provide quality healthcare in a safe and patient centred environment by highly skilled professionals using current
-     best medical practices and advanced technology. We offer patients outstanding value in an environment friendly atmosphere”.</p>
-</div>
-<div>
-    <h4>CAREMATRIX - More than care</h4>
-    <p>Being committed to care for three decades has meant a lot to us. It helped us to understand better on how to give you more than care, through deeper understanding of your needs. We have thus, combined the best of healthcare,
-    commitment and personal attention to give you a unique healing experience.</p> 
-</div>
+<div class="container mt-5 fade-in">
+    <div class="row d-flex align-items-stretch">
+        <div class="col-lg-6 mb-4 d-flex">
+            <div class="card p-4 w-100">
+                <h4>Vision & Mission</h4>
+                <p><strong style="color: rgb(176, 18, 18);">Vision:</strong> Affordable, Accessible, and Quality Services to All.</p>
+                <p><strong style="color: rgb(176, 18, 18);">Mission:</strong> “BMH provides quality healthcare in a safe and patient-centered environment by highly skilled professionals, using advanced technology and best practices. Our services offer value in an eco-friendly atmosphere.”</p>
+            </div>
+        </div>
+    </div>
 
+    <div class="row d-flex align-items-stretch">
+        <div class="col-lg-6 mb-4 d-flex">
+            <div class="card p-4 w-100">
+                <h4>CAREMATRIX - More Than Care</h4>
+                <p>Our commitment to care for three decades has led us to better understand how to offer you more than just healthcare. By combining medical expertise with compassion, we provide a unique healing experience tailored to your needs.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
-
-
-
-

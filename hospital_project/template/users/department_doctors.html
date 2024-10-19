@@ -9,21 +9,23 @@ Doctor View
 
 
 <style>
-    
+    p{
+        font-size: 20px;
+    }
     
 </style>
 
 <div class="container mt-5">
-    <h4 class="text-center mb-4 text-dark">{{ department }}</h4>
+    <h1 class="text-center mb-4 text-dark"><b>{{ department }}</b></h1>
     <hr>
     <p class="text-center mb-4">{{ department.dep_description }}</p>
     <div class="row">
         {% for doctor in doctors %}
-        <div class="col-md-4 mb-4" >
+        <div class="col-md-3 mb-4" >
             <div class="card shadow-sm">
                
-                <div class="card-body text-center">
-                    <h5 class="card-title">Dr. {{ doctor.name }}</h5>
+                <div class="card-body text-center bg-body-secondary">
+                    <h5 class="card-title"><b>Dr. {{ doctor.name }}</b></h5>
                     <p class="card-text">{{ doctor.department }}</p>
                 </div>
             </div>
