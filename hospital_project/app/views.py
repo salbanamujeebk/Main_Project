@@ -70,6 +70,77 @@ def Login(request):
         return render(request, 'users/login.html')
 
 
+import random
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib import messages
+from .forms import PasswordResetRequestForm
+
+def send_otp(email):
+    otp = random.randint(100000, 999999) 
+    send_mail(
+        'Your OTP Code',
+        f'Your OTP code is: {otp}',
+        'shahanafathima2985@gmail.com',
+        [email],
+        fail_silently=False,
+    )
+    return otp
+
+def password_reset_request(request):
+    if request.method == 'POST':
+        form = PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            try:
+                user = CustomUser.objects.get(email=email)
+                otp = send_otp(email) 
+
+                context = {
+                            "email":email,
+                            "otp":otp
+                }
+
+                return render(request,'verify_otp.html',context) # Redirect to OTP verification
+            except User.DoesNotExist:
+                messages.error(request, "Email address not found.")
+    else:
+        form = PasswordResetRequestForm()
+    return render(request, 'password_reset_request.html', {'form': form})
+
+def verify_otp(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        otpold = request.POST.get('otpold')
+        otp = request.POST.get('otp')
+
+        if otpold==otp :
+
+            context = {
+                'otp' : otp,
+                'email' : email
+            }
+
+            return render(request,'set_new_password.html',context)
+        else:
+            messages.error(request, "Invalid OTP.")
+    return render(request, 'verify_otp.html')
+
+def set_new_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        new_password = request.POST.get('new_password')
+        try:
+            user = CustomUser.objects.get(email=email)
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, "Password has been reset successfully.")
+            return redirect(Login)  # Redirect to login page
+        except User.DoesNotExist:
+            messages.error(request, "Email address not found.")
+    return render(request, 'set_new_password.html', {'email': email})
+
 
 def logout(request):
     auth.logout(request)

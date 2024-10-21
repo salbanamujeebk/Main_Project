@@ -1,4 +1,4 @@
-# from django import forms
+from django import forms
 
 # from .models import Booking
 
@@ -16,3 +16,9 @@
 #         }
 
 
+
+
+
+
+class PasswordResetRequestForm(forms.Form):
+    email = forms.EmailField(label="Email", max_length=254)

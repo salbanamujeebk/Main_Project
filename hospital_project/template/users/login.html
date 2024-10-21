@@ -84,6 +84,7 @@
                 <input type="text" class="form-control" placeholder="Username" name="username" required>
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
                 <button type="submit" class="btn btn-login">Login</button>
+                <a href="{% url 'password_reset_request' %}">Forgot Password?</a>
                 <p class="register-link">Don't have an account? <a href="{% url 'registration' %}">Register</a></p>
             </form>
             {% if message %}
