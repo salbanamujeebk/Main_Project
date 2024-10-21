@@ -67,7 +67,7 @@ Appointments
     <tbody>
         {% for booking in bookings %}
         <tr {% if booking.booking_date == today %} style="font-weight: bold;" {% endif %}>
-            <td><a href="{% url 'consultation' booking.id %}">{{ booking.p_name }}</a></td>
+            <td><a href="{% url 'consultation' id=booking.id %}">{{ booking.p_name }}</a></td>
             <td>{{ booking.p_phone }}</td>
             <td>{{ booking.p_email }}</td>
             <td>{{ booking.booking_date }}</td>

@@ -95,7 +95,7 @@ def editprofile(request):
         edit_prof.Age=request.POST['Age']
         edit_prof.DOB=request.POST['DOB']   
         # if 'Image' in request.FILES:
-        #     editprof.Image = request.FILES['Image']
+        #     edit_prof.Image = request.FILES['Image']
         # edit_prof.save()
         return redirect(profile)
     else:
@@ -174,11 +174,6 @@ def booking(request):
         return render(request, 'users/booking.html',context)
 
         
-
-
-
-
-
 
 def doctors(request):
     doct= Doctors.objects.all()
