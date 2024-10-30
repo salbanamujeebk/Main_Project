@@ -45,6 +45,7 @@ urlpatterns = [
     path('editprofile',views.editprofile,name='editprofile'),
     path('about',views.about,name='about'),
     path('booking',views.booking,name='booking'),
+    path('view_data',views.view_data,name='view_data'),
     # path('departments',views.departments,name='departments'),
     path('contact',views.contact,name='contact'),
     path('department_doctors/<int:department_id>', views.department_doctors, name='department_doctors'),
@@ -59,7 +60,7 @@ urlpatterns = [
     path('consultation/<int:id>/',views.consultation,name='consultation'),
     # path('doctor/<int:id>/appointments/', views.appointments, name='appointments'),
     path('my_patients',views.my_patients,name='my_patients'),
-    path('patient_history',views.patient_history,name='patient_history'),
+    path('patient_history/<int:id>',views.patient_history,name='patient_history'),
     path('doctor_profile',views.doctor_profile,name='doctor_profile'),
 
 

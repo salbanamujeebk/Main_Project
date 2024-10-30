@@ -23,18 +23,18 @@ Patient History
         <th>Medicine</th>
         <th>Created At</th>
     </tr>
-    {% for i in details %}
+   
     <tr>
-        <td>{{ i.name }}</td>
-        <td>{{ i.age }}</td>
-        <td>{{ i.height }}</td>
-        <td>{{ i.weight }}</td>
-        <td>{{ i.state }}</td>
-        <td>{{ i.condition }}</td>
-        <td>{{ i.medicine }}</td>
-        <td>{{ i.created_at }}</td>
+        <td>{{ details.name }}</td>
+        <td>{{ details.age }}</td>
+        <td>{{ details.height }}</td>
+        <td>{{ details.weight }}</td>
+        <td>{{ details.state }}</td>
+        <td>{{ details.condition }}</td>
+        <td>{{ details.medicine }}</td>
+        <td>{{ details.created_at }}</td>
     </tr>
-    {% endfor %}
+   
 </table>
 
 

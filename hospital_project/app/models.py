@@ -70,6 +70,7 @@ class PatientConsultation(models.Model):
     condition = models.TextField()
     medicine = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(null=True,blank=True,max_length=100)
 
     def __str__(self):
         return self.name

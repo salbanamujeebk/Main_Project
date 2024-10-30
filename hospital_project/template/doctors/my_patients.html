@@ -39,7 +39,10 @@ My Patients
                 <td>{{ i.phone }}</td>
                 <td>{{ i.doctor.username }}</td>
                 <td>
-                    <button type="submit" class="btn btn-dark"><a href="{% url 'patient_details' %}">View</a></button>
+                    <button type="submit" class="btn btn-dark"><a href="{% url 'patient_history' id=i.id %}">View</a></button>
+                </td>
+                <td>
+                    <button class="btn btn-success">{{ i.status }}</button>
                 </td>
             </tr>
             {% endfor %}

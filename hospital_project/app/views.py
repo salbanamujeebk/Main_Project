@@ -243,6 +243,14 @@ def booking(request):
 
         
 
+def view_data(request):
+    return render(request,'users/view_data.html')
+
+
+
+
+
+
 def doctors(request):
     doct= Doctors.objects.all()
     return render(request,'users/doctor.html', {'doctors': doct})
@@ -346,7 +354,7 @@ def consultation(request, id):
         medicine = request.POST.get('medicine')
         doctor = request.user
       
-        consultation1 = PatientConsultation.objects.create(user_id=patient.user,name=name,age=age,height=height,weight=weight,state=state,condition=condition,medicine=medicine,doctor=doctor)
+        consultation1 = PatientConsultation.objects.create(user_id=patient.user,name=name,age=age,height=height,weight=weight,state=state,condition=condition,medicine=medicine,doctor=doctor,status="COMPLETED")
         consultation1.save()
         # print("hghghg")
         # messages.success(request, "Consultation details submitted successfully!")
@@ -366,11 +374,16 @@ def reject_app(request):
 
 
 def my_patients(request):
-    return render(request,'doctors/my_patients.html')
+    data = CustomUser.objects.get(id=request.user.id)
+    consultation1 = PatientConsultation.objects.filter(doctor=data)
+    print(consultation1)
+    return render(request,'doctors/my_patients.html', {'consultation': consultation1})
 
 
-def patient_history(request):
-    return render(request,'doctors/patient_history.html')
+def patient_history(request,id):
+    details = PatientConsultation.objects.get(id=id)
+    return render(request,'doctors/patient_history.html',{'details': details})
+
 
 
 def doctor_profile(request):
