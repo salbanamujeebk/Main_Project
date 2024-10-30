@@ -1,18 +1,58 @@
-{% extends 'admin/base_admin.html' %}
-
-{% load static %}
-
-{% block title %}
-Admin Home
-{% endblock %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% block content %}
+  {% load static %}
 
 <style>
-  .custom-navbar {
-    background-color: white; 
-    height: 60px;
-    box-shadow: 0 4px 6px rgba(18, 15, 15, 0.1);
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #2c3e50; 
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .sidebar h4 {
+    color: #ecf0f1;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .sidebar a {
+    display: block;
+    color: #ecf0f1;
+    padding: 15px 20px;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  .sidebar a:hover {
+    background-color: #34495e; 
+    color: #1abc9c; 
+    border-left: 5px solid #1abc9c; 
+  }
+
+  .sidebar img {
+    display: block;
+    margin: 0 auto 10px;
+  }
+
+  .content-section {
+    margin-left: 270px; 
+    padding: 50px 0;
   }
 
   body {
@@ -20,10 +60,6 @@ Admin Home
     background-size: cover;
     background-attachment: fixed;
     height: 100vh;
-  }
-
-  .content-section {
-    padding: 50px 0;
   }
 
   .card-custom {
@@ -43,20 +79,33 @@ Admin Home
     color: white;
     margin-right: 15px;
   }
-  #box{
+
+  #box {
     background-color: rgb(136, 181, 166);
+  }
+  .btn{
+    text-decoration: none;
   }
 </style>
 
 
+<div class="sidebar">
+  <h4><img src="{% static 'images/college-logo.png' %}" alt="Logo" width="40" height="40">SMK</h4>
+  <a href="{% url 'doctors_list' %}">Doctors</a>
+  <a href="{% url 'patients_list' %}">Patients</a>
+  <a href="{% url 'total_appoinments' %}">Appointments</a>
+  <a href="{% url 'departments' %}">Departments</a>
+  <a href="{% url 'records' %}">Records</a>
+  <a href="{% url 'user_feedback' %}">User Feedback</a>
+</div>
 
-<div class="container content-section" style="height: 100vh;">
+<div class="container content-section">
   <div class="row g-4">
     <div class="col-lg-3 col-md-6">
       <div class="card card-custom bg-danger text-white">
         <h3>Doctors</h3>
         <p>Manage doctor profiles and schedules</p>
-        <a href="{% url 'doctors_list'%}" class="btn btn-light">View</a><br>
+        <a href="{% url 'doctors_list' %}" class="btn btn-light">View</a><br>
         <a href="{% url 'registration_doctor' %}" class="btn btn-light">Register</a>
       </div>
     </div>
@@ -65,7 +114,6 @@ Admin Home
         <h3>Patients</h3>
         <p>View and manage patient records</p><br>
         <a href="{% url 'patients_list' %}" class="btn btn-light">View</a>
-        <!-- <a href="{% url 'patients_list' %}" class="btn btn-light">history</a> -->
       </div>
     </div>
     <div class="col-lg-3 col-md-12">
@@ -73,7 +121,6 @@ Admin Home
         <h3>Appointments</h3>
         <p>Check and schedule appointments</p><br>
         <a href="{% url 'total_appoinments' %}" class="btn btn-light">View</a>
-        <!-- <a href="{% url 'patients_list' %}" class="btn btn-light">History</a> -->
       </div>
     </div>
     <div class="col-lg-3 col-md-12">
@@ -88,7 +135,7 @@ Admin Home
       <div class="card card-custom text-white" id="box">
         <h3>Records</h3>
         <p>View the records</p><br>
-        <a href="{% url 'user_feedback' %}" class="btn btn-light">View</a>
+        <a href="{% url 'records' %}" class="btn btn-light">View</a>
       </div>
     </div>
     <div class="col-lg-6 col-md-12">
@@ -101,7 +148,8 @@ Admin Home
   </div>
 </div>
 
-
-
-
 {% endblock %}
+</body>
+</html>
+
+

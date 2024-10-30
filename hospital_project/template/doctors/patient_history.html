@@ -11,4 +11,31 @@ Patient History
 <h1 class="text-center">History</h1>
 <hr>
 
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Patient's Name</th>
+        <th>Age</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>State</th>
+        <th>Condition</th>
+        <th>Medicine</th>
+        <th>Created At</th>
+    </tr>
+    {% for i in details %}
+    <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.age }}</td>
+        <td>{{ i.height }}</td>
+        <td>{{ i.weight }}</td>
+        <td>{{ i.state }}</td>
+        <td>{{ i.condition }}</td>
+        <td>{{ i.medicine }}</td>
+        <td>{{ i.created_at }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
 {% endblock %}

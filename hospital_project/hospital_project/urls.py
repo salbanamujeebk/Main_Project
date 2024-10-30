@@ -83,6 +83,7 @@ urlpatterns = [
     path('update_department/<int:id>',views.update_department,name='update_department'),
     path('delete_department/<int:id>',views.delete_department,name='delete_department'),
     path('delete_doctor/<int:id>',views.delete_doctor,name='delete_doctor'),
+    path('records',views.records,name='records'),
     path('user_feedback',views.user_feedback,name='user_feedback'),
 
 

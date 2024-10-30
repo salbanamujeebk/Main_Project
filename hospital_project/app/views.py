@@ -109,6 +109,7 @@ def password_reset_request(request):
         form = PasswordResetRequestForm()
     return render(request, 'password_reset_request.html', {'form': form})
 
+
 def verify_otp(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -126,6 +127,7 @@ def verify_otp(request):
         else:
             messages.error(request, "Invalid OTP.")
     return render(request, 'verify_otp.html')
+
 
 def set_new_password(request):
     if request.method == 'POST':
@@ -145,9 +147,6 @@ def set_new_password(request):
 def logout(request):
     auth.logout(request)
     return redirect(Login)
-
-
-
 
 
 def profile(request):
@@ -209,8 +208,6 @@ def about(request):
     return render(request,'users/about.html')
 
 
-
-
 # def booking(request):
 #     if request.method == "POST":
 #         form = BookingForm(request.POST)
@@ -251,8 +248,6 @@ def doctors(request):
     return render(request,'users/doctor.html', {'doctors': doct})
 
 
-
-
 # def departments(request):
 #     dept= Departments.objects.all()  
 #     return render(request,'users/department.html',{'department':dept})
@@ -277,7 +272,6 @@ def doctor_view(request):
 
 def contact(request):
     return render(request,'users/contact.html')
-
 
 
 # DOCTORS
@@ -320,12 +314,8 @@ def contact(request):
 def doctor_home(request):
     return render(request,'doctors/doctor_home.html')
 
-
-
-
 # def appoinments(request):
 #     return render(request,'doctors/appoinments.html')
-
 
 
 def appointments(request):
@@ -437,9 +427,6 @@ def registration_doctor(request):
         return render(request, 'admin/doctor_reg.html')
 
 
-
-
-
 def doctors_list(request):  
     doctors = Doctors.objects.all()
     return render(request,'admin/doctors_list.html',{'doctors':doctors})
@@ -481,13 +468,8 @@ def patient_details(request):
 
 #     return render(request, 'admin/patients_list.html', {'consultations': consultations})
 
-
-
-
 def total_appoinments(request):
     return render(request,'admin/total_appoinments.html')
-
-
 
 def total_appoinments(request):
     bookings = Booking.objects.all()
@@ -538,6 +520,10 @@ def delete_department(request,id):
     data=Departments.objects.get(id=id)
     data.delete()
     return redirect(departments)
+
+
+def records(request):
+    return render(request,'admin/records.html')
 
 
 

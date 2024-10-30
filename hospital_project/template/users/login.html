@@ -72,6 +72,10 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+        a{
+            text-decoration: none;
+            color: #4feac4;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +87,7 @@
                 <h4 class="head">Login</h4>
                 <input type="text" class="form-control" placeholder="Username" name="username" required>
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
-                <button type="submit" class="btn btn-login">Login</button>
+                <button type="submit" class="btn btn-login">Login</button><br><br>
                 <a href="{% url 'password_reset_request' %}">Forgot Password?</a>
                 <p class="register-link">Don't have an account? <a href="{% url 'registration' %}">Register</a></p>
             </form>
