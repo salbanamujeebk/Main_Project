@@ -62,6 +62,7 @@ urlpatterns = [
     path('my_patients',views.my_patients,name='my_patients'),
     path('patient_history/<int:id>',views.patient_history,name='patient_history'),
     path('doctor_profile',views.doctor_profile,name='doctor_profile'),
+    path('approve_app/<int:id>',views.approve_app,name='approve_app'),
 
 
 

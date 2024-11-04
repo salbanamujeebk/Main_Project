@@ -43,6 +43,13 @@ class Booking(models.Model):
     name=models.ForeignKey(Doctors, on_delete=models.CASCADE)
     booking_date=models.DateField()
     booked_on=models.DateField(auto_now=True)
+    STATUS_CHOICES = [
+         ('Pending','Pending'),
+         ('Approve','Approve'),
+         ('Reject','Reject')
+    ]
+    status = models.CharField(null=True,blank=True,max_length=100,choices=STATUS_CHOICES,default='pending')
+
 
     def __str__(self):
         return self.name

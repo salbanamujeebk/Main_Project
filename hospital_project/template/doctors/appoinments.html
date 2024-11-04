@@ -73,8 +73,17 @@ Appointments
             <td>{{ booking.booking_date }}</td>
             <td>{{ booking.booked_on }}</td>
             <td>
-                <button type="submit" class="btn btn-success">Approve</button>
-                <button type="submit" class="btn btn-danger">Reject</button>
+                <form action="{% url 'approve_app' id=booking.id %}" method="post">
+                    {% csrf_token %}
+                {% if booking.status == 'pending' %}
+                <button type="submit" name="status" value="Approve" class="btn btn-success">Approve</button>
+                <button type="submit" name="status" value="Reject" class="btn btn-danger">Reject</button>
+                {% elif booking.status == 'Approve' %}
+                <button type="submit" name="status" value="Reject" class="btn btn-danger">Reject</button>
+                {% elif booking.status == 'Reject' %}
+                <p>{{ booking.status }}</p>
+                {% endif %}
+            </form>
             </td>
         </tr>
         {% empty %}

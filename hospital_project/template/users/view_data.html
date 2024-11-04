@@ -8,17 +8,19 @@
 
 
 
-<table>
+<table style="width: 100%;">
     <tr>
         <th></th>
         <th></th>
         <th></th>
     </tr>
+    {% for i in data%}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{ i.p_name }}</td>
+        <td>{{ i.name.name }}</td>
+        <td>{{ i.status }}</td>
     </tr>
+    {% endfor %}
 </table>
 
 

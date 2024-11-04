@@ -36,7 +36,11 @@ def registration(request):
             return render(request, 'users/registration.html', {'error': 'email already exists'})
         Password = request.POST['password']
         print("pass : ",Password)
-        data = CustomUser.objects.create_user(first_name=name, username=Username, Age=age,DOB=dob,Address=Address,email=Email,password=Password,usertype="user")
+        Image=request.FILES['Image']
+        print("image :   ",Image)
+        data = CustomUser.objects.create_user(first_name=name, username=Username,
+                                               Age=age,DOB=dob,Address=Address,email=Email,
+                                               password=Password,Image=Image,usertype="user")
         data.save()
         return redirect(Login)
     else:
@@ -102,7 +106,7 @@ def password_reset_request(request):
                             "otp":otp
                 }
 
-                return render(request,'verify_otp.html',context) # Redirect to OTP verification
+                return render(request,'verify_otp.html',context) 
             except User.DoesNotExist:
                 messages.error(request, "Email address not found.")
     else:
@@ -164,9 +168,9 @@ def editprofile(request):
         edit_prof.email=request.POST['Email']
         edit_prof.Age=request.POST['Age']
         edit_prof.DOB=request.POST['DOB']   
-        # if 'Image' in request.FILES:
-        #     edit_prof.Image = request.FILES['Image']
-        # edit_prof.save()
+        if 'Image' in request.FILES:
+            edit_prof.Image = request.FILES['Image']
+        edit_prof.save()
         return redirect(profile)
     else:
         return render(request,'users/editprofile.html',{'data':edit_prof})
@@ -244,9 +248,9 @@ def booking(request):
         
 
 def view_data(request):
-    return render(request,'users/view_data.html')
-
-
+    data = CustomUser.objects.get(id=request.user.id)
+    book = Booking.objects.filter(user=data.id)
+    return render(request,'users/view_data.html',{'data':book})
 
 
 
@@ -335,6 +339,8 @@ def appointments(request):
     return render(request,'doctors/appoinments.html',{'doctor': doctor_id, 'bookings': bookings, 'today':today})
 
 
+
+
 # def consultation(request):
 #     return render(request,'doctors/consultation.html')
 
@@ -364,9 +370,61 @@ def consultation(request, id):
     else:
         return render(request, 'doctors/consultation.html',{'patient':patient})
 
+def send_appr(email):
+    otp = date.today()
+    send_mail(
+        'yor appointment is approved',
+        f'this mail is send by this date: {otp}',
+        'salbanamujeebali@gmail.com',
+        [email],
+        fail_silently=False,
+    )
+    return otp
 
-def approve_app(request):
-    return HttpResponse("done")
+def send_rej(email):
+    otp = date.today()
+    send_mail(
+        'yor appointment is Rejected',
+        f'this mail is send by this date: {otp}',
+        'salbanamujeebali@gmail.com',
+        [email],
+        fail_silently=False,
+    )
+    return otp
+
+
+def approve_app(request,id):
+    data = CustomUser.objects.get(id=request.user.id)
+    book = Booking.objects.get(id=id)
+    email = book.user.email
+    if request.method == 'POST':
+        status = request.POST['status']
+        if status == 'Approve':
+            book.status = status
+            book.save()
+            try:
+                user = CustomUser.objects.get(email=book.user.email)
+                otp = send_appr(email) 
+
+                
+            except User.DoesNotExist:
+                messages.error(request, "Email address not found.")
+            return redirect(appointments)
+        elif status == 'Reject':
+            book.status = status
+            book.save()
+            try:
+                user = CustomUser.objects.get(email=book.user.email)
+                otp = send_rej(email) 
+
+                
+            except User.DoesNotExist:
+                messages.error(request, "Email address not found.")
+            return redirect(appointments)
+        else:
+            return redirect(appointments)
+    else:
+        return redirect(appointments)
 
 
 def reject_app(request):
