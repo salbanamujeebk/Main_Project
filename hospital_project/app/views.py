@@ -247,10 +247,10 @@ def booking(request):
 
         
 
-def view_data(request):
+def view_payment(request):
     data = CustomUser.objects.get(id=request.user.id)
     book = Booking.objects.filter(user=data.id)
-    return render(request,'users/view_data.html',{'data':book})
+    return render(request,'users/view_payment.html',{'data':book})
 
 
 

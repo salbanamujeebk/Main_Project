@@ -1,8 +1,84 @@
-<form action="{% url 'verify_otp' %}" method="post">
-    {% csrf_token %}
-    <input type="text" name="otpold" value="{{ otp }}" >
-    <input type="text" name="email" value="{{ email }}" hidden>
-    <label for="otp">Enter OTP:</label>
-    <input type="text" name="otp" required>
-    <button type="submit">Verify OTP</button>
-</form>
+{% extends 'users/base.html' %}
+
+{% block title %}
+    Reset Password
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    .reset-password-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #e0f7fa, #bcf5e7);
+    }
+
+    .reset-password-box {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 40px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .reset-password-box h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .reset-password-box label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .reset-password-box input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .reset-password-box button {
+        background-color: #4feac4;
+        color: #fff;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .reset-password-box button:hover {
+        background-color: #3c9e86;
+    }
+</style>
+
+<div class="reset-password-container">
+    <div class="reset-password-box">
+        <h2>Verify Your OTP</h2>
+        <form action="{% url 'verify_otp' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="otpold" value="{{ otp }}" hidden>
+            <input type="text" name="email" value="{{ email }}" hidden>
+
+            <label for="otp">Enter OTP:</label>
+            <input type="text" name="otp" id="otp" required placeholder="Enter OTP here">
+
+            <button type="submit">Verify OTP</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
