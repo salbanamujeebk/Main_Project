@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
     Address=models.CharField(null=True,blank=True,max_length=100)
     DOB=models.DateField(null=True,blank=True)
     usertype=models.CharField(max_length=200)
+    
 
 
 

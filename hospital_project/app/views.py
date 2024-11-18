@@ -455,7 +455,19 @@ def doctor_profile(request):
 
 
 def admin_home(request):
-    return render(request,'admin/admin_home.html')
+    total_doctors = Doctors.objects.count()  
+    # total_patients = Patient.objects.count() 
+    total_appointments = Booking.objects.count()  
+    total_departments = Departments.objects.count()  
+
+    context = {
+        'total_doctors': total_doctors,
+        # 'total_patients': total_patients,
+        'total_appointments': total_appointments,
+        'total_departments': total_departments,
+    }
+    return render(request,'admin/admin_home.html',context)
+
 
 
 

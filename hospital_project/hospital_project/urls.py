@@ -87,7 +87,7 @@ urlpatterns = [
     path('delete_doctor/<int:id>',views.delete_doctor,name='delete_doctor'),
     path('records',views.records,name='records'),
     path('user_feedback',views.user_feedback,name='user_feedback'),
-
+    # path('dashboard_view',views.dashboard_view,name='dashboard_view'),
 
 
 
