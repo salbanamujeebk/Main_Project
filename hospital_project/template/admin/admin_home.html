@@ -98,27 +98,21 @@
     <a href="{% url 'doctors_list' %}">View Doctors</a>
     <a href="{% url 'registration_doctor' %}">Register Doctor</a>
   </div>
+
   <a href="{% url 'patients_list' %}" >Patients</a>
-  <!-- <div class="dropdown-container">
-    <a href="{% url 'patients_list' %}">View Patients</a>
-  </div> -->
+
   <a href="{% url 'total_appoinments' %}" >Appointments</a>
-  <!-- <div class="dropdown-container">
-    <a href="{% url 'total_appoinments' %}">View Appointments</a>
-  </div> -->
+
   <a href="{% url 'departments' %}" class="dropdown-btn">Departments</a>
+
   <div class="dropdown-container">
     <a href="{% url 'departments' %}">View Departments</a>
     <a href="{% url 'add_departments' %}">Add Department</a>
   </div>
   <a href="{% url 'records' %}" >Records</a>
-  <!-- <div class="dropdown-container">
-    <a href="{% url 'records' %}">View Records</a>
-  </div> -->
+
   <a href="{% url 'user_feedback' %}">User Feedback</a>
-  <!-- <div class="dropdown-container">
-    <a href="{% url 'user_feedback' %}">View Feedback</a>
-  </div> -->
+
 </div>
 
 <script>
@@ -161,7 +155,7 @@
               </svg>
                 <br><br>
                 <h4>Toatal Patients</h4>
-                <p></p>
+                <p><b>{{ total_patients }}</b></p>
             </div>
         </div>
     </div>
