@@ -7,12 +7,10 @@ Doctor View
 {% block content %}
 {% load static %}
 
-
 <style>
-    p{
+    p {
         font-size: 20px;
     }
-    
 </style>
 
 <div class="container mt-5">
@@ -21,9 +19,11 @@ Doctor View
     <p class="text-center mb-4">{{ department.dep_description }}</p>
     <div class="row">
         {% for doctor in doctors %}
-        <div class="col-md-3 mb-4" >
+        <div class="col-md-3 mb-4">
             <div class="card shadow-sm">
-               
+                <img 
+                    src="" class="card-img-top" alt="" style="height: 200px; object-fit: cover;">
+
                 <div class="card-body text-center bg-body-secondary">
                     <h5 class="card-title"><b>Dr. {{ doctor.name }}</b></h5>
                     <p class="card-text">{{ doctor.department }}</p>
@@ -37,7 +37,5 @@ Doctor View
         {% endfor %}
     </div>
 </div>
-
-
 
 {% endblock %}

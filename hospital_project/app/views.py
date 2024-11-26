@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404
 
 
 def index(request):
-    return render(request,'users/index.html')
+    return render(request,'users/login.html')
 
 
 def registration(request):
@@ -36,9 +36,9 @@ def registration(request):
             return render(request, 'users/registration.html', {'error': 'email already exists'})
         Password = request.POST['password']
         print("pass : ",Password)
-        # Image=request.FILES['Image']
-        # print("image :   ",Image)
-        data = CustomUser.objects.create_user(first_name=name, username=Username,
+        Image=request.FILES['Image']
+        print("image :   ",Image)
+        data = CustomUser.objects.create_user(first_name=name, username=Username,Image=Image,
                                                Age=age,DOB=dob,Address=Address,email=Email,
                                                password=Password,usertype="user")
         data.save()
@@ -224,6 +224,8 @@ def about(request):
 #     return render(request, 'users/booking.html', {'form': form})
 
 
+
+
 def booking(request):
     data = CustomUser.objects.get(id=request.user.id)
     doctors_name  = Doctors.objects.all()
@@ -237,7 +239,7 @@ def booking(request):
         
         data1 = Booking.objects.create(user=data,p_name=patient_name,p_phone=phone,p_email=email,booking_date=booking_date,name=dname1)
         data1.save()
-        return HttpResponse('success')
+        return redirect(success)
     else:
         context = {
             "data":data,
@@ -246,6 +248,9 @@ def booking(request):
         return render(request, 'users/booking.html',context)
 
         
+def success(request):
+    return render(request,'users/success.html')
+
 
 def view_payment(request):
     data = CustomUser.objects.get(id=request.user.id)
@@ -494,7 +499,7 @@ def registration_doctor(request):
         department = request.POST['department']
         image = request.FILES['Image']
     
-        data = CustomUser.objects.create_user(username=Username, Age=age, DOB=dob, Address=Address, email=Email, password=Password, usertype="doctor", Phonenumber=Phonenumber)
+        data = CustomUser.objects.create_user(username=Username,image=image, Age=age, DOB=dob, Address=Address, email=Email, password=Password, usertype="doctor", Phonenumber=Phonenumber)
         data.save()
         try:
             data1 = Doctors.objects.create(doc=data, name=name, speciality=speciality, department=department, image=image)

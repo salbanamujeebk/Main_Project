@@ -13,13 +13,13 @@
                     <h2>User Profile</h2>
                 </div>
                 <div class="card-body p-4">
-                    <!-- <div class="text-center mb-4">
-                        <img 
-                            src="{{ data.profile_image.url|default:'/static/images/default-profile.png' }}" 
+                    <div class="text-center mb-4">
+                        <img src="{{ data.Image.url }}" 
                             alt="Profile Picture" 
                             class="rounded-circle" 
                             style="width: 150px; height: 150px; object-fit: cover;">
-                    </div> -->
+
+                    </div>
                     <form action="{% url 'profile' %}" method="POST">
                         {% csrf_token %}
                         <div class="mb-3">
