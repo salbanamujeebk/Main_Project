@@ -80,6 +80,8 @@ class PatientConsultation(models.Model):
     medicine = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(null=True,blank=True,max_length=100)
+    fees=models.IntegerField()
+
 
     def __str__(self):
         return self.name

@@ -291,6 +291,14 @@ def contact(request):
     return render(request,'users/contact.html')
 
 
+def prescription(request):
+    data = CustomUser.objects.get(id=request.user.id)
+    presc = PatientConsultation.objects.filter(user_id=data.id)
+    for i in presc:
+        print(i.status)
+    return render(request, 'users/prescription.html',{'presc':presc} )
+
+
 # DOCTORS
 
 
@@ -499,7 +507,7 @@ def registration_doctor(request):
         department = request.POST['department']
         image = request.FILES['Image']
     
-        data = CustomUser.objects.create_user(username=Username,image=image, Age=age, DOB=dob, Address=Address, email=Email, password=Password, usertype="doctor", Phonenumber=Phonenumber)
+        data = CustomUser.objects.create_user(username=Username, Age=age, DOB=dob, Address=Address, email=Email, password=Password, usertype="doctor", Phonenumber=Phonenumber)
         data.save()
         try:
             data1 = Doctors.objects.create(doc=data, name=name, speciality=speciality, department=department, image=image)

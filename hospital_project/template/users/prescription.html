@@ -1,0 +1,42 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+
+Prescription
+
+{% endblock %}
+
+{% block content %}
+
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Status</th>
+    </tr>
+    {% for i in presc %}
+    <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.user_id.Address}}</td>
+        <td>{{i.Phonenumber}}</td>
+        <td>{{i.email}}</td>
+        <td>
+            {% if i.status == 'COMPLETED' %}
+            <a href=""><button>Payment</button></a>
+            {% elif i.status == 'PAYMENT' %}
+            <p>successfully payed</p>
+            {% else %}
+            <p>Pending</p>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+{% endblock %}

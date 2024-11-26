@@ -51,6 +51,7 @@ urlpatterns = [
     path('department_doctors/<int:department_id>', views.department_doctors, name='department_doctors'),
     path('doctors/', views.doctors, name='doctors'),
     path('success',views.success,name='success'),
+    path('prescription',views.prescription,name='prescription'),
     
 
 
