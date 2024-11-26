@@ -337,7 +337,8 @@ def prescription(request):
 
 
 def doctor_home(request):
-    return render(request,'doctors/doctor_home.html')
+    doct =  Doctors.objects.all()
+    return render(request,'doctors/doctor_home.html', {'doct': doct})
 
 # def appoinments(request):
 #     return render(request,'doctors/appoinments.html')

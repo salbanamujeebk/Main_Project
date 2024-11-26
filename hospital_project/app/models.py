@@ -31,7 +31,7 @@ class Doctors(models.Model):
     speciality=models.CharField(max_length=100)
     department=models.CharField(max_length=100)
     # department = models.ForeignKey(Departments, on_delete=models.CASCADE)
-    image=models.FileField()
+    image=models.FileField(null=True, blank=True)
 
     def __str__(self):
          return self.name
@@ -80,7 +80,7 @@ class PatientConsultation(models.Model):
     medicine = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(null=True,blank=True,max_length=100)
-    fees=models.IntegerField()
+    fees = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
 
     def __str__(self):
