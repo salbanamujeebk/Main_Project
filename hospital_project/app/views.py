@@ -298,6 +298,11 @@ def prescription(request):
         print(i.status)
     return render(request, 'users/prescription.html',{'presc':presc} )
 
+def payment_details(request):
+    return render(request,'users/payment_details.html')
+
+
+
 
 # DOCTORS
 
@@ -525,7 +530,7 @@ def registration_doctor(request):
 
 
 def doctors_list(request):  
-    doctors = Doctors.objects.all()
+    doctors = Doctors.objects.all().order_by('-id') 
     return render(request,'admin/doctors_list.html',{'doctors':doctors})
 
 
@@ -626,6 +631,7 @@ def records(request):
 
 def user_feedback(request):
     return render(request,'admin/user_feedback.html')
+
 
 
 

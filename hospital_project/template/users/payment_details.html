@@ -1,0 +1,88 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+Payment Details
+{% endblock %}
+
+{% block content %}
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #e5f8f6;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .form-container label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-container input,
+    .form-container select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .form-container input:focus,
+    .form-container select:focus {
+        border-color: #00897b;
+        outline: none;
+        box-shadow: 0 0 5px #3be9d8;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #00897b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .form-container button:hover {
+        background-color: #00897b;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Payment Details</h2>
+    <form action="{% url 'payment_details' %}" method="POST">
+        {% csrf_token %}
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" name="amount" placeholder="Enter the amount" required min="1">
+
+        <label for="payment_method">Payment Method</label>
+        <select id="payment_method" name="payment_method" required>
+            <option value="" disabled selected>Select a payment method</option>
+            <option value="credit_card">Credit Card</option>
+            <option value="debit_card">Debit Card</option>
+        </select>
+        <button type="submit">Pay Now</button>
+    </form>
+</div>
+{% endblock %}

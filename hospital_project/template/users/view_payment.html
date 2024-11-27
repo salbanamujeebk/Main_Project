@@ -5,34 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="view-data-container">
-    <div class="header">
-        <a href="{% url 'booking' %}" class="btn">Make a Booking</a>
-    </div>
-    
-    {% if data %}
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>Patient's Name</th>
-                    <th>Doctor</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in data %}
-                <tr>
-                    <td>{{ i.p_name }}</td>
-                    <td>{{ i.name.name }}</td>
-                    <td class="status">{{ i.status }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p class="no-data-message">There are no current bookings.</p>
-    {% endif %}
-</div>
+
 
 <style>
     body {
@@ -125,4 +98,35 @@
         margin: 20px 0;
     }
 </style>
+
+
+<div class="view-data-container">
+    <div class="header">
+        <a href="{% url 'booking' %}" class="btn">Make a Booking</a>
+    </div>
+    
+    {% if data %}
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Patient's Name</th>
+                    <th>Doctor</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.p_name }}</td>
+                    <td>{{ i.name.name }}</td>
+                    <td class="status">{{ i.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-data-message">There are no current bookings.</p>
+    {% endif %}
+</div>
+
 {% endblock %}

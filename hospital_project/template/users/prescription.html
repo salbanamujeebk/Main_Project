@@ -2,41 +2,109 @@
 {% load static %}
 
 {% block title %}
-
 Prescription
-
 {% endblock %}
 
 {% block content %}
+<style>
+    table {
+        width: 90%;
+        margin: 30px auto;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
+    table th, table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Status</th>
-    </tr>
-    {% for i in presc %}
-    <tr>
-        <td>{{i.name}}</td>
-        <td>{{i.user_id.Address}}</td>
-        <td>{{i.Phonenumber}}</td>
-        <td>{{i.email}}</td>
-        <td>
-            {% if i.status == 'COMPLETED' %}
-            <a href=""><button>Payment</button></a>
-            {% elif i.status == 'PAYMENT' %}
-            <p>successfully payed</p>
-            {% else %}
-            <p>Pending</p>
-            {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    table th {
+        background: #00897b;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
 
+    table tr:hover {
+        background: #f1f1f1;
+    }
 
+    table td:last-child {
+        text-align: center;
+    }
 
+    button {
+        padding: 8px 15px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #00897b;
+        color: #fff;
+        transition: background 0.3s;
+    }
+
+    button:hover {
+        background-color: #06c1ae;
+    }
+
+    p {
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+    }
+
+    .status-success {
+        color: #00897b;
+    }
+
+    .status-pending {
+        color: #dc3545;
+    }
+
+    .container {
+        padding: 20px;
+    }
+</style>
+
+<div class="container">
+    <h2 style="text-align: center;">Prescription Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in presc %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.user_id.Address }}</td>
+                <td>{{ i.Phonenumber }}</td>
+                <td>{{ i.email }}</td>
+                <td>
+                    {% if i.status == 'COMPLETED' %}
+                    <a href="{% url 'payment_details' %}">
+                        <button>Payment</button>
+                    </a>
+                    {% elif i.status == 'PAYMENT' %}
+                    <p class="status-success">Successfully Paid</p>
+                    {% else %}
+                    <p class="status-pending">Pending</p>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

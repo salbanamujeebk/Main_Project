@@ -52,6 +52,8 @@ urlpatterns = [
     path('doctors/', views.doctors, name='doctors'),
     path('success',views.success,name='success'),
     path('prescription',views.prescription,name='prescription'),
+    path('payment_details',views.payment_details,name='payment_details'),
+    
     
 
 
