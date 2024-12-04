@@ -93,7 +93,7 @@ Prescription
                 <td>{{ i.email }}</td>
                 <td>
                     {% if i.status == 'COMPLETED' %}
-                    <a href="{% url 'payment_details' %}">
+                    <a href="{% url 'payment_details' id=i.id %}">
                         <button>Payment</button>
                     </a>
                     {% elif i.status == 'PAYMENT' %}

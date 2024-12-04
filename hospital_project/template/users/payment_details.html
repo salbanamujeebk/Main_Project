@@ -47,34 +47,34 @@ Payment Details
         box-shadow: 0 0 5px #3be9d8;
     }
 
-    .form-container button {
+    .btn {
         width: 100%;
         padding: 12px;
         background-color: #00897b;
-        color: #fff;
         border: none;
         border-radius: 5px;
         font-size: 16px;
-        cursor: pointer;
+
     }
 
-    .form-container button:hover {
-        background-color: #00897b;
+    .btn:hover {
+        background-color: #06c1ae;
+    }
+    a{
+        color: white;
+        text-decoration: none;
     }
 </style>
 
 <div class="form-container">
     <h2>Payment Details</h2>
-    <form action="{% url 'payment_details' %}" method="POST">
+    <form action="{% url 'payment_details' id=data.id %}" method="POST">
         {% csrf_token %}
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <input type="text" id="name" name="name" placeholder="Enter your name"  value="{{ data.name }}" required>
 
         <label for="amount">Amount</label>
-        <input type="number" id="amount" name="amount" placeholder="Enter the amount" required min="1">
+        <input type="number" id="amount" name="amount" placeholder="Enter the amount" value="{{ data.fees }}" required min="1">
 
         <label for="payment_method">Payment Method</label>
         <select id="payment_method" name="payment_method" required>
@@ -82,7 +82,7 @@ Payment Details
             <option value="credit_card">Credit Card</option>
             <option value="debit_card">Debit Card</option>
         </select>
-        <button type="submit">Pay Now</button>
+        <button type="submit" class="btn"><a href="{% url 'creditcard' %}">Pay Now</button></a>
     </form>
 </div>
 {% endblock %}

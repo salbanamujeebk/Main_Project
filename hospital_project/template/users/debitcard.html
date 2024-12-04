@@ -1,0 +1,51 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+  Debit Card
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .btn{
+    background-color: #00897b;
+    color: white;
+    
+  }
+</style>
+
+<div class="form-container">
+  <h4 class="text-center mt-4">Debit Card Payment</h4>
+
+  <form method="POST" action="{% url 'debitcard' %}" class="p-4 shadow-sm rounded bg-light" style="max-width: 500px; margin: auto;">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+      <label for="name" class="form-label fw-bold">Name on Card</label>
+      <input type="text" class="form-control" name="name" placeholder="Enter your name" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="number" class="form-label fw-bold">Card Number</label>
+      <input type="text" class="form-control" name="number" maxlength="19" placeholder="1234 5678 9012 3456" required>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="expiration" class="form-label fw-bold">Expiration (MM/YY)</label>
+        <input type="month" class="form-control" name="expiration" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="security" class="form-label fw-bold">Security Code</label>
+        <input type="number" class="form-control" name="security" placeholder="123" required>
+      </div>
+    </div>
+    
+    <button type="submit" class="btn w-100"><a href="{% url 'complete_payment' %}">Submit</button></a>
+  </form>
+</div>
+
+
+{% endblock %}
+
+

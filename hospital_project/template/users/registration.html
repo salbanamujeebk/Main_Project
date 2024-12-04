@@ -89,8 +89,9 @@
                 <input type="date" class="form-control" name="dob" placeholder="Date of Birth" required>
                 <input type="file" name="Image" required>
                 <button type="submit" class="btn btn-register">Register</button>
-                <p class="login-link">Already have an account? <a href="{% url 'Login' %}">Login here</a></p>
             </form>
+            <p class="login-link">Already have an account? <a href="{% url 'Login' %}">Login here</a></p>
+
             {% if error %}
                 <p class="text-danger text-center mt-3">{{ error }}</p>
             {% endif %}

@@ -298,9 +298,24 @@ def prescription(request):
         print(i.status)
     return render(request, 'users/prescription.html',{'presc':presc} )
 
-def payment_details(request):
-    return render(request,'users/payment_details.html')
+def payment_details(request,id):
+    data = PatientConsultation.objects.get(id=id)
+    return render(request,'users/payment_details.html',{'data':data})
 
+def creditcard(request):
+    return render(request,'users/creditcard.html')
+
+def debitcard(request):
+    # if request.method == 'POST':
+    #     name = request.POST['name']
+    #     card = request.POST['number']
+    #     expiry = request.POST['expiration']
+    #     security = request.POST['security']
+    return render(request,'users/debitcard.html')
+
+
+def complete_payment(request):
+    return render(request,'users/complete_payment.html')
 
 
 
@@ -378,8 +393,10 @@ def consultation(request, id):
         condition = request.POST.get('condition')
         medicine = request.POST.get('medicine')
         doctor = request.user
-      
-        consultation1 = PatientConsultation.objects.create(user_id=patient.user,name=name,age=age,height=height,weight=weight,state=state,condition=condition,medicine=medicine,doctor=doctor,status="COMPLETED")
+        fees = request.POST.get('fees')
+        consultation1 = PatientConsultation.objects.create(user_id=patient.user,name=name,age=age,height=height,
+                                                           weight=weight,state=state,condition=condition,medicine=medicine,
+                                                           doctor=doctor,fees=fees,status="COMPLETED")
         consultation1.save()
         # print("hghghg")
         # messages.success(request, "Consultation details submitted successfully!")
