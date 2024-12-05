@@ -302,8 +302,14 @@ def payment_details(request,id):
     data = PatientConsultation.objects.get(id=id)
     return render(request,'users/payment_details.html',{'data':data})
 
-def creditcard(request):
-    return render(request,'users/creditcard.html')
+def creditcard(request,id):
+    data = PatientConsultation.objects.get(id=id)
+    if request.method == 'POST':
+        data.status = 'PAYMENT'
+        data.save()
+        return redirect(complete_payment)
+    else:
+        return render(request,'users/creditcard.html',{'data':data})
 
 def debitcard(request):
     # if request.method == 'POST':
@@ -478,6 +484,9 @@ def patient_history(request,id):
     details = PatientConsultation.objects.get(id=id)
     return render(request,'doctors/patient_history.html',{'details': details})
 
+def remuneration(request):
+    return render(request,'doctors/remuneration.html')
+
 
 
 def doctor_profile(request):
@@ -645,6 +654,17 @@ def records(request):
     return render(request,'admin/records.html')
 
 
+def financial_area(request):
+    return render(request,'admin/financial_area.html')
+
+def paliative_details(request):
+    return render(request,'admin/paliative_details.html')
+
+def insurance_details(request):
+    return render(request,'admin/insurance_details.html')
+
+def orphancare_details(request):
+    return render(request,'admin/orphancare_details.html')
 
 def user_feedback(request):
     return render(request,'admin/user_feedback.html')

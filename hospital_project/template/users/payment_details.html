@@ -68,7 +68,7 @@ Payment Details
 
 <div class="form-container">
     <h2>Payment Details</h2>
-    <form action="{% url 'payment_details' id=data.id %}" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         <label for="name">Full Name</label>
         <input type="text" id="name" name="name" placeholder="Enter your name"  value="{{ data.name }}" required>
@@ -76,13 +76,14 @@ Payment Details
         <label for="amount">Amount</label>
         <input type="number" id="amount" name="amount" placeholder="Enter the amount" value="{{ data.fees }}" required min="1">
 
-        <label for="payment_method">Payment Method</label>
+        <!-- <label for="payment_method">Payment Method</label>
         <select id="payment_method" name="payment_method" required>
             <option value="" disabled selected>Select a payment method</option>
             <option value="credit_card">Credit Card</option>
             <option value="debit_card">Debit Card</option>
-        </select>
-        <button type="submit" class="btn"><a href="{% url 'creditcard' %}">Pay Now</button></a>
+        </select> -->
     </form>
+    <a href="{% url 'creditcard' id=data.id %}"><button type="submit" class="btn">Pay Now</button></a>
+
 </div>
 {% endblock %}

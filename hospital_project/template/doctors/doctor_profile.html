@@ -11,7 +11,7 @@ Appointments
 <h1 class="text-center">Profile</h1>
 <hr>
 
-<form action="{% url 'profile' %}" method="POST">
+<form action="{% url 'doctor_profile' %}" method="POST">
     {% csrf_token %}
     <label>Name</label><br>
     <p>{{data.first_name}}</p>

@@ -53,7 +53,7 @@ urlpatterns = [
     path('success',views.success,name='success'),
     path('prescription',views.prescription,name='prescription'),
     path('payment_details/<int:id>',views.payment_details,name='payment_details'),
-    path('creditcard',views.creditcard,name='creditcard'),
+    path('creditcard/<int:id>',views.creditcard,name='creditcard'),
     path('debitcard',views.debitcard,name='debitcard'),
     path('complete_payment',views.complete_payment,name='complete_payment'),
     
@@ -70,6 +70,7 @@ urlpatterns = [
     path('patient_history/<int:id>',views.patient_history,name='patient_history'),
     path('doctor_profile',views.doctor_profile,name='doctor_profile'),
     path('approve_app/<int:id>',views.approve_app,name='approve_app'),
+    path('remuneration',views.remuneration,name='remuneration'),
 
 
 
@@ -95,6 +96,10 @@ urlpatterns = [
     path('records',views.records,name='records'),
     path('user_feedback',views.user_feedback,name='user_feedback'),
     # path('dashboard_view',views.dashboard_view,name='dashboard_view'),
+    path('financial_area',views.financial_area,name='financial_area'),
+    path('paliative_details',views.paliative_details,name='paliative_details'),
+    path('insurance_details',views.insurance_details,name='insurance_details'),
+    path('orphancare_details',views.orphancare_details,name='orphancare_details'),
 
 
 
