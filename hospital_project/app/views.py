@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import date
 from django.shortcuts import get_object_or_404
+from decimal import Decimal
+from django.urls import reverse
 
 
 
@@ -193,6 +195,16 @@ def paliative(request):
 def donations(request):
     return render(request,'users/donations.html')
 
+def blood_donation(request):
+    return render(request,'users/blood_donation.html')
+
+def hair_donation(request):
+    return render(request,'users/hair_donation.html')
+
+def other_donation(request):
+    return render(request,'users/other_donation.html')
+
+
 
 def emergency(request):
     emerg= Emergency.objects.all()  
@@ -302,14 +314,31 @@ def payment_details(request,id):
     data = PatientConsultation.objects.get(id=id)
     return render(request,'users/payment_details.html',{'data':data})
 
-def creditcard(request,id):
+
+
+# def creditcard(request,id):
+#     data = PatientConsultation.objects.get(id=id)
+#     if request.method == 'POST':
+#         data.status = 'PAYMENT'
+#         data.save()
+#         return redirect(complete_payment)
+#     else:
+#         return render(request,'users/creditcard.html',{'data':data})
+    
+
+
+def creditcard(request, id):
     data = PatientConsultation.objects.get(id=id)
     if request.method == 'POST':
         data.status = 'PAYMENT'
+        data.commission = data.fees * Decimal('0.25')
+        data.amount = data.fees * Decimal('0.75')
         data.save()
-        return redirect(complete_payment)
+        return redirect(reverse('remuneration'))
     else:
-        return render(request,'users/creditcard.html',{'data':data})
+        return render(request, 'users/creditcard.html', {'data': data})
+
+
 
 def debitcard(request):
     # if request.method == 'POST':
@@ -363,7 +392,7 @@ def complete_payment(request):
 
 
 def doctor_home(request):
-    doct =  Doctors.objects.all()
+    doct =  Doctors.objects.get(doc=request.user)
     return render(request,'doctors/doctor_home.html', {'doct': doct})
 
 # def appoinments(request):
@@ -484,10 +513,42 @@ def patient_history(request,id):
     details = PatientConsultation.objects.get(id=id)
     return render(request,'doctors/patient_history.html',{'details': details})
 
+
+# def remuneration(request, consultation_id):
+#     consultation = get_object_or_404(PatientConsultation, id=consultation_id)
+#     total_payment = consultation.fees
+#     commission = total_payment * Decimal('0.25')
+#     doctor_amount = total_payment * Decimal('0.75')
+#     consultation.commission = commission
+#     consultation.amount = doctor_amount
+#     consultation.status = 'Paid'  
+#     consultation.save()
+    
+#     context = {
+#         'consultation': consultation,
+#         'total_payment': total_payment,
+#         'commission': commission,
+#         'doctor_amount': doctor_amount,
+#     }
+#     return render(request, 'doctors/remuneration.html', context)
+
+
+
 def remuneration(request):
-    return render(request,'doctors/remuneration.html')
+    consultations = PatientConsultation.objects.filter(status='PAYMENT')
+    total_commission = sum(c.commission for c in consultations)
+    total_doctor_amount = sum(c.amount for c in consultations)
+    
+    context = {
+        'consultations': consultations,
+        'total_commission': total_commission,
+        'total_doctor_amount': total_doctor_amount,
+    }
+    return render(request, 'doctors/remuneration.html', context)
 
 
+def remuneration_report(request):
+    return render(request,'doctors/remuneration_report.html')
 
 def doctor_profile(request):
     proff=Doctors.objects.get(id=request.user.id)
@@ -659,6 +720,9 @@ def financial_area(request):
 
 def paliative_details(request):
     return render(request,'admin/paliative_details.html')
+
+def donation_details(request):
+    return render(request,'admin/donation_details.html')
 
 def insurance_details(request):
     return render(request,'admin/insurance_details.html')

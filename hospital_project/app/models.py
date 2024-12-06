@@ -81,6 +81,8 @@ class PatientConsultation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(null=True,blank=True,max_length=100)
     fees = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    commission = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
 
     def __str__(self):

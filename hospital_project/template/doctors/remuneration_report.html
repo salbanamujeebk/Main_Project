@@ -1,0 +1,65 @@
+{% extends 'doctors/doctor_home.html' %}
+
+{% load static %}
+
+{% block title %}
+Remuneration Report
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Detailed Remuneration Report</h3>
+    
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Consultation Details</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Patient Name:</strong> {{ consultation.name }}</p>
+            <p><strong>Doctor:</strong> {{ consultation.doctor.name }}</p>
+            <p><strong>Consultation Date:</strong> {{ consultation.created_at }}</p>
+            <p><strong>Diagnosis/Condition:</strong> {{ consultation.condition }}</p>
+            <p><strong>Prescribed Medicines:</strong> {{ consultation.medicine }}</p>
+            <p><strong>Consultation Fees:</strong> ₹{{ consultation.fees }}</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Payment Breakdown</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Total Fees:</strong> ₹{{ consultation.fees }}</p>
+            <p><strong>Admin's Commission (25%):</strong> ₹{{ consultation.commission }}</p>
+            <p><strong>Doctor's Share (75%):</strong> ₹{{ consultation.amount }}</p>
+            <p><strong>Payment Status:</strong>{{ consultation.status }} </p>               
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Payment History</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Payment Date:</strong></p>
+            <p><strong>Payment Method:</strong> </p>
+            <p><strong>Transaction ID:</strong> </p>
+            <p><strong>Amount Paid:</strong> ₹</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Total Summary</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Total Commission:</strong> ₹</p>
+            <p><strong>Total Doctor's Earnings:</strong> ₹</p>
+            <p><strong>Total Payments Received:</strong> ₹</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

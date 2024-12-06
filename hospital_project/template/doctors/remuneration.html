@@ -3,9 +3,76 @@
 {% load static %}
 
 {% block title %}
-Appointments
+Remuneration
 {% endblock %}
 
 {% block content %}
+
+<!-- <h1>Payment Details</h1>
+<p><strong>Patient Name:</strong> {{ consultation.name }}</p>
+<p><strong>Total Payment:</strong> ₹{{ total_payment }}</p>
+<p><strong>Commission (Admin):</strong> ₹{{ commission }}</p>
+<p><strong>Amount for Doctor:</strong> ₹{{ doctor_amount }}</p>
+<p><strong>Status:</strong> {{ consultation.status }}</p> -->
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Remuneration Details</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Doctor</th>
+                    <th>Fees</th>
+                    <th>Commission (25%)</th>
+                    <th>Doctor's Amount (75%)</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consultation in consultations %}
+                    <tr>
+                        <td>{{ consultation.name }}</td>
+                        <td>{{ consultation.doctor.get_full_name }}</td>
+                        <td>₹{{ consultation.fees }}</td>
+                        <td>₹{{ consultation.commission }}</td>
+                        <td>₹{{ consultation.amount }}</td>
+                        <td>
+                            <span class="badge {% if consultation.status == 'PAYMENT' %} bg-success {% else %} bg-warning text-dark {% endif %}">
+                                {{ consultation.status }}
+                            </span>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-muted">No payments found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6 ">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-success text-white text-center">
+                    <h5 class="mb-0">Total Summary</h5>
+                </div>
+                <div class="card-body bg-light">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span><strong>Total Commission:</strong></span>
+                        <span class="text-danger fw-bold">₹{{ total_commission }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span><strong>Total Doctor's Amount:</strong></span>
+                        <span class="text-success fw-bold">₹{{ total_doctor_amount }}</span>
+                    </div>
+                </div>
+                <div class="card-footer text-center bg-white">
+                    <a href="{% url 'remuneration_report' %}"><button class="btn btn-outline-success btn-sm">View Report</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

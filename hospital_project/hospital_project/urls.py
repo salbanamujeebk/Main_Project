@@ -30,6 +30,9 @@ urlpatterns = [
     path('kidney_care',views.kidney_care,name='kidney_care'),
     path('paliative',views.paliative,name='paliative'),
     path('donations',views.donations,name='donations'),
+    path('blood_donation',views.blood_donation,name='blood_donation'),
+    path('hair_donation',views.hair_donation,name='hair_donation'),
+    path('other_donation',views.other_donation,name='other_donation'),
     path('emergency',views.emergency,name='emergency'),
     path('orphan_care',views.orphan_care,name='orphan_care'),
     path('health_insurance',views.health_insurance,name='health_insurance'),
@@ -71,6 +74,8 @@ urlpatterns = [
     path('doctor_profile',views.doctor_profile,name='doctor_profile'),
     path('approve_app/<int:id>',views.approve_app,name='approve_app'),
     path('remuneration',views.remuneration,name='remuneration'),
+    # path('remuneration/<int:consultation_id>/',views.remuneration,name='remuneration'),
+    path('remuneration_report',views.remuneration_report,name="remuneration_report"),
 
 
 
@@ -98,6 +103,7 @@ urlpatterns = [
     # path('dashboard_view',views.dashboard_view,name='dashboard_view'),
     path('financial_area',views.financial_area,name='financial_area'),
     path('paliative_details',views.paliative_details,name='paliative_details'),
+    path('donation_details',views.donation_details,name='donation_details'),
     path('insurance_details',views.insurance_details,name='insurance_details'),
     path('orphancare_details',views.orphancare_details,name='orphancare_details'),
 

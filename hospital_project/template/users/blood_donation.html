@@ -1,0 +1,79 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block title %}
+Blood Donations
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+    <h1>Blood Donation Form</h1>
+    <form action="/submit-blood-donation" method="POST">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="" disabled selected>Select your gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email">
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+
+        <label for="blood-group">Blood Group:</label>
+        <select id="blood-group" name="blood-group" required>
+            <option value="" disabled selected>Select your blood group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+        </select>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required>
+
+        <label>Are you currently under medication?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="medication" value="yes" required> Yes</label>
+            <label><input type="radio" name="medication" value="no"> No</label>
+        </div>
+
+        <label>Have you donated blood before?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="donated-before" value="yes" required> Yes</label>
+            <label><input type="radio" name="donated-before" value="no"> No</label>
+        </div>
+
+        <label>Do you have any medical conditions?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="medical-condition" value="yes" required> Yes</label>
+            <label><input type="radio" name="medical-condition" value="no"> No</label>
+        </div>
+        <div class="consent">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">I certify that I meet the eligibility criteria for blood donation and have answered all questions truthfully.</label>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+  
+
+
+{% endblock %}

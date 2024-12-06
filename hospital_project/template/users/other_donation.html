@@ -1,0 +1,53 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block title %}
+Other Donations
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="row-container">
+    <div class="image-container">
+       <img src="{% static 'images/atmcard2.png' %}" alt="Credit Card Image">
+    </div>
+
+    <div class="form-section bg-light p-4"> 
+       <form method="POST">
+          {% csrf_token %}
+          
+          <div class="mb-3">
+             <label for="name" class="form-label fw-bold">Name on Card</label>
+             <input type="text" class="form-control" name="name" placeholder="Enter your name" required>
+          </div>
+          
+          <div class="mb-3">
+             <label for="number" class="form-label fw-bold">Card Number</label>
+             <input type="text" class="form-control" name="number" maxlength="19" placeholder="1234 5678 9012 3456" required>
+          </div>
+          
+          <div class="row">
+             <div class="col-md-6 mb-3">
+                <label for="expiration" class="form-label fw-bold">Expiration (MM/YY)</label>
+                <input type="month" class="form-control" name="expiration" required>
+             </div>
+             <div class="col-md-6 mb-3">
+                <label for="security" class="form-label fw-bold">Security Code</label>
+                <input type="number" class="form-control" name="security" placeholder="123" required>
+             </div>
+             <div class="col-md-6 mb-3">
+                <label for="amount" class="form-label fw-bold">Amount</label>
+                <input type="number" class="form-control" name="amount" placeholder="Enter Amount"  required>
+             </div>
+          </div>
+          
+          <button type="submit" class="btn w-100">Submit</button>
+       </form>
+    </div>
+ </div>
+
+
+
+
+{% endblock %}

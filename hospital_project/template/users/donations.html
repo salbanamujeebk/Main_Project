@@ -4,11 +4,40 @@
 Donations
 {% endblock %}
 
-
 {% block content %}
 
-<h2 class="text-center mt-5 text-danger"> Help the 12,000,000 people who need palliative care, get palliative care.</h2><br>
-<hr>
+<style>
+    a{
+        font-size: 20px;
+    }
+</style>
 
-<h3 style="text-decoration: underline;">Donate Now</h3>
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h2 class="text-danger mb-4">Help the 12,000,000 people who need palliative care, get palliative care.</h2>
+        <hr class="w-50 mx-auto">
+    </div>
+    <div class="text-center mt-4">
+        <h3 class="mb-4"><u>Donate Now</u></h3>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-3 ">
+                <a href="{% url 'blood_donation' %}" class="d-block py-3 text-decoration-none text-dark border rounded shadow-sm">
+                 Blood Donation
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'hair_donation' %}" class="d-block py-3 text-decoration-none text-dark border rounded shadow-sm">
+                 Hair Donation
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'other_donation' %}" class="d-block py-3 text-decoration-none text-dark border rounded shadow-sm">
+                 Other Donation
+                </a>
+            </div>
+        </div>
+    </div>
+    
+</div>
 {% endblock %}
