@@ -316,6 +316,33 @@ def payment_details(request,id):
     return render(request,'users/payment_details.html',{'data':data})
 
 
+import stripe 
+from django.conf import settings
+
+stripe.api_key=settings.STRIPE_SECRET_KEY
+
+
+def stripe_payment(request,id):
+    try:
+        data = PatientConsultation.objects.get(id=id)
+
+        intent = stripe.PaymentIntent.create(
+            amount = int(data.fees*100),
+            currency = "usd",
+            metadata={"id":data.id,"user_id":request.user.id},
+        )
+
+        context = {
+            'client_secret':intent.client_secret,
+            'STRIPE_PUBLISHABLE_KEY':settings.STRIPE_PUBLISHABLE_KEY,
+            'data':data,
+        }
+        return render(request,'users/stripe.html',context)
+    except PatientConsultation.DoesNotExist:
+        return redirect(creditcard)
+
+    
+
 
 # def creditcard(request,id):
 #     data = PatientConsultation.objects.get(id=id)
@@ -329,15 +356,18 @@ def payment_details(request,id):
 
 
 def creditcard(request, id):
-    data = PatientConsultation.objects.get(id=id)
-    if request.method == 'POST':
-        data.status = 'PAYMENT'
-        data.commission = data.fees * Decimal('0.25')
-        data.amount = data.fees * Decimal('0.75')
-        data.save()
-        return redirect(reverse('remuneration'))
-    else:
-        return render(request, 'users/creditcard.html', {'data': data})
+    try:
+        data = PatientConsultation.objects.get(id=id)
+        if request.method == 'POST':
+            data.status = 'PAYMENT'
+            data.commission = data.fees * Decimal('0.25')
+            data.amount = data.fees * Decimal('0.75')
+            data.save()
+            return redirect(reverse('remuneration'))
+        return redirect(prescription)
+    except PatientConsultation.DoesNotExist:
+        return redirect(prescription)
+    
 
 
 

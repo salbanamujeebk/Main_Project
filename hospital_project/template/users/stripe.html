@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .info {
+            margin-bottom: 20px;
+        }
+
+        .info p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .card-element {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+
+        #payment-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #submit-button {
+            background-color: #09aa77;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #submit-button:disabled {
+            background-color: #ccc;
+        }
+
+        #submit-button:hover:not(:disabled) {
+            background-color:#15cd92;
+        }
+
+        #payment-status {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Stripe Payment</h1>
+        <form id="payment-details-form">
+            <div class="form-group">
+                <label for="patient-name"><strong>Patient:</strong></label>
+                <input type="text" id="patient-name" name="patient-name" value="{{ data.name }}" readonly class="form-control">
+            </div>
+        
+            <div class="form-group">
+                <label for="consultation-id"><strong>Consultation ID:</strong></label>
+                <input type="text" id="consultation-id" name="consultation-id" value="{{ data.id }}" readonly class="form-control">
+            </div>
+        
+            <div class="form-group">
+                <label for="amount-to-pay"><strong>Amount to Pay:</strong></label>
+                <input type="text" id="amount-to-pay" name="amount-to-pay" value="${{ data.fees }}" readonly class="form-control">
+            </div>
+        </form>
+        
+        <form id="payment-form">
+            <div id="card-element" class="card-element">
+            </div>
+            <button type="submit" id="submit-button">Pay Now</button>
+            <div id="payment-status"></div>
+        </form>
+
+        <div id="error-message" class="alert alert-error" style="display: none;"></div>
+        <div id="success-message" class="alert alert-success" style="display: none;"></div>
+    </div>
+
+    <script>
+        const stripe = Stripe('{{ STRIPE_PUBLISHABLE_KEY }}');
+        const clientSecret = '{{ client_secret }}';
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        const form = document.getElementById('payment-form');
+        const paymentStatus = document.getElementById('payment-status');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            document.getElementById('submit-button').disabled = true;
+            paymentStatus.style.display = 'none';
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+
+            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: '{{ request.user.get_full_name }}',
+                        email: '{{ request.user.email }}',
+                    },
+                },
+            });
+
+            if (error) {
+                errorMessage.textContent = `Error: ${error.message}`;
+                errorMessage.style.display = 'block';
+                document.getElementById('submit-button').disabled = false;
+            } else if (paymentIntent.status === 'succeeded') {
+                successMessage.textContent = 'Payment successful! Redirecting...';
+                successMessage.style.display = 'block';
+
+                setTimeout(() => {
+                    window.location.href = "{% url 'creditcard' id=data.id %}";
+                }, 2000);
+            }
+        });
+    </script>
+
+</body>
+</html>

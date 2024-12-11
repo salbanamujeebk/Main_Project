@@ -83,7 +83,7 @@ Payment Details
             <option value="debit_card">Debit Card</option>
         </select> -->
     </form>
-    <a href="{% url 'creditcard' id=data.id %}"><button type="submit" class="btn">Pay Now</button></a>
+    <a href="{% url 'stripe_payment' id=data.id %}"><button type="submit" class="btn">Pay Now</button></a>
 
 </div>
 {% endblock %}

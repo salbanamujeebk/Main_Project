@@ -60,6 +60,7 @@ urlpatterns = [
     path('creditcard/<int:id>',views.creditcard,name='creditcard'),
     path('debitcard',views.debitcard,name='debitcard'),
     path('complete_payment',views.complete_payment,name='complete_payment'),
+    path('stripe_payment/<int:id>',views.stripe_payment,name='stripe_payment'),
     
     
 
