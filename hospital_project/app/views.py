@@ -11,6 +11,7 @@ from datetime import date
 from django.shortcuts import get_object_or_404
 from decimal import Decimal
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 
 
@@ -434,7 +435,7 @@ def appointments(request):
     doctor = CustomUser.objects.get(id=request.user.id)
     doctor_id = Doctors.objects.get(doc=doctor)  
     today = date.today()
-    bookings = Booking.objects.filter(name=doctor_id). order_by('booking_date')
+    bookings = Booking.objects.filter(name=doctor_id). order_by('-booking_date')
     
     return render(request,'doctors/appoinments.html',{'doctor': doctor_id, 'bookings': bookings, 'today':today})
 
@@ -535,7 +536,7 @@ def reject_app(request):
 
 def my_patients(request):
     data = CustomUser.objects.get(id=request.user.id)
-    consultation1 = PatientConsultation.objects.filter(doctor=data)
+    consultation1 = PatientConsultation.objects.filter(doctor=data).order_by('-created_at') 
     print(consultation1)
     return render(request,'doctors/my_patients.html', {'consultation': consultation1})
 
@@ -576,6 +577,24 @@ def remuneration(request):
         'total_doctor_amount': total_doctor_amount,
     }
     return render(request, 'doctors/remuneration.html', context)
+
+
+
+# def remuneration(request):
+#     consultations = PatientConsultation.objects.filter(status='PAYMENT')
+#     paginator = Paginator(consultations, 10)  
+#     page_number = request.GET.get('page')
+#     consultations_page = paginator.get_page(page_number)
+    
+#     total_commission = sum(c.commission for c in consultations_page)
+#     total_doctor_amount = sum(c.amount for c in consultations_page)
+    
+#     context = {
+#         'consultations': consultations_page,
+#         'total_commission': total_commission,
+#         'total_doctor_amount': total_doctor_amount,
+#     }
+#     return render(request, 'doctors/remuneration.html', context)
 
 
 def remuneration_report(request):

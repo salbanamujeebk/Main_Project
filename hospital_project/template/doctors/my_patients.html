@@ -1,12 +1,12 @@
 {% extends 'doctors/doctor_home.html' %}
-
+{% load static %}
 {% block title %}
 My Patients
 {% endblock %}
 
 
 {% block content %}
-{% load static %}
+
 
 <style>
     a{
@@ -22,8 +22,7 @@ My Patients
 
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Patients List</h2>
-    
+    <h2 class="text-center mb-4">Patients List</h2>   
     <table class="table table-bordered table-hover">
         <thead class="thead-dark">
             <tr>

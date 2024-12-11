@@ -33,7 +33,7 @@ Remuneration
                 {% for consultation in consultations %}
                     <tr>
                         <td>{{ consultation.name }}</td>
-                        <td>{{ consultation.doctor.get_full_name }}</td>
+                        <td>{{ consultation.doctor}}</td>
                         <td>₹{{ consultation.fees }}</td>
                         <td>₹{{ consultation.commission }}</td>
                         <td>₹{{ consultation.amount }}</td>

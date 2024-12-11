@@ -10,9 +10,8 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            color: #333;
+            background-color: rgb(212, 211, 211)
         }
-
         .vertical-navbar {
             width: 250px;
             height: 100vh;
@@ -48,10 +47,6 @@
             gap: 10px;
             color: #ffffff;
         }
-        .content-container {
-            margin-left: 270px;
-            padding: 40px;
-        }
 
         .navbar {
             margin-left: 250px;
@@ -74,53 +69,59 @@
             font-size: 45px;
             color:black;
             margin-bottom: 20px;
-        }
-        .doctor-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px;
-            text-align: center;
-            background-color: #f9f9f9;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .doctor-card img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        h2{
+        }    
+        h4{
             color: white;
-            padding: 15px;
+            padding-top: 15px;
+        }
+        .logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .navbar-image img {
-        width: 100px; 
-        height: 100px; 
-        object-fit: cover;
-        border-radius: 50%;
-        margin-left: 10px; 
-        }
-        .navbar-expand-lg{
-            height: 150px;
-        }
-        .logo {
-        display: flex;               
-        justify-content: center;     
-        align-items: center;         
-        height: 100px;               
+        .container-fluid {
+            display: flex;
+            align-items: center;
         }
 
-        .logo img {
-            max-width: 100%;             
-            max-height: 100%;            
+        #navbarNavBottom {
+            display: flex;
+            align-items: center;
+            width: 100%; 
         }
+
+        .rounded-circle {
+            height: 80px;
+            width: 80px;
+            object-fit: cover;
+            margin-right: 15px; 
+        }
+
+        .doctorname {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+        }
+
+        .doctorname h3 {
+            margin: 0; 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            color: white;
+        }
+
+        .doctorname p {
+            margin: 0; 
+            font-size: 1rem; 
+            color: white; 
+        }
+
+        
     </style>
 </head>
 
 <body>
-
     <nav class="vertical-navbar">
         <div class="logo">
             <img src="{% static 'images/college-logo.png' %}" alt="Logo" width="50" height="50">
@@ -157,14 +158,38 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-image">
-                    <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}">
-                </div>
-                <h2>SMK Doctor Portal</h2>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavTop">
+                <h4 class="text-center w-100">Doctor Portal</h4>
             </div>
         </div>
     </nav>
+    
+    
+    <nav class="navbar navbar-expand-lg bg-secondary mt-5 style="height: 120px;">
+        <div class="container-fluid" style="height: 100px;">
+            <div class="collapse navbar-collapse " id="navbarNavBottom">
+                <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" class="rounded-circle"  object-fit: cover;>
+                <div class="doctorname">
+                    <h3>{{ doctor.name }}</h3>
+                    <p>{{ doctor.speciality }}</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    
+
+    <div class="container content-container">
+        {% block content %}
+            {% if doctor.image %}
+                <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}">
+            {% else %}
+                <img src="{% static 'images/default-doctor.jpg' %}" alt="{{ doctor.name }}">
+            {% endif %}
+            <h4>{{ doctor.name }}</h4>
+            <p>{{ doctor.speciality }}</p>
+        {% endblock %}
+    </div>
 
 </body>
 </html>

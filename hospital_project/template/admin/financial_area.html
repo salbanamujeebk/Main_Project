@@ -1,11 +1,47 @@
 {% extends 'admin/base_admin.html' %}
 
 {% block title %}
-Financial Area
+    Financial Area
 {% endblock %}
 
 {% block content %}
-
-
-
+    <div class="container my-4">
+        <h2 class="text-center mb-4">Consultation Payment Remuneration</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Doctor Name</th>
+                        <th>Fees</th>
+                        <th>Commission (25%)</th>
+                        <th>Doctor Amount (75%)</th>
+                        <th>Status</th>
+                        <th>Payment Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consultation in consultations %}
+                        <tr>
+                            <td>{{ consultation.patient.name }}</td>
+                            <td>{{ consultation.doctor.name }}</td>
+                            <td>{{ consultation.fees }}</td>
+                            <td>{{ consultation.commission }}</td>
+                            <td>{{ consultation.amount }}</td>
+                            <td>{{ consultation.status }}</td>
+                            <td>{{ consultation.payment_date|date:"Y-m-d H:i" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h4>Total Commission: <span class="text-success">{{ total_commission }}</span></h4>
+            </div>
+            <div class="col-md-6">
+                <h4>Total Doctor Amount: <span class="text-primary">{{ total_doctor_amount }}</span></h4>
+            </div>
+        </div>
+    </div>
 {% endblock %}

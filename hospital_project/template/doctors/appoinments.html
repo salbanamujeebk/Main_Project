@@ -8,9 +8,6 @@ Appointments
 
 {% block content %}
 
-<!-- <h1>Appointments for Dr. {{ doctor.name }}</h1> -->
-
-<h3>My Appoinments</h3>
 
 <style>
     table {
@@ -55,43 +52,50 @@ Appointments
     }
 </style>
 
-<table>
-    <tr>
-        <th>Patient Name</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Booking Date</th>
-        <th>Booked On</th>
-        <th>Status</th>
-    </tr>
-    <tbody>
-        {% for booking in bookings %}
-        <tr {% if booking.booking_date == today %} style="font-weight: bold;" {% endif %}>
-            <td><a href="{% url 'consultation' id=booking.id %}">{{ booking.p_name }}</a></td>
-            <td>{{ booking.p_phone }}</td>
-            <td>{{ booking.p_email }}</td>
-            <td>{{ booking.booking_date }}</td>
-            <td>{{ booking.booked_on }}</td>
-            <td>
-                <form action="{% url 'approve_app' id=booking.id %}" method="post">
-                    {% csrf_token %}
-                {% if booking.status == 'pending' %}
-                <button type="submit" name="status" value="Approve" class="btn btn-success">Approve</button>
-                <button type="submit" name="status" value="Reject" class="btn btn-danger">Reject</button>
-                {% elif booking.status == 'Approve' %}
-                <button type="submit" name="status" value="Reject" class="btn btn-danger">Reject</button>
-                {% elif booking.status == 'Reject' %}
-                <p>{{ booking.status }}</p>
-                {% endif %}
-            </form>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="5" class="no-appointments">No appointments available.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Appointments</h2>
+    
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Patient Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Booking Date</th>
+                <th>Booked On</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr {% if booking.booking_date == today %} style="font-weight: bold;" {% endif %}>
+                    <td><a href="{% url 'consultation' id=booking.id %}">{{ booking.p_name }}</a></td>
+                    <td>{{ booking.p_phone }}</td>
+                    <td>{{ booking.p_email }}</td>
+                    <td>{{ booking.booking_date }}</td>
+                    <td>{{ booking.booked_on }}</td>
+                    <td>
+                        <form action="{% url 'approve_app' id=booking.id %}" method="post">
+                            {% csrf_token %}
+                        {% if booking.status == 'pending' %}
+                        <button type="submit" name="status" value="Approve" class="btn btn-success">Approve</button>
+                        <button type="submit" name="status" value="Reject" class="btn btn-danger">Reject</button>
+                        {% elif booking.status == 'Approve' %}
+                        <button type="submit" name="status" value="Reject" class="btn btn-danger">Reject</button>
+                        {% elif booking.status == 'Reject' %}
+                        <p>{{ booking.status }}</p>
+                        {% endif %}
+                    </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="no-appointments">No appointments available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
 </table>
 
 
