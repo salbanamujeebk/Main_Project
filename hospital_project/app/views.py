@@ -201,10 +201,11 @@ def blood_donation(request):
 def hair_donation(request):
     return render(request,'users/hair_donation.html')
 
+def organ_donation(request):
+    return render(request,'users/organ_donation.html')
+
 def other_donation(request):
     return render(request,'users/other_donation.html')
-
-
 
 def emergency(request):
     emerg= Emergency.objects.all()  

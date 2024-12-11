@@ -32,6 +32,7 @@ urlpatterns = [
     path('donations',views.donations,name='donations'),
     path('blood_donation',views.blood_donation,name='blood_donation'),
     path('hair_donation',views.hair_donation,name='hair_donation'),
+    path('organ_donation',views.organ_donation,name='organ_donation'),
     path('other_donation',views.other_donation,name='other_donation'),
     path('emergency',views.emergency,name='emergency'),
     path('orphan_care',views.orphan_care,name='orphan_care'),
@@ -61,7 +62,6 @@ urlpatterns = [
     path('complete_payment',views.complete_payment,name='complete_payment'),
     
     
-
 
 # DOCTOR
     

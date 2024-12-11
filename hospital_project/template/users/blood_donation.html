@@ -1,79 +1,134 @@
 {% extends 'users/base.html' %}
 {% load static %}
-{% block title %}
-Blood Donations
-{% endblock %}
+{% block title %}Blood Donations{% endblock %}
 
 {% block content %}
 
+<style>
+    h1 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+</style>
 
-<div class="container">
-    <h1>Blood Donation Form</h1>
-    <form action="/submit-blood-donation" method="POST">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required>
+<div class="container py-5">
+    <h1 class="text-center mb-4">Blood Donation Form</h1>
+    <div class="card shadow">
+        <div class="card-body">
+            <form action="/submit-blood-donation" method="POST" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Full Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                    <div class="invalid-feedback">Please enter your full name.</div>
+                </div>
 
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-            <option value="" disabled selected>Select your gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Gender:</label>
+                    <select id="gender" name="gender" class="form-select" required>
+                        <option value="" disabled selected>Select your gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="invalid-feedback">Please select your gender.</div>
+                </div>
 
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" required>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" class="form-control" required>
+                    <div class="invalid-feedback">Please provide your date of birth.</div>
+                </div>
 
-        <label for="contact">Contact Number:</label>
-        <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required>
+                <div class="mb-3">
+                    <label for="contact" class="form-label">Contact Number:</label>
+                    <input type="tel" id="contact" name="contact" class="form-control" pattern="[0-9]{10}" required>
+                    <div class="invalid-feedback">Please provide a valid 10-digit contact number.</div>
+                </div>
 
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address:</label>
+                    <input type="email" id="email" name="email" class="form-control">
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
 
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" rows="3" required></textarea>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address:</label>
+                    <textarea id="address" name="address" rows="3" class="form-control" required></textarea>
+                    <div class="invalid-feedback">Please provide your address.</div>
+                </div>
 
-        <label for="blood-group">Blood Group:</label>
-        <select id="blood-group" name="blood-group" required>
-            <option value="" disabled selected>Select your blood group</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-        </select>
+                <div class="mb-3">
+                    <label for="blood-group" class="form-label">Blood Group:</label>
+                    <select id="blood-group" name="blood-group" class="form-select" required>
+                        <option value="" disabled selected>Select your blood group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                    <div class="invalid-feedback">Please select your blood group.</div>
+                </div>
 
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" name="weight" required>
+                <div class="mb-3">
+                    <label for="weight" class="form-label">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" class="form-control" required>
+                    <div class="invalid-feedback">Please provide your weight in kilograms.</div>
+                </div>
 
-        <label>Are you currently under medication?</label>
-        <div class="radio-group">
-            <label><input type="radio" name="medication" value="yes" required> Yes</label>
-            <label><input type="radio" name="medication" value="no"> No</label>
+                <div class="mb-3">
+                    <label>Are you currently under medication?</label>
+                    <div class="form-check">
+                        <input type="radio" id="medication-yes" name="medication" value="yes" class="form-check-input" required>
+                        <label for="medication-yes" class="form-check-label">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="medication-no" name="medication" value="no" class="form-check-input">
+                        <label for="medication-no" class="form-check-label">No</label>
+                    </div>
+                    <div class="invalid-feedback">Please select an option.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label>Have you donated blood before?</label>
+                    <div class="form-check">
+                        <input type="radio" id="donated-before-yes" name="donated-before" value="yes" class="form-check-input" required>
+                        <label for="donated-before-yes" class="form-check-label">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="donated-before-no" name="donated-before" value="no" class="form-check-input">
+                        <label for="donated-before-no" class="form-check-label">No</label>
+                    </div>
+                    <div class="invalid-feedback">Please select an option.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label>Do you have any medical conditions?</label>
+                    <div class="form-check">
+                        <input type="radio" id="medical-condition-yes" name="medical-condition" value="yes" class="form-check-input" required>
+                        <label for="medical-condition-yes" class="form-check-label">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="medical-condition-no" name="medical-condition" value="no" class="form-check-input">
+                        <label for="medical-condition-no" class="form-check-label">No</label>
+                    </div>
+                    <div class="invalid-feedback">Please select an option.</div>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" id="consent" name="consent" class="form-check-input" required>
+                    <label for="consent" class="form-check-label">I certify that I meet the eligibility criteria for blood donation and have answered all questions truthfully.</label>
+                    <div class="invalid-feedback">You must agree to the terms before submitting.</div>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Submit</button>
+            </form>
         </div>
-
-        <label>Have you donated blood before?</label>
-        <div class="radio-group">
-            <label><input type="radio" name="donated-before" value="yes" required> Yes</label>
-            <label><input type="radio" name="donated-before" value="no"> No</label>
-        </div>
-
-        <label>Do you have any medical conditions?</label>
-        <div class="radio-group">
-            <label><input type="radio" name="medical-condition" value="yes" required> Yes</label>
-            <label><input type="radio" name="medical-condition" value="no"> No</label>
-        </div>
-        <div class="consent">
-            <input type="checkbox" id="consent" name="consent" required>
-            <label for="consent">I certify that I meet the eligibility criteria for blood donation and have answered all questions truthfully.</label>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+    </div>
 </div>
-  
 
 
 {% endblock %}

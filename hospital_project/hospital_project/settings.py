@@ -128,6 +128,10 @@ DEFAULT_FROM_EMAIL = 'salbanamujeebali@gmail.com'
 
 
 
+STRIPE_SECRET_KEY = 'sk_test_51QSuLlCeKFqKLlVdWY7MBbPMRbOt9aUutvUsMxWuMBlr70JDbmNKaI17kEq8guuN3P9SsHcwJmpEh4zNoD2M48GS00UunUEvEx'
+STRIPE_PUBLISHABLE_KEY ='pk_test_51QSuLlCeKFqKLlVd6EM9FYMnMtKUAyvami1R4colUTFK2U1WhzMnp5bDXMuqWACcmIC8yfTKZ2x8zanM8h8N3guJ00rtCZbRMR' 
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
