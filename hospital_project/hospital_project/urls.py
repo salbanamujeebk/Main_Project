@@ -52,6 +52,7 @@ urlpatterns = [
     path('view_payment',views.view_payment,name='view_payment'),
     # path('departments',views.departments,name='departments'),
     path('contact',views.contact,name='contact'),
+    path('submit_message',views.submit_message,name='submit_message'),
     path('department_doctors/<int:department_id>', views.department_doctors, name='department_doctors'),
     path('doctors/', views.doctors, name='doctors'),
     path('success',views.success,name='success'),

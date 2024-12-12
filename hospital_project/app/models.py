@@ -65,7 +65,25 @@ class Emergency(models.Model):
 class Orpahan_care(models.Model):
      heading=models.CharField(max_length=200)
      description=models.TextField()
-     
+
+
+class BloodDonation(models.Model):
+    name = models.CharField(max_length=255)
+    gender = models.CharField(max_length=50)
+    dob = models.DateField()
+    contact = models.CharField(max_length=10)
+    email = models.EmailField(blank=True, null=True)
+    address = models.TextField()
+    blood_group = models.CharField(max_length=5)
+    weight = models.FloatField()
+    medication = models.CharField(max_length=10)  
+    donated_before = models.CharField(max_length=10)  
+    medical_condition = models.CharField(max_length=10)  
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
 
 
 class PatientConsultation(models.Model):
@@ -87,3 +105,15 @@ class PatientConsultation(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Messagefromuser(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(blank=True, null=True)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+     

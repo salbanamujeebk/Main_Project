@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import CustomUser
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login , logout
-from .models import Departments, Doctors, Emergency, Orpahan_care,Booking, PatientConsultation
+from .models import Departments, Doctors, Emergency, Orpahan_care,Booking, PatientConsultation,BloodDonation,Messagefromuser
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 from decimal import Decimal
 from django.urls import reverse
 from django.core.paginator import Paginator
+from django.db.models import Sum
 
 
 
@@ -197,7 +198,46 @@ def donations(request):
     return render(request,'users/donations.html')
 
 def blood_donation(request):
-    return render(request,'users/blood_donation.html')
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        gender = request.POST.get('gender')
+        dob = request.POST.get('dob')
+        contact = request.POST.get('contact')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        blood_group = request.POST.get('blood-group')
+        weight = request.POST.get('weight')
+        medication = request.POST.get('medication')
+        donated_before = request.POST.get('donated-before')
+        medical_condition = request.POST.get('medical-condition')
+        consent = request.POST.get('consent')
+        if not (name and gender and dob and contact and address and blood_group and weight and medication and donated_before and medical_condition and consent):
+            messages.error(request, "Please fill out all required fields.")
+            return render(request, 'users/blood_donation.html')
+
+        try:
+            BloodDonation.objects.create(
+                name=name,
+                gender=gender,
+                dob=dob,
+                contact=contact,
+                email=email,
+                address=address,
+                blood_group=blood_group,
+                weight=weight,
+                medication=medication,
+                donated_before=donated_before,
+                medical_condition=medical_condition
+            )
+            messages.success(request, "Your blood donation form has been submitted successfully!")
+            return redirect('blood_donation')
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+            return render(request, 'users/blood_donation.html')
+
+    return render(request, 'users/blood_donation.html')
+        
+   
 
 def hair_donation(request):
     return render(request,'users/hair_donation.html')
@@ -305,12 +345,23 @@ def contact(request):
     return render(request,'users/contact.html')
 
 
+def submit_message(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message_content = request.POST.get('message')
+        data = Messagefromuser.objects.create(name=name, email=email, message=message_content)
+        data.save()
+        messages.success(request, 'Your message has been submitted successfully!')
+        return redirect('contact') 
+    return render(request, 'users/contact.html')
+
+
 def prescription(request):
     data = CustomUser.objects.get(id=request.user.id)
     presc = PatientConsultation.objects.filter(user_id=data.id)
-    for i in presc:
-        print(i.status)
     return render(request, 'users/prescription.html',{'presc':presc} )
+
 
 def payment_details(request,id):
     data = PatientConsultation.objects.get(id=id)
@@ -357,15 +408,23 @@ def stripe_payment(request,id):
 
 
 def creditcard(request, id):
+    print("id ",id)
     try:
+
         data = PatientConsultation.objects.get(id=id)
-        if request.method == 'POST':
-            data.status = 'PAYMENT'
-            data.commission = data.fees * Decimal('0.25')
-            data.amount = data.fees * Decimal('0.75')
-            data.save()
-            return redirect(reverse('remuneration'))
-        return redirect(prescription)
+        
+        print("data ",data)
+        data.status = 'PAYMENT'
+        data.commission = data.fees * Decimal('0.25')
+        data.amount = data.fees * Decimal('0.75')
+        data.save()
+        print("status",data.status)
+        print("commision",data.commission)
+        print("amount",data.amount)
+        return redirect(reverse('prescription'))
+   
+    except Exception as e:
+        print(e)
     except PatientConsultation.DoesNotExist:
         return redirect(prescription)
     
@@ -427,6 +486,8 @@ def doctor_home(request):
     doct =  Doctors.objects.get(doc=request.user)
     return render(request,'doctors/doctor_home.html', {'doct': doct})
 
+
+
 # def appoinments(request):
 #     return render(request,'doctors/appoinments.html')
 
@@ -436,8 +497,8 @@ def appointments(request):
     doctor_id = Doctors.objects.get(doc=doctor)  
     today = date.today()
     bookings = Booking.objects.filter(name=doctor_id). order_by('-booking_date')
-    
-    return render(request,'doctors/appoinments.html',{'doctor': doctor_id, 'bookings': bookings, 'today':today})
+    context = {'doct':doctor,'doctor': doctor_id, 'bookings': bookings, 'today':today}
+    return render(request,'doctors/appoinments.html',context)
 
 
 
@@ -567,7 +628,8 @@ def patient_history(request,id):
 
 
 def remuneration(request):
-    consultations = PatientConsultation.objects.filter(status='PAYMENT')
+    data = CustomUser.objects.get(id=request.user.id)
+    consultations = PatientConsultation.objects.filter(doctor=data.id,status='PAYMENT')
     total_commission = sum(c.commission for c in consultations)
     total_doctor_amount = sum(c.amount for c in consultations)
     
@@ -597,8 +659,99 @@ def remuneration(request):
 #     return render(request, 'doctors/remuneration.html', context)
 
 
+
+# def remuneration_report(request):
+#     doctor = request.user
+#     consultation = PatientConsultation.objects.filter(doctor=doctor).order_by('-created_at') 
+
+#     if consultation.exists():
+#         total_fees = consultation.fees
+#         commission = total_fees * Decimal('0.25')
+#         doctor_share = total_fees * Decimal('0.75') 
+#         status = consultation.status
+#         payment_date = consultation.created_at
+#         payment_method = ""  
+#         transaction_id = ""
+#         total_fees = consultation.aggregate(Sum('fees'))['fees__sum'] or Decimal('0.00')
+#         total_commission = total_fees * Decimal('0.25')
+#         total_doctor_earnings = total_fees * Decimal('0.75') 
+#     else:
+#         total_fees = commission = doctor_share = status = "No data available"
+
+#     context = {
+#         'consultation': {
+#             'fees': total_fees,
+#             'commission': commission,
+#             'amount': doctor_share,
+#             'status': status,
+#         },
+#         'payment_history': {
+#             'payment_date': payment_date,
+#             'payment_method': payment_method,
+#             'transaction_id': transaction_id,
+#             'amount_paid': total_fees,
+#         },
+#          'total_summary': {
+#             'total_commission': total_commission,
+#             'total_doctor_earnings': total_doctor_earnings,
+#             'total_payments_received': total_fees,
+
+#         }
+
+#     }
+
+#     return render(request, 'doctors/remuneration_report.html', context)
+
+
+
 def remuneration_report(request):
-    return render(request,'doctors/remuneration_report.html')
+    doctor = request.user  
+    consultations = PatientConsultation.objects.filter(doctor=doctor).order_by('-created_at')  
+
+    latest_consultation = consultations.first() 
+
+    total_fees = commission = doctor_share = status = payment_date = payment_method = transaction_id = "No data available"
+    total_commission = total_doctor_earnings = Decimal('0.00')
+
+    if latest_consultation:
+        total_fees = latest_consultation.fees
+        commission = total_fees * Decimal('0.25')
+        doctor_share = total_fees * Decimal('0.75')
+        status = latest_consultation.status
+        payment_date = latest_consultation.created_at
+        payment_method = " " 
+        transaction_id = " "  
+        aggregated_data = consultations.aggregate(total_fees=Sum('fees'))
+        total_fees = aggregated_data['total_fees'] or Decimal('0.00')
+        total_commission = total_fees * Decimal('0.25')
+        total_doctor_earnings = total_fees * Decimal('0.75')
+
+    
+    context = {
+        'consultation': {
+            'fees': latest_consultation.fees if latest_consultation else "No data available",
+            'commission': commission,
+            'amount': doctor_share,
+            'status': status,
+        },
+        'payment_history': {
+            'payment_date': payment_date,
+            'payment_method': payment_method,
+            'transaction_id': transaction_id,
+            'amount_paid': latest_consultation.fees if latest_consultation else "No data available",
+        },
+        'total_summary': {
+            'total_commission': total_commission,
+            'total_doctor_earnings': total_doctor_earnings,
+            'total_payments_received': total_fees,
+        }
+    }
+
+    return render(request, 'doctors/remuneration_report.html', context)
+
+
+
+
 
 def doctor_profile(request):
     proff=Doctors.objects.get(id=request.user.id)
@@ -781,7 +934,8 @@ def orphancare_details(request):
     return render(request,'admin/orphancare_details.html')
 
 def user_feedback(request):
-    return render(request,'admin/user_feedback.html')
+    messages = Messagefromuser.objects.all()
+    return render(request, 'admin/user_feedback.html', {'messages': messages})
 
 
 

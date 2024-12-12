@@ -6,9 +6,11 @@
 Remuneration Report
 {% endblock %}
 
+
+
 {% block content %}
 
-<div class="container mt-5">
+<div class="container" style="margin-top: 8rem ;">
     <h3 class="text-center mb-4">Detailed Remuneration Report</h3>
     
     <div class="card shadow-sm mb-4">
@@ -28,10 +30,10 @@ Remuneration Report
             <h5 class="mb-0">Payment History</h5>
         </div>
         <div class="card-body">
-            <p><strong>Payment Date:</strong></p>
-            <p><strong>Payment Method:</strong> </p>
-            <p><strong>Transaction ID:</strong> </p>
-            <p><strong>Amount Paid:</strong> ₹</p>
+            <p><strong>Payment Date:</strong> {{ payment_history.payment_date }}</p>
+            <p><strong>Payment Method:</strong>{{ payment_history.payment_method }}</p>
+            <p><strong>Transaction ID:</strong>{{ payment_history.transaction_id }}</p>
+            <p><strong>Amount Paid:</strong> ₹{{ payment_history.amount_paid }}</p>
         </div>
     </div>
 
@@ -40,9 +42,9 @@ Remuneration Report
             <h5 class="mb-0">Total Summary</h5>
         </div>
         <div class="card-body">
-            <p><strong>Total Commission:</strong> ₹</p>
-            <p><strong>Total Doctor's Earnings:</strong> ₹</p>
-            <p><strong>Total Payments Received:</strong> ₹</p>
+            <p><strong>Total Commission:</strong> ₹{{ total_summary.total_commission }}</p>
+            <p><strong>Total Doctor's Earnings:</strong> ₹{{ total_summary.total_doctor_earnings }}</p>
+            <p><strong>Total Payments Received:</strong> ₹{{ total_summary.total_payments_received }}</p>
         </div>
     </div>
 </div>

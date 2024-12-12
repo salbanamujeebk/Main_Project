@@ -74,6 +74,7 @@
             color: white;
             padding-top: 15px;
         }
+        
         .logo{
             display: flex;
             justify-content: center;
@@ -124,8 +125,13 @@
 <body>
     <nav class="vertical-navbar">
         <div class="logo">
-            <img src="{% static 'images/college-logo.png' %}" alt="Logo" width="50" height="50">
+            <img src="{{ doct.image.url }}" alt="data" class="rounded-circle"  object-fit: cover;>
         </div>
+        <div class="text-center text-white">
+            <h4>{{ doct.name }}</h4>
+            <p>{{doct.speciality}}</p>
+        </div>
+        <hr style="color: white;">
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'doctor_home' %}">Home</a>
@@ -154,42 +160,30 @@
             </a>
         </div>
     </nav>
-
+    
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container-fluid">
+        <div class="container-fluid" style="height: 100px;">
             <div class="collapse navbar-collapse justify-content-center" id="navbarNavTop">
-                <h4 class="text-center w-100">Doctor Portal</h4>
+                <img src="{% static 'images/college-logo.png' %}" alt="Logo" width="70" height="70">
             </div>
         </div>
-    </nav>
-    
-    
-    <nav class="navbar navbar-expand-lg bg-secondary mt-5 style="height: 120px;">
+    </nav>   
+    <!-- <nav class="navbar navbar-expand-lg bg-secondary mt-5" style="height: 120px;">
         <div class="container-fluid" style="height: 100px;">
             <div class="collapse navbar-collapse " id="navbarNavBottom">
-                <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" class="rounded-circle"  object-fit: cover;>
+                <img src="{{ doct.image.url }}" alt="data" class="rounded-circle"  object-fit: cover;>
                 <div class="doctorname">
-                    <h3>{{ doctor.name }}</h3>
-                    <p>{{ doctor.speciality }}</p>
+                    <h3>{{ doct.name }}</h3>
+                    <p>{{ doct.speciality }}</p>
                 </div>
             </div>
         </div>
-    </nav>
+    </nav> -->
     
-    
+    {% block content %}
+    {% endblock %}
 
-    <div class="container content-container">
-        {% block content %}
-            {% if doctor.image %}
-                <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}">
-            {% else %}
-                <img src="{% static 'images/default-doctor.jpg' %}" alt="{{ doctor.name }}">
-            {% endif %}
-            <h4>{{ doctor.name }}</h4>
-            <p>{{ doctor.speciality }}</p>
-        {% endblock %}
-    </div>
 
 </body>
 </html>

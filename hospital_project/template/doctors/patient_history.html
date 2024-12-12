@@ -8,11 +8,11 @@ Patient History
 {% block content %}
 {% load static %}
 
-<h1 class="text-center">History</h1>
-<hr>
 
+<div class="container " style="margin-top: 8rem ;">
+    <h2 class="text-center mb-4">Details</h2>
 
-<table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" >
     <tr>
         <th>Patient's Name</th>
         <th>Age</th>
@@ -23,7 +23,7 @@ Patient History
         <th>Medicine</th>
         <th>Created At</th>
     </tr>
-   
+
     <tr>
         <td>{{ details.name }}</td>
         <td>{{ details.age }}</td>
@@ -34,8 +34,9 @@ Patient History
         <td>{{ details.medicine }}</td>
         <td>{{ details.created_at }}</td>
     </tr>
-   
-</table>
+
+    </table>
+</div>
 
 
 {% endblock %}

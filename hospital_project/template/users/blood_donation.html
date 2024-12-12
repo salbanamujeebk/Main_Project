@@ -15,7 +15,8 @@
     <h1 class="text-center mb-4">Blood Donation Form</h1>
     <div class="card shadow">
         <div class="card-body">
-            <form action="/submit-blood-donation" method="POST" class="needs-validation" novalidate>
+            <form action="{% url 'blood_donation' %}" method="POST" class="needs-validation" novalidate>
+
                 <div class="mb-3">
                     <label for="name" class="form-label">Full Name:</label>
                     <input type="text" id="name" name="name" class="form-control" required>
@@ -124,7 +125,7 @@
                     <div class="invalid-feedback">You must agree to the terms before submitting.</div>
                 </div>
 
-                <button type="submit" class="btn btn-success w-100">Submit</button>
+                <a href="{% url 'blood_donation' %}"><button type="submit" class="btn btn-success w-100">Submit</button></a>
             </form>
         </div>
     </div>
