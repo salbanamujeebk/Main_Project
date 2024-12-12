@@ -4,34 +4,32 @@
 Feedbacks
 {% endblock %}
 
-
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">User Feedbacks</h1>
-    <table class="table table-striped mt-4">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Message</th>
-                <th>Date Submitted</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for message in messages %}
-                <tr>
-                    <td>{{ message.name }}</td>
-                    <td>{{ message.email }}</td>
-                    <td>{{ message.message }}</td>
-                    <td>{{ message.created_at }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="4" class="text-center">No feedbacks available.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1 class="text-center" style="color: #ff6f61; font-family: 'Comic Sans MS', cursive, sans-serif;">
+        🔆 User Feedbacks 🔆
+    </h1>
+    <div class="row mt-4">
+        {% for message in messages %}
+        <div class="col-md-6 mb-4">
+            <div style="background: linear-gradient(135deg, #fae5e6, #f0c4b8); border-radius: 15px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #ff6f61; font-family: 'Comic Sans MS', cursive;">
+                    {{ message.name }}
+                </h3>
+                <h5 style="color: #ffa69e;">📧 {{ message.email }}</h5>
+                <p style="color: #6b705c; margin-top: 15px; font-size: 1.1em;">
+                    "{{ message.message }}"
+                </p>
+                <p style="color: #9a8c98; font-size: 0.9em; text-align: right;">
+                    🕒 {{ message.created_at }}
+                </p>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p style="color: #9a8c98; font-size: 1.2em;">No feedbacks available. 😔</p>
+        </div>
+        {% endfor %}
+    </div>
 </div>
-
 {% endblock %}
