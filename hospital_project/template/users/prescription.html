@@ -19,7 +19,7 @@ Prescription
 
     table th, table td {
         padding: 15px;
-        text-align: left;
+        text-align: center;
         border-bottom: 1px solid #ddd;
     }
 
@@ -79,8 +79,6 @@ Prescription
             <tr>
                 <th>Name</th>
                 <th>Address</th>
-                <th>Phone</th>
-                <th>Email</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -89,8 +87,6 @@ Prescription
             <tr>
                 <td>{{ i.name }}</td>
                 <td>{{ i.user_id.Address }}</td>
-                <td>{{ i.Phonenumber }}</td>
-                <td>{{ i.email }}</td>
                 <td>
                     {% if i.status == 'COMPLETED' %}
                     <a href="{% url 'payment_details' id=i.id %}">

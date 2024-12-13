@@ -40,8 +40,11 @@ def registration(request):
             return render(request, 'users/registration.html', {'error': 'email already exists'})
         Password = request.POST['password']
         print("pass : ",Password)
+      
         Image=request.FILES['Image']
         print("image :   ",Image)
+
+        
         data = CustomUser.objects.create_user(first_name=name, username=Username,Image=Image,
                                                Age=age,DOB=dob,Address=Address,email=Email,
                                                password=Password,usertype="user")

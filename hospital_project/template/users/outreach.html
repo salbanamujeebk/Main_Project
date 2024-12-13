@@ -21,7 +21,6 @@ Social Outreach
 
   .card-title {
       font-weight: bold;
-      
   }
 
   .card-text {
@@ -38,18 +37,23 @@ Social Outreach
   .btn-primary:hover {
       background-color: #494749;
   }
+
+  .card img {
+      border-radius: 10px 10px 0 0;
+      max-height: 200px;
+      object-fit: cover;
+  }
 </style>
-
-
 
 
 <div class="container mt-5">
     <h1 class="text-center">SOCIAL OUTREACH</h1>
-    <hr>
 
-    <div class="row justify-content-center">
+
+    <div class="row justify-content-center mt-5">
         <div class="col-md-6 col-lg-3 mb-4">
             <div class="card h-100 shadow">
+                <img src="{% static 'images/kidneycare.png' %}" class="card-img-top" alt="Kidney Care">
                 <div class="card-body text-center">
                     <h3 class="card-title">Kidney Care</h3>
                     <p class="card-text">Comprehensive care for patients with kidney-related conditions.</p>
@@ -57,9 +61,10 @@ Social Outreach
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-6 col-lg-3 mb-4">
             <div class="card h-100 shadow">
+                <img src="{% static 'images/paliative.png' %}" class="card-img-top" alt="Pain and Palliative">
                 <div class="card-body text-center">
                     <h3 class="card-title">Pain and Palliative</h3>
                     <p class="card-text">Supportive care for those suffering from chronic pain.</p>
@@ -67,9 +72,10 @@ Social Outreach
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-6 col-lg-3 mb-4">
             <div class="card h-100 shadow">
+                <img src="{% static 'images/emergencyCare.png' %}" class="card-img-top" alt="Emergency Care">
                 <div class="card-body text-center">
                     <h3 class="card-title">Emergency Care</h3>
                     <p class="card-text">Urgent care for critical conditions and emergencies.</p>
@@ -77,9 +83,10 @@ Social Outreach
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-6 col-lg-3 mb-4">
             <div class="card h-100 shadow">
+                <img src="{% static 'images/orphancare.png' %}" class="card-img-top" alt="Orphan Care">
                 <div class="card-body text-center">
                     <h3 class="card-title">Orphan Care</h3>
                     <p class="card-text">Caring for orphans with specialized health services.</p>

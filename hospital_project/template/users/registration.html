@@ -76,7 +76,7 @@
 <body>
     <div class="registration-container">
         <div class="registration-form">
-            <form method="POST" action="{% url 'registration' %}">
+            <form method="POST" action="{% url 'registration' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h4>Register</h4>
                 <input type="text" class="form-control" name="name" placeholder="Name" required>
